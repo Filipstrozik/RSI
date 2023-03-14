@@ -7,12 +7,10 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace grpcGreeterClient.Services
+namespace grpcGreeter.Services
 {
     public class MyData
     {
-        public static void Main(string[] args) { }
-
         public static void Info()
         {
             Console.WriteLine("Filip Strózik, 260377");
