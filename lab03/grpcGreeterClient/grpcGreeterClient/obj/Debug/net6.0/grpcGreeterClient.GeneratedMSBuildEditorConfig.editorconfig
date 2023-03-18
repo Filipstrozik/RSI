@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = grpcGreeterClient
-build_property.ProjectDir = C:\Users\filip\Documents\Sem6\RSI\lab03\grpcGreeterClient\grpcGreeterClient\
+build_property.ProjectDir = C:\Users\Piotr\source\repos\RSI\lab03\grpcGreeterClient\grpcGreeterClient\
