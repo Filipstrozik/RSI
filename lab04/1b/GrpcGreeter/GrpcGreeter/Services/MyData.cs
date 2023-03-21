@@ -24,7 +24,7 @@ namespace grpcGreeter.Services
 
             try
             {
-                GetLocalIPAddress();
+                Console.WriteLine(GetLocalIPAddress()); 
             }
             catch (Exception e)
             {

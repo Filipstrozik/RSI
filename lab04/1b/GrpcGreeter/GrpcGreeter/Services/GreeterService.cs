@@ -11,14 +11,6 @@ namespace GrpcGreeter.Services
             _logger = logger;
         }
 
-        public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
-        {
-            return Task.FromResult(new HelloReply
-            {
-                Message = "Witaj " + request.Name + "!\n" +(DateTime.UtcNow).ToString("dd MMM, HH:mm:ss")
-            });
-        }
-
         public override Task<DistanceReply> Distance(DistanceRequest request, ServerCallContext context)
         {
             double R = 6371; // Earth's radius in km
@@ -37,7 +29,7 @@ namespace GrpcGreeter.Services
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
             double distance = R * c;
 
-            return Task.FromResult(new DistanceReply { Distance = distance });
+            return Task.FromResult(new DistanceReply { Distance = Math.Round(distance,2, MidpointRounding.ToZero) });
         }
     }
 }
