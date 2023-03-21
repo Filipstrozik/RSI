@@ -1,24 +1,16 @@
-﻿using System.Drawing;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using Grpc.Net.Client;
+﻿using Grpc.Net.Client;
 using grpcGreeterClient.Services;
 using GrpcGreeterClient;
 using Point = GrpcGreeterClient.Point;
 
 // The port number must match the port of the gRPC server.
 //using var channel = GrpcChannel.ForAddress("http://192.168.43.3:5000");
-using var channel = GrpcChannel.ForAddress("http://localhost:7019");
+using var channel = GrpcChannel.ForAddress("http://10.182.36.179:7019");
 var client = new Greeter.GreeterClient(channel);
 MyData.Info();
-Console.Write("Podaj imię: ");
-string name = Console.ReadLine();
-var reply = await client.SayHelloAsync(
-                  new HelloRequest { Name = name });
-Console.WriteLine(reply.Message);
 
 Console.WriteLine("Wybierz jedną z opcji: ");
-Console.WriteLine ("1 - Oblicz odległość pomiędzy dwoma punktami P1 i P2: ");
+Console.WriteLine("1 - Oblicz odległość między dwoma punktami P1 i P2");
 Console.WriteLine("2 - Oblicz odległość między punktami P1 i P3, z przystankiem w punkcie P2");
 string choice = Console.ReadLine();
 
@@ -64,7 +56,7 @@ var distanceReply1 = await client.DistanceAsync(new DistanceRequest
 
 
 //Calculating additional distance from p2 to p3
-if(choice == "2")
+if (choice == "2")
 {
     Console.Write("Podaj nazwę trzeciego punktu: ");
     string name3 = Console.ReadLine();
