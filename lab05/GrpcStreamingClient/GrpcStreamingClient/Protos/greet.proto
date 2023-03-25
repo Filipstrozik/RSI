@@ -1,0 +1,18 @@
+
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "GrpcStreamingClient";
+
+package greet;
+
+
+service ImageService {
+  rpc StreamToServer(stream ImageData) returns (google.protobuf.Empty) {}
+  rpc StreamToClient(google.protobuf.Empty) returns (stream ImageData) {}
+}
+
+message ImageData {
+  bytes data = 1;
+}
