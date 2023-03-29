@@ -17,6 +17,9 @@ namespace GrpcStreamingService.Services
                 {
                     ImageData imageData = requestStream.Current;
                     await fileStream.WriteAsync(imageData.Data.ToByteArray());
+
+                    Console.WriteLine(imageData);
+                    Thread.Sleep(100);
                 }
             }
 
@@ -29,7 +32,7 @@ namespace GrpcStreamingService.Services
             using (var fileStream = File.OpenRead(@"Files\received.png"))
             {
                 // Create a buffer to hold the data read from the file
-                byte[] buffer = new byte[4 * 1024]; // 4KB buffer size
+                byte[] buffer = new byte[256]; // 4KB buffer size
 
                 // Read the file in chunks and write each chunk to the response stream
                 int bytesRead;
@@ -40,6 +43,8 @@ namespace GrpcStreamingService.Services
 
                     // Write the ImageData message to the response stream
                     await responseStream.WriteAsync(imageData);
+                    Console.WriteLine(imageData);
+                    Thread.Sleep(100);
                 }
             }
         }

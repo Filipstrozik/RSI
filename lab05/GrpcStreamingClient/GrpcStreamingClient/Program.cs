@@ -13,7 +13,7 @@ using (var fileStream = File.OpenRead(@"..\..\..\Files\test.png"))
     using (var call = client.StreamToServer())
     {
         // Stream the file data to the server
-        byte[] buffer = new byte[4096];
+        byte[] buffer = new byte[256];
         int bytesRead;
         while ((bytesRead = await fileStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
         {
@@ -39,6 +39,7 @@ using (var call = client.StreamToClient(new Google.Protobuf.WellKnownTypes.Empty
         {
             ImageData imageData = call.ResponseStream.Current;
             await fileStream.WriteAsync(imageData.Data.ToByteArray());
+            Console.WriteLine(imageData);
         }
     }
 }
