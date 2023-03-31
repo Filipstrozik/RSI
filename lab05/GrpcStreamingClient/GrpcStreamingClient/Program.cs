@@ -5,6 +5,8 @@ using GrpcStreamingClient;
 using var channel = GrpcChannel.ForAddress("https://localhost:7215");
 var client = new ImageService.ImageServiceClient(channel);
 // Open the file for reading
+
+MyData.Info();
 Console.WriteLine("Press any key to upload");
 Console.ReadKey();
 using (var fileStream = File.OpenRead(@"..\..\..\Files\test.png"))
