@@ -14,47 +14,62 @@ Console.WriteLine("2 - Pobieranie pliku");
 string choice = Console.ReadLine();
 
 Console.WriteLine("Podaj scieżkę do pliku");
-string file = Console.ReadLine();
+string filepath = Console.ReadLine();
 
 switch (choice)
 {
     case "1":
-        using (var fileStream = File.OpenRead(@"..\..\..\Files\test.png"))
+        try
         {
-            // Create a stream of ImageData objects
-            using (var call = client.StreamToServer())
+            using (var fileStream = File.OpenRead(filepath))
             {
-                // Stream the file data to the server
-                byte[] buffer = new byte[256];
-                int bytesRead;
-                while ((bytesRead = await fileStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                // Create a stream of ImageData objects
+                using (var call = client.StreamToServer())
                 {
-                    await call.RequestStream.WriteAsync(new ImageData { Data = Google.Protobuf.ByteString.CopyFrom(buffer, 0, bytesRead) });
-                }
-                await call.RequestStream.CompleteAsync();
+                    // Stream the file data to the server
+                    byte[] buffer = new byte[256];
+                    int bytesRead;
+                    while ((bytesRead = await fileStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                    {
+                        await call.RequestStream.WriteAsync(new ImageData { Data = Google.Protobuf.ByteString.CopyFrom(buffer, 0, bytesRead) });
+                    }
+                    await call.RequestStream.CompleteAsync();
 
-                // Wait for the server to finish processing the stream
-                await call.ResponseAsync;
+                    // Wait for the server to finish processing the stream
+                    await call.ResponseAsync;
+                }
             }
+            Console.WriteLine("Plik wysłany poprawnie");
         }
-        Console.WriteLine("Plik wysłany poprawnie");
+        catch (FileNotFoundException ex)
+        {
+            Console.WriteLine("Niepoprawna sciezka do pliku!");   
+        }
+        
         break;
     case "2":
         using (var call = client.StreamToClient(new Google.Protobuf.WellKnownTypes.Empty()))
         {
             // Create a file stream to write the received data
-            using (var fileStream = File.Create(@"..\..\..\Recieved\received.png"))
+            try
             {
-                // Read data from the server stream and write it to the file stream
-                while (await call.ResponseStream.MoveNext())
+                using (var fileStream = File.Create(filepath))
                 {
-                    ImageData imageData = call.ResponseStream.Current;
-                    await fileStream.WriteAsync(imageData.Data.ToByteArray());
-                    Console.WriteLine(imageData);
+                    // Read data from the server stream and write it to the file stream
+                    while (await call.ResponseStream.MoveNext())
+                    {
+                        ImageData imageData = call.ResponseStream.Current;
+                        await fileStream.WriteAsync(imageData.Data.ToByteArray());
+                        Console.WriteLine(imageData);
+                    }
                 }
+                Console.WriteLine("Plik pobrany poprawnie");
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine("Niepoprawna sciezka do pliku!");
             }
         }
-        Console.WriteLine("Plik pobrany poprawnie");
         break;
     default:
         Console.WriteLine("Niepoprawny wybór");
