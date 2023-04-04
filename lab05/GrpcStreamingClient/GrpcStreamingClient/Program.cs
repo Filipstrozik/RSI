@@ -2,7 +2,7 @@
 using Grpc.Net.Client;
 using GrpcStreamingClient;
 // The port number must match the port of the gRPC server.
-using var channel = GrpcChannel.ForAddress("https://localhost:7215");
+using var channel = GrpcChannel.ForAddress("http://10.182.3.126:5292");
 var client = new ImageService.ImageServiceClient(channel);
 // Open the file for reading
 
@@ -27,11 +27,13 @@ switch (choice)
                 using (var call = client.StreamToServer())
                 {
                     // Stream the file data to the server
-                    byte[] buffer = new byte[256];
+                    byte[] buffer = new byte[1024];
                     int bytesRead;
+                    int counter = 1;
                     while ((bytesRead = await fileStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                     {
                         await call.RequestStream.WriteAsync(new ImageData { Data = Google.Protobuf.ByteString.CopyFrom(buffer, 0, bytesRead) });
+                        Console.WriteLine($"pakiet nr: {counter++}");
                     }
                     await call.RequestStream.CompleteAsync();
 
@@ -55,12 +57,13 @@ switch (choice)
             {
                 using (var fileStream = File.Create(filepath))
                 {
+                    var counter = 1;
                     // Read data from the server stream and write it to the file stream
                     while (await call.ResponseStream.MoveNext())
                     {
                         ImageData imageData = call.ResponseStream.Current;
                         await fileStream.WriteAsync(imageData.Data.ToByteArray());
-                        Console.WriteLine(imageData);
+                        Console.WriteLine($"pakiet nr: {counter++}");
                     }
                 }
                 Console.WriteLine("Plik pobrany poprawnie");

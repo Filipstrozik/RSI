@@ -32,7 +32,7 @@ namespace GrpcStreamingService.Services
             using (var fileStream = File.OpenRead(@"Files\received.png"))
             {
                 // Create a buffer to hold the data read from the file
-                byte[] buffer = new byte[256]; // 4KB buffer size
+                byte[] buffer = new byte[256]; // 256 bytes buffer size
 
                 // Read the file in chunks and write each chunk to the response stream
                 int bytesRead;
