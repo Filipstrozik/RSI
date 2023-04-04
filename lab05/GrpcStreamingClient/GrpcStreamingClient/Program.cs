@@ -46,14 +46,14 @@ switch (choice)
             Console.WriteLine("Niepoprawna sciezka do pliku!");   
         }
         
-        break;
+        break;  
     case "2":
         using (var call = client.StreamToClient(new Google.Protobuf.WellKnownTypes.Empty()))
         {
             // Create a file stream to write the received data
             try
             {
-                using (var fileStream = File.Create(filepath))
+                using (var fileStream = new FileStream(filepath, FileMode.OpenOrCreate))
                 {
                     // Read data from the server stream and write it to the file stream
                     while (await call.ResponseStream.MoveNext())
