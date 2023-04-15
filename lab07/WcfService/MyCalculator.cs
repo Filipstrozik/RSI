@@ -12,97 +12,44 @@ namespace WcfService
     {
         public int iAdd(int n1, int n2)
         {
-            int result = 0;
-            try
+            checked // kontrola przepełnienia
             {
-                checked
-                {
-                    result = n1 + n2;
-                }
+                return n1 + n2;
             }
-            catch (OverflowException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return result;
-
         }
 
         public int iSub(int n1, int n2)
         {
-            int result = 0;
-            try
+            checked // kontrola przepełnienia
             {
-                checked
-                {
-                    result = n1 - n2;
-                }
+                return n1 - n2;
             }
-            catch (OverflowException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return result;
-
         }
 
         public int iMul(int n1, int n2)
         {
-            int result = 0;
-            try
+            checked // kontrola przepełnienia
             {
-                checked
-                {
-                    result = n1 * n2;
-                }
+                return n1 * n2;
             }
-            catch (OverflowException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return result;
         }
 
         public int iDiv(int n1, int n2)
         {
-            int result = 0;
-            try
+            if (n2 == 0)
             {
-                checked
-                {
-                    result = n1 / n2;
-                }
+                throw new FaultException<DivideByZeroException>(new DivideByZeroException(), "Cannot divide by zero");
             }
-            catch(DivideByZeroException dex)
-            {
-                Console.WriteLine(dex.Message);
-            }
-            catch (OverflowException oex)
-            {
-                Console.WriteLine(oex.Message);
-            }
-            return result;
+            return n1 / n2;
         }
 
         public int iMod(int n1, int n2)
         {
-            int result = 0;
-            try
+            if (n2 == 0)
             {
-                checked
-                {
-                    result = n1 % n2;
-                }
+                throw new ArgumentException("Cannot modulo by zero");
             }
-            catch (DivideByZeroException dex)
-            {
-                Console.WriteLine(dex.Message);
-            }
-            catch (OverflowException oex)
-            {
-                Console.WriteLine(oex.Message);
-            }
-            return result;
+            return n1 % n2;
         }
     }
 }
