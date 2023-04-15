@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WcfService
 {
@@ -25,6 +26,9 @@ namespace WcfService
 
         [OperationContract]
         int iMod(int n1, int n2);
+
+        [OperationContract]
+        Task<int> HMult(int n1, int n2);
     }
 
 

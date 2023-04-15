@@ -44,6 +44,12 @@ namespace WcfClient.WcfService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/iMod", ReplyAction="http://tempuri.org/ICalculator/iModResponse")]
         System.Threading.Tasks.Task<int> iModAsync(int n1, int n2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/HMult", ReplyAction="http://tempuri.org/ICalculator/HMultResponse")]
+        int HMult(int n1, int n2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/HMult", ReplyAction="http://tempuri.org/ICalculator/HMultResponse")]
+        System.Threading.Tasks.Task<int> HMultAsync(int n1, int n2);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +117,14 @@ namespace WcfClient.WcfService {
         
         public System.Threading.Tasks.Task<int> iModAsync(int n1, int n2) {
             return base.Channel.iModAsync(n1, n2);
+        }
+        
+        public int HMult(int n1, int n2) {
+            return base.Channel.HMult(n1, n2);
+        }
+        
+        public System.Threading.Tasks.Task<int> HMultAsync(int n1, int n2) {
+            return base.Channel.HMultAsync(n1, n2);
         }
     }
 }

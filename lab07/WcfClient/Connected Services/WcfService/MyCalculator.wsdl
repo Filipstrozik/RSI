@@ -43,6 +43,12 @@
   <wsdl:message name="ICalculator_iMod_OutputMessage">
     <wsdl:part name="parameters" element="tns:iModResponse" />
   </wsdl:message>
+  <wsdl:message name="ICalculator_HMult_InputMessage">
+    <wsdl:part name="parameters" element="tns:HMult" />
+  </wsdl:message>
+  <wsdl:message name="ICalculator_HMult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HMultResponse" />
+  </wsdl:message>
   <wsdl:portType name="ICalculator">
     <wsdl:operation name="iAdd">
       <wsdl:input wsaw:Action="http://tempuri.org/ICalculator/iAdd" message="tns:ICalculator_iAdd_InputMessage" />
@@ -63,6 +69,10 @@
     <wsdl:operation name="iMod">
       <wsdl:input wsaw:Action="http://tempuri.org/ICalculator/iMod" message="tns:ICalculator_iMod_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICalculator/iModResponse" message="tns:ICalculator_iMod_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HMult">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICalculator/HMult" message="tns:ICalculator_HMult_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICalculator/HMultResponse" message="tns:ICalculator_HMult_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICalculator" type="tns:ICalculator">
@@ -112,6 +122,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="HMult">
+      <soap:operation soapAction="http://tempuri.org/ICalculator/HMult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WSHttpBinding_ICalculator" type="tns:ICalculator">
     <wsp:PolicyReference URI="#WSHttpBinding_ICalculator_policy" />
@@ -154,6 +173,15 @@
     </wsdl:operation>
     <wsdl:operation name="iMod">
       <soap12:operation soapAction="http://tempuri.org/ICalculator/iMod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HMult">
+      <soap12:operation soapAction="http://tempuri.org/ICalculator/HMult" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
