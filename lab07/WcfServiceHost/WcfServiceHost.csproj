@@ -83,6 +83,10 @@
     <None Include="WcfServiceHost_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CallbackService\CallbackService.csproj">
+      <Project>{d7f353d1-c998-498a-b8a8-0a5a6d15d184}</Project>
+      <Name>CallbackService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WcfService\WcfService.csproj">
       <Project>{c91e05e7-29e0-4265-92b5-104aa078d56d}</Project>
       <Name>WcfService</Name>

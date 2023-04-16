@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace WcfService
 {
-    // UWAGA: możesz użyć polecenia „Zmień nazwę” w menu „Refaktoryzuj”, aby zmienić nazwę interfejsu „IService1” w kodzie i pliku konfiguracji.
     [ServiceContract(ProtectionLevel = System.Net.Security.ProtectionLevel.None)]
     public interface ICalculator
     {
@@ -29,6 +28,9 @@ namespace WcfService
 
         [OperationContract]
         Task<int> HMult(int n1, int n2);
+
+        [OperationContract]
+        Task<(int, int)> CountAndMaxPrimesInRangeAsync(int l1, int l2);
     }
 
 

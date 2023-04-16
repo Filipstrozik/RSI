@@ -24,6 +24,7 @@
   <Metadata>
     <MetadataFile FileName="MyCalculator.xsd" MetadataType="Schema" ID="4b893567-7908-47f1-a0ec-3dc22ea7403b" SourceId="1" SourceUrl="http://localhost:10000/MyCalculator?xsd=xsd1" />
     <MetadataFile FileName="MyCalculator.wsdl" MetadataType="Wsdl" ID="10eb2e3b-0f4b-4494-8228-88dc1e20e840" SourceId="1" SourceUrl="http://localhost:10000/MyCalculator?wsdl" />
+    <MetadataFile FileName="MyCalculator2.xsd" MetadataType="Schema" ID="956a4888-08c6-430d-bcca-44614432384e" SourceId="1" SourceUrl="http://localhost:10000/MyCalculator?xsd=xsd2" />
     <MetadataFile FileName="MyCalculator1.xsd" MetadataType="Schema" ID="e810573d-608c-4bb0-b555-0d5f330bc7af" SourceId="1" SourceUrl="http://localhost:10000/MyCalculator?xsd=xsd0" />
     <MetadataFile FileName="MyCalculator.disco" MetadataType="Disco" ID="5390c754-91cd-4cbf-8c9d-0aa59b72940e" SourceId="1" SourceUrl="http://localhost:10000/MyCalculator?disco" />
   </Metadata>

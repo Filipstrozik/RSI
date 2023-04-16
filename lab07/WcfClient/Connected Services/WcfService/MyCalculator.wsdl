@@ -11,6 +11,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:10000/MyCalculator?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:10000/MyCalculator?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:10000/MyCalculator?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ICalculator_iAdd_InputMessage">
@@ -49,6 +50,12 @@
   <wsdl:message name="ICalculator_HMult_OutputMessage">
     <wsdl:part name="parameters" element="tns:HMultResponse" />
   </wsdl:message>
+  <wsdl:message name="ICalculator_CountAndMaxPrimesInRange_InputMessage">
+    <wsdl:part name="parameters" element="tns:CountAndMaxPrimesInRange" />
+  </wsdl:message>
+  <wsdl:message name="ICalculator_CountAndMaxPrimesInRange_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CountAndMaxPrimesInRangeResponse" />
+  </wsdl:message>
   <wsdl:portType name="ICalculator">
     <wsdl:operation name="iAdd">
       <wsdl:input wsaw:Action="http://tempuri.org/ICalculator/iAdd" message="tns:ICalculator_iAdd_InputMessage" />
@@ -73,6 +80,10 @@
     <wsdl:operation name="HMult">
       <wsdl:input wsaw:Action="http://tempuri.org/ICalculator/HMult" message="tns:ICalculator_HMult_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICalculator/HMultResponse" message="tns:ICalculator_HMult_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CountAndMaxPrimesInRange">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICalculator/CountAndMaxPrimesInRange" message="tns:ICalculator_CountAndMaxPrimesInRange_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICalculator/CountAndMaxPrimesInRangeResponse" message="tns:ICalculator_CountAndMaxPrimesInRange_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICalculator" type="tns:ICalculator">
@@ -131,6 +142,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CountAndMaxPrimesInRange">
+      <soap:operation soapAction="http://tempuri.org/ICalculator/CountAndMaxPrimesInRange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WSHttpBinding_ICalculator" type="tns:ICalculator">
     <wsp:PolicyReference URI="#WSHttpBinding_ICalculator_policy" />
@@ -182,6 +202,15 @@
     </wsdl:operation>
     <wsdl:operation name="HMult">
       <soap12:operation soapAction="http://tempuri.org/ICalculator/HMult" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CountAndMaxPrimesInRange">
+      <soap12:operation soapAction="http://tempuri.org/ICalculator/CountAndMaxPrimesInRange" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
