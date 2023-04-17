@@ -115,6 +115,23 @@ namespace WcfClient
                 Console.WriteLine(ex.Message);
             }
         }
+        static public async void HMultiply()
+        {
+            Console.WriteLine("Enter first number:");
+            int n1 = GetNumberFromUser();
+            Console.WriteLine("Enter second number:");
+            int n2 = GetNumberFromUser();
+
+            try
+            {
+                var result = await _client.HMultAsync(n1, n2);
+                Console.WriteLine($"HMultiply asyncronous: {n1} * {n2} = {result}"); ;
+            }
+            catch (FaultException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 
         static public async void CountAndMaxPrimesInRangeAsync()
         {

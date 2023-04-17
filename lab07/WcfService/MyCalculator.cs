@@ -40,7 +40,7 @@ namespace WcfService
             }
             catch (OverflowException e)
             {
-                throw new FaultException<OverflowException>(new OverflowException(), $"Subtract overflow when subtracting {n1},{n2}");
+                throw new FaultException<OverflowException>(e, $"Subtract overflow when subtracting {n1},{n2}");
             }
         }
 
@@ -57,7 +57,7 @@ namespace WcfService
             }
             catch (OverflowException e)
             {
-                throw new FaultException<OverflowException>(new OverflowException(), $"Multiply overflow when multipling {n1},{n2}");
+                throw new FaultException<OverflowException>(e, $"Multiply overflow when multipling {n1},{n2}");
             }
 
         }
@@ -101,7 +101,7 @@ namespace WcfService
             }
             catch (OverflowException e)
             {
-                throw new FaultException<OverflowException>(new OverflowException(), $"Multiply overflow when async multipling {n1},{n2}");
+                throw new FaultException<OverflowException>(e, $"Multiply overflow when async multipling {n1},{n2}");
             }
         }
 
