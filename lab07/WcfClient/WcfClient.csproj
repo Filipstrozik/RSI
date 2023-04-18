@@ -91,6 +91,7 @@
     <Compile Include="MyCalculatorHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MyData.cs" />
     <Compile Include="SuperCalcCallback.cs" />
   </ItemGroup>
   <ItemGroup>

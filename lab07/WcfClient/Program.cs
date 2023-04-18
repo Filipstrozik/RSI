@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
+﻿using GrpcStreamingService.Services;
+using System;
 using System.Threading.Tasks;
-using WcfClient.CallbackService;
-using WcfClient.WcfService;
 
 namespace WcfClient
 {
@@ -15,9 +10,7 @@ namespace WcfClient
         {
             int operation = 0;
             int n1, n2, result;
-
-
-
+            MyData.Info();
             do
             {
                 Console.WriteLine("Choose an operation:");

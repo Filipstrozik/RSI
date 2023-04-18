@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using WcfClient.WcfService;
 
 namespace WcfClient
@@ -146,9 +142,9 @@ namespace WcfClient
                 Console.WriteLine($"Number of primes: {result.Item1}");
                 Console.WriteLine($"Max prime: {result.Item2}");
             }
-            catch (FaultException<ArgumentException> ex)
+            catch (FaultException ex)
             {
-                Console.WriteLine(ex.Detail.Message);
+                Console.WriteLine(ex.Message);
             }
         }
     }
