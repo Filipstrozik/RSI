@@ -16,8 +16,6 @@ namespace WcfClient
             int operation = 0;
             int n1, n2, result;
 
-
-
             do
             {
                 Console.WriteLine("Choose an operation:");

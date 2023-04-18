@@ -10,7 +10,8 @@ namespace WcfServiceHost
     {
         static void Main(string[] args)
         {
-            Uri baseAdress = new Uri("http://192.168.0.80:10000/MyCalculator");
+            MyData.Info();
+            Uri baseAdress = new Uri("http://10.182.36.179:10000/MyCalculator");
 
             ServiceHost myHost = new ServiceHost(typeof(MyCalculator), baseAdress);
             ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
@@ -24,7 +25,7 @@ namespace WcfServiceHost
             ServiceEndpoint endpoint1 = myHost.AddServiceEndpoint(typeof(ICalculator), myBinding, "endpoint1");
             ServiceEndpoint endpoint2 = myHost.AddServiceEndpoint(typeof(ICalculator), binding2, "endpoint2");
 
-            Uri baseAddress3 = new Uri("http://192.168.0.80:10000/MySuperCalculator"); 
+            Uri baseAddress3 = new Uri("http://10.182.36.179:10000/MySuperCalculator"); 
             ServiceHost myHost3 = new ServiceHost(typeof(MySuperCalc), baseAddress3);
             WSDualHttpBinding myBinding3 = new WSDualHttpBinding();
             ServiceEndpoint endpoint3 = myHost3.AddServiceEndpoint(typeof(ISuperCalc), myBinding3, "endpoint3");

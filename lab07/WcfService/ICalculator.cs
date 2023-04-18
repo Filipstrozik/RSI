@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
+﻿using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace WcfService
@@ -33,5 +28,5 @@ namespace WcfService
         Task<(int, int)> CountAndMaxPrimesInRangeAsync(int l1, int l2);
     }
 
-
+    
 }

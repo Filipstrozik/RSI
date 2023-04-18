@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace WcfService
@@ -105,28 +101,54 @@ namespace WcfService
             }
         }
 
-        public async Task<(int, int)> CountAndMaxPrimesInRangeAsync(int l1, int l2)
+        public async Task<(int, int)> CountAndMaxPrimesInRangeAsync(int lowerBound, int upperBound)
         {
-            Console.WriteLine($"...called CountAndMaxPrimesInRangeAsync({l1}, {l2})");
-            int count = 0;
-            int maxPrime = 0;
+            Console.WriteLine($"...called CountAndMaxPrimesInRangeAsync({lowerBound}, {upperBound})");
 
-            await Task.Run(() =>
+
+            if (upperBound < lowerBound)
             {
-                for (int i = l1; i <= l2; i++)
+                throw new FaultException<ArgumentException>(new ArgumentException() , "Upper bound cannot be smaller than lower bound.");
+            }
+
+            if (lowerBound <= 0 || upperBound <= 0)
+            {
+                throw new FaultException<ArgumentException>(new ArgumentException() ,"Lower bound and upper bound must be greater than 0.");
+            }
+
+            var isPrime = new bool[upperBound + 1];
+            for (var i = 0; i < isPrime.Length; i++)
+            {
+                isPrime[i] = true;
+            }
+
+            isPrime[0] = false;
+            isPrime[1] = false;
+
+            for (var p = 2; p * p <= upperBound; p++)
+            {
+                if (isPrime[p])
                 {
-                    if (IsPrime(i))
+                    for (var i = p * p; i <= upperBound; i += p)
                     {
-                        count++;
-                        if (i > maxPrime)
-                        {
-                            maxPrime = i;
-                        }
+                        isPrime[i] = false;
                     }
                 }
-            });
+            }
+
+            var count = 0;
+            var maxPrime = -1;
+            for (var p = lowerBound; p <= upperBound; p++)
+            {
+                if (isPrime[p])
+                {
+                    count++;
+                    maxPrime = p;
+                }
+            }
 
             return (count, maxPrime);
+
         }
 
 
@@ -153,5 +175,56 @@ namespace WcfService
             }
             return true;
         }
+
+        public (int, int) Primes(int l1, int l2)
+        {
+            var prime = new bool[l2 + 1];
+            for (var i = 0; i < prime.Length; i++)
+                prime[i] = true;
+
+            prime[0] = false;
+            prime[1] = false;
+
+            for (var p = 2; p * p <= l2; p++)
+            {
+                if (prime[p])
+                {
+                    for (var i = p * p; i <= l2; i += p)
+                        prime[i] = false;
+                }
+            }
+
+            var count = 0;
+            var max = -1;
+            for (var p = l1; p <= l2; p++)
+            {
+                if (prime[p])
+                {
+                    count++;
+                    max = p;
+                }
+            }
+            return (count, max);
+        }
     }
 }
+
+//int count = 0;
+//int maxPrime = 0;
+
+//await Task.Run(() =>
+//{
+//    for (int i = l1; i <= l2; i++)
+//    {
+//        if (IsPrime(i))
+//        {
+//            count++;
+//            if (i > maxPrime)
+//            {
+//                maxPrime = i;
+//            }
+//        }
+//    }
+//});
+
+//return (count, maxPrime);
