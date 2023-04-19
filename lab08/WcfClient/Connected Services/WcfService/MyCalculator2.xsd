@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:10000/MyCalculator?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ValueTupleOfintint">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ValueTupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
+          <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Item1" type="xs:int" />
+      <xs:element name="Item2" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValueTupleOfintint" nillable="true" type="tns:ValueTupleOfintint" />
+</xs:schema>

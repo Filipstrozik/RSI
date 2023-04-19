@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="WcfServiceHost.exe" version="1.0.0.5" publicKeyToken="f746c554ae92b05a" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="WcfServiceHost" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="WcfServiceHost.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          Opcje manifestu kontroli konta użytkownika
+          Jeśli chcesz zmienić poziom kontroli konta użytkownika systemu Windows, zastąp węzeł 
+          requestedExecutionLevel jednym z następujących.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         Jeśli chcesz użyć wirtualizacji plików i rejestru do celów zgodności wstecznej, 
+         usuń węzeł requestedExecutionLevel.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WcfService.dll" size="6144">
+      <assemblyIdentity name="WcfService" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>e0YCZcpvIHjInPkgDN6n1kNuJSyhYRi+Pg9i2+ShIXE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WcfServiceHost.exe" size="7648">
+      <assemblyIdentity name="WcfServiceHost" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>P6zgIpvN8XDmLHtO9JQ1wIGvBDuFPTDem9RQtiGYUGA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="WcfServiceHost.exe.config" size="187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>+CM46OnHRrXZXNLMx7+U3V3iubiYL//d8hGOR13lDhU=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=DESKTOP-MONUTBU\Piotr" issuerKeyHash="1f65dcd98b567e0cdd5b13c84f7f09a0ea4a348d" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>WEcNaEPAH22VC/9fsMOPCplRFO+QGWD1yakqalXbhKQ=</DigestValue></Reference></SignedInfo><SignatureValue>Ob+dEQsBMSG9XSW28/P2vjbEe6j+K2KYzKVUGaNtfKIOJHNo/HOweLlFX0aEGVGMbtbIY8vcIrQh2jhTnOaGsYWbNLHxk8Ocf4qUHXCjLCFnGtfslN1xFDMRF7DMsS93q4rQFG9gDUgJetnJf7ToZ/nCxXA/dNaE72AbtHgUlF0=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>vXKEFkeuj/H6b5kzl7UzeJ2oYHDe42ptocSYfIrVp25PgazkH0H42xQyRcDdZf5UtYLZ8ZpdH4EgkFDmzRRVkcpt05ZPRHR8dDnaKn2tH/F11yOT3V/CZSFKYtXfFk/+mIZX3yuQpZLpAntS4RPk8QvlVaWbEbY8Ux/Eouy0TW0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="a484db556a2aa9c9f5601990ef1451990a8fc3b05fff0b956d1fc043680d4758" Description="" Url=""><as:assemblyIdentity name="WcfServiceHost.exe" version="1.0.0.5" publicKeyToken="f746c554ae92b05a" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-MONUTBU\Piotr</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>bvjjSNG5RqymIRDke2U+Mtn/fMzeXpOxcfI+I307REw=</DigestValue></Reference></SignedInfo><SignatureValue>VbcjM+246WjQBeDE0PigPgd5mZszB4Ube+6QmnKGBCgBVgxsWifTTHMFgP0VUKXuaacd/+ugzkBMoh0HF54RuKNidz0uvM9Lo5foZrBe95uJKX2XUk+yL6PQCNq7xYwnAykQ5ycEB42u/QNKZuRMIt0v8kQsUW6NeRbng/Mv7ws=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>vXKEFkeuj/H6b5kzl7UzeJ2oYHDe42ptocSYfIrVp25PgazkH0H42xQyRcDdZf5UtYLZ8ZpdH4EgkFDmzRRVkcpt05ZPRHR8dDnaKn2tH/F11yOT3V/CZSFKYtXfFk/+mIZX3yuQpZLpAntS4RPk8QvlVaWbEbY8Ux/Eouy0TW0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB7TCCAVagAwIBAgIQFUGRGzMwA4xOL0rqwPMngzANBgkqhkiG9w0BAQsFADA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtAE0ATwBOAFUAVABCAFUAXABQAGkAbwB0AHIwHhcNMjMwNDE1MTIwNzAxWhcNMjQwNDE0MTgwNzAxWjA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtAE0ATwBOAFUAVABCAFUAXABQAGkAbwB0AHIwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAL1yhBZHro/x+m+ZM5e1M3idqGBw3uNqbaHEmHyK1aduT4Gs5B9B+NsUMkXA3WX+VLWC2fGaXR+BIJBQ5s0UVZHKbdOWT0R0fHQ52ip9rR/xddcjk91fwmUhSmLV3xZP/piGV98rkKWS6QJ7UuET5PEL5VWlmxG2PFMfxKLstE1tAgMBAAEwDQYJKoZIhvcNAQELBQADgYEANvbhe1P3B0UZPeH8YJg+rjQ0xtt263BFn8xxQyykA0cekDolNwwcjc3mjAPTE+io4HheFeW6+YMrT7zZEFESDHu/vNrvmA0xMCuvdvy3NfhQa4b6yVgaiKAHjt7d7To0lwWqyOyROixaBVeRL2t7dRyCSeJuWjVcreohZ/ccoFw=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
