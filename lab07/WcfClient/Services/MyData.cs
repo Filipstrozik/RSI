@@ -2,8 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-
-namespace WcfClient.Services
+namespace GrpcStreamingService.Services
 {
     public class MyData
     {

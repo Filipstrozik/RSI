@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService", "WcfService.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfServiceHost", "..\WcfServiceHost\WcfServiceHost.csproj", "{2C3D7B47-A3E2-4379-A9F9-B544CB550C85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallbackService", "..\CallbackService\CallbackService.csproj", "{D7F353D1-C998-498A-B8A8-0A5A6D15D184}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{2C3D7B47-A3E2-4379-A9F9-B544CB550C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C3D7B47-A3E2-4379-A9F9-B544CB550C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C3D7B47-A3E2-4379-A9F9-B544CB550C85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7F353D1-C998-498A-B8A8-0A5A6D15D184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7F353D1-C998-498A-B8A8-0A5A6D15D184}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7F353D1-C998-498A-B8A8-0A5A6D15D184}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7F353D1-C998-498A-B8A8-0A5A6D15D184}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

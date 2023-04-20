@@ -6,17 +6,18 @@ namespace WcfClient
 {
     internal class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
+            MyData.Info();
+
             int operation = 0;
             int n1, n2, result;
-            MyData.Info();
             do
             {
                 Console.WriteLine("Choose an operation:");
-                Console.WriteLine("1. Addition");
-                Console.WriteLine("2. Subtraction");
-                Console.WriteLine("3. Multiplication");
+                Console.WriteLine("1. Show all users");
+                Console.WriteLine("2. Delete user");
+                Console.WriteLine("3. ");
                 Console.WriteLine("4. Division");
                 Console.WriteLine("5. Modulo");
                 Console.WriteLine("6. HMultiply");
@@ -32,28 +33,6 @@ namespace WcfClient
                 switch (operation)
                 {
                     case 0:
-                        DatabaseServiceHandler.CloseConnection();
-                        break;
-                    case 1:
-                        DatabaseServiceHandler.Addition();
-                        break;
-                    case 2:
-                        DatabaseServiceHandler.Subtraction();
-                        break;
-                    case 3:
-                        DatabaseServiceHandler.Multiplication();
-                        break;
-                    case 4:
-                        DatabaseServiceHandler.Division();
-                        break;
-                    case 5:
-                        DatabaseServiceHandler.Modulo();
-                        break;
-                    case 6:
-                        DatabaseServiceHandler.HMultiply();
-                        break;
-                    case 7:
-                        DatabaseServiceHandler.CountAndMaxPrimesInRangeAsync();
                         break;
                     default:
                         Console.WriteLine("Invalid input.");
