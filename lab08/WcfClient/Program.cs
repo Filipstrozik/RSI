@@ -1,6 +1,6 @@
-﻿using WcfClient.Services;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using WcfClient.Services;
 
 namespace WcfClient
 {
@@ -11,17 +11,13 @@ namespace WcfClient
             MyData.Info();
 
             int operation = 0;
-            int n1, n2, result;
             do
             {
                 Console.WriteLine("Choose an operation:");
                 Console.WriteLine("1. Show all users");
-                Console.WriteLine("2. Delete user");
-                Console.WriteLine("3. ");
-                Console.WriteLine("4. Division");
-                Console.WriteLine("5. Modulo");
-                Console.WriteLine("6. HMultiply");
-                Console.WriteLine("7. Count and find max prime numbers in range");
+                Console.WriteLine("2. Add user");
+                Console.WriteLine("3. Update user");
+                Console.WriteLine("4. Delete user");
                 Console.WriteLine("0. Exit");
 
                 if (!int.TryParse(Console.ReadLine(), out operation))
@@ -34,12 +30,23 @@ namespace WcfClient
                 {
                     case 0:
                         break;
+                    case 1:
+                        DatabaseServiceHandler.GetAllUsers();
+                        break;
+                    case 2:
+                        DatabaseServiceHandler.AddUser();
+                        break;
+                    case 3:
+                        DatabaseServiceHandler.UpdateUser();
+                        break;
+                    case 4:
+                        DatabaseServiceHandler.DeleteUser();
+                        break;
                     default:
                         Console.WriteLine("Invalid input.");
                         break;
                 }
             } while (operation != 0);
-            Console.ReadKey();
         }
     }
 }

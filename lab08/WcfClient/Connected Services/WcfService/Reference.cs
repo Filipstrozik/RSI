@@ -9,136 +9,203 @@
 //------------------------------------------------------------------------------
 
 namespace WcfClient.WcfService {
+    using System.Runtime.Serialization;
+    using System;
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WcfService.ICalculator")]
-    public interface ICalculator {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/WcfService")]
+    [System.SerializableAttribute()]
+    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/iAdd", ReplyAction="http://tempuri.org/ICalculator/iAddResponse")]
-        int iAdd(int n1, int n2);
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/iAdd", ReplyAction="http://tempuri.org/ICalculator/iAddResponse")]
-        System.Threading.Tasks.Task<int> iAddAsync(int n1, int n2);
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AgeField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/iSub", ReplyAction="http://tempuri.org/ICalculator/iSubResponse")]
-        int iSub(int n1, int n2);
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/iSub", ReplyAction="http://tempuri.org/ICalculator/iSubResponse")]
-        System.Threading.Tasks.Task<int> iSubAsync(int n1, int n2);
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/iMul", ReplyAction="http://tempuri.org/ICalculator/iMulResponse")]
-        int iMul(int n1, int n2);
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/iMul", ReplyAction="http://tempuri.org/ICalculator/iMulResponse")]
-        System.Threading.Tasks.Task<int> iMulAsync(int n1, int n2);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Age {
+            get {
+                return this.AgeField;
+            }
+            set {
+                if ((this.AgeField.Equals(value) != true)) {
+                    this.AgeField = value;
+                    this.RaisePropertyChanged("Age");
+                }
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/iDiv", ReplyAction="http://tempuri.org/ICalculator/iDivResponse")]
-        int iDiv(int n1, int n2);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/iDiv", ReplyAction="http://tempuri.org/ICalculator/iDivResponse")]
-        System.Threading.Tasks.Task<int> iDivAsync(int n1, int n2);
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/iMod", ReplyAction="http://tempuri.org/ICalculator/iModResponse")]
-        int iMod(int n1, int n2);
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/iMod", ReplyAction="http://tempuri.org/ICalculator/iModResponse")]
-        System.Threading.Tasks.Task<int> iModAsync(int n1, int n2);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/HMult", ReplyAction="http://tempuri.org/ICalculator/HMultResponse")]
-        int HMult(int n1, int n2);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/HMult", ReplyAction="http://tempuri.org/ICalculator/HMultResponse")]
-        System.Threading.Tasks.Task<int> HMultAsync(int n1, int n2);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/CountAndMaxPrimesInRange", ReplyAction="http://tempuri.org/ICalculator/CountAndMaxPrimesInRangeResponse")]
-        System.ValueTuple<int, int> CountAndMaxPrimesInRange(int l1, int l2);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculator/CountAndMaxPrimesInRange", ReplyAction="http://tempuri.org/ICalculator/CountAndMaxPrimesInRangeResponse")]
-        System.Threading.Tasks.Task<System.ValueTuple<int, int>> CountAndMaxPrimesInRangeAsync(int l1, int l2);
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ICalculatorChannel : WcfClient.WcfService.ICalculator, System.ServiceModel.IClientChannel {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WcfService.IDatabaseService")]
+    public interface IDatabaseService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetAllUsers", ReplyAction="http://tempuri.org/IDatabaseService/GetAllUsersResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(WcfClient.WcfService.User))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
+        System.Collections.Generic.List<object> GetAllUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetAllUsers", ReplyAction="http://tempuri.org/IDatabaseService/GetAllUsersResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<object>> GetAllUsersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetUserDatabaseSize", ReplyAction="http://tempuri.org/IDatabaseService/GetUserDatabaseSizeResponse")]
+        int GetUserDatabaseSize();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetUserDatabaseSize", ReplyAction="http://tempuri.org/IDatabaseService/GetUserDatabaseSizeResponse")]
+        System.Threading.Tasks.Task<int> GetUserDatabaseSizeAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetUser", ReplyAction="http://tempuri.org/IDatabaseService/GetUserResponse")]
+        WcfClient.WcfService.User GetUser(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetUser", ReplyAction="http://tempuri.org/IDatabaseService/GetUserResponse")]
+        System.Threading.Tasks.Task<WcfClient.WcfService.User> GetUserAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/AddUser", ReplyAction="http://tempuri.org/IDatabaseService/AddUserResponse")]
+        WcfClient.WcfService.User AddUser(WcfClient.WcfService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/AddUser", ReplyAction="http://tempuri.org/IDatabaseService/AddUserResponse")]
+        System.Threading.Tasks.Task<WcfClient.WcfService.User> AddUserAsync(WcfClient.WcfService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/UpdateUser", ReplyAction="http://tempuri.org/IDatabaseService/UpdateUserResponse")]
+        WcfClient.WcfService.User UpdateUser(WcfClient.WcfService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/UpdateUser", ReplyAction="http://tempuri.org/IDatabaseService/UpdateUserResponse")]
+        System.Threading.Tasks.Task<WcfClient.WcfService.User> UpdateUserAsync(WcfClient.WcfService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/DeleteUser", ReplyAction="http://tempuri.org/IDatabaseService/DeleteUserResponse")]
+        WcfClient.WcfService.User DeleteUser(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/DeleteUser", ReplyAction="http://tempuri.org/IDatabaseService/DeleteUserResponse")]
+        System.Threading.Tasks.Task<WcfClient.WcfService.User> DeleteUserAsync(string username);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IDatabaseServiceChannel : WcfClient.WcfService.IDatabaseService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class CalculatorClient : System.ServiceModel.ClientBase<WcfClient.WcfService.ICalculator>, WcfClient.WcfService.ICalculator {
+    public partial class DatabaseServiceClient : System.ServiceModel.ClientBase<WcfClient.WcfService.IDatabaseService>, WcfClient.WcfService.IDatabaseService {
         
-        public CalculatorClient() {
+        public DatabaseServiceClient() {
         }
         
-        public CalculatorClient(string endpointConfigurationName) : 
+        public DatabaseServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public CalculatorClient(string endpointConfigurationName, string remoteAddress) : 
+        public DatabaseServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public CalculatorClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public DatabaseServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public CalculatorClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public DatabaseServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public int iAdd(int n1, int n2) {
-            return base.Channel.iAdd(n1, n2);
+        public System.Collections.Generic.List<object> GetAllUsers() {
+            return base.Channel.GetAllUsers();
         }
         
-        public System.Threading.Tasks.Task<int> iAddAsync(int n1, int n2) {
-            return base.Channel.iAddAsync(n1, n2);
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<object>> GetAllUsersAsync() {
+            return base.Channel.GetAllUsersAsync();
         }
         
-        public int iSub(int n1, int n2) {
-            return base.Channel.iSub(n1, n2);
+        public int GetUserDatabaseSize() {
+            return base.Channel.GetUserDatabaseSize();
         }
         
-        public System.Threading.Tasks.Task<int> iSubAsync(int n1, int n2) {
-            return base.Channel.iSubAsync(n1, n2);
+        public System.Threading.Tasks.Task<int> GetUserDatabaseSizeAsync() {
+            return base.Channel.GetUserDatabaseSizeAsync();
         }
         
-        public int iMul(int n1, int n2) {
-            return base.Channel.iMul(n1, n2);
+        public WcfClient.WcfService.User GetUser(string username) {
+            return base.Channel.GetUser(username);
         }
         
-        public System.Threading.Tasks.Task<int> iMulAsync(int n1, int n2) {
-            return base.Channel.iMulAsync(n1, n2);
+        public System.Threading.Tasks.Task<WcfClient.WcfService.User> GetUserAsync(string username) {
+            return base.Channel.GetUserAsync(username);
         }
         
-        public int iDiv(int n1, int n2) {
-            return base.Channel.iDiv(n1, n2);
+        public WcfClient.WcfService.User AddUser(WcfClient.WcfService.User user) {
+            return base.Channel.AddUser(user);
         }
         
-        public System.Threading.Tasks.Task<int> iDivAsync(int n1, int n2) {
-            return base.Channel.iDivAsync(n1, n2);
+        public System.Threading.Tasks.Task<WcfClient.WcfService.User> AddUserAsync(WcfClient.WcfService.User user) {
+            return base.Channel.AddUserAsync(user);
         }
         
-        public int iMod(int n1, int n2) {
-            return base.Channel.iMod(n1, n2);
+        public WcfClient.WcfService.User UpdateUser(WcfClient.WcfService.User user) {
+            return base.Channel.UpdateUser(user);
         }
         
-        public System.Threading.Tasks.Task<int> iModAsync(int n1, int n2) {
-            return base.Channel.iModAsync(n1, n2);
+        public System.Threading.Tasks.Task<WcfClient.WcfService.User> UpdateUserAsync(WcfClient.WcfService.User user) {
+            return base.Channel.UpdateUserAsync(user);
         }
         
-        public int HMult(int n1, int n2) {
-            return base.Channel.HMult(n1, n2);
+        public WcfClient.WcfService.User DeleteUser(string username) {
+            return base.Channel.DeleteUser(username);
         }
         
-        public System.Threading.Tasks.Task<int> HMultAsync(int n1, int n2) {
-            return base.Channel.HMultAsync(n1, n2);
-        }
-        
-        public System.ValueTuple<int, int> CountAndMaxPrimesInRange(int l1, int l2) {
-            return base.Channel.CountAndMaxPrimesInRange(l1, l2);
-        }
-        
-        public System.Threading.Tasks.Task<System.ValueTuple<int, int>> CountAndMaxPrimesInRangeAsync(int l1, int l2) {
-            return base.Channel.CountAndMaxPrimesInRangeAsync(l1, l2);
+        public System.Threading.Tasks.Task<WcfClient.WcfService.User> DeleteUserAsync(string username) {
+            return base.Channel.DeleteUserAsync(username);
         }
     }
 }

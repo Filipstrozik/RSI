@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 
@@ -8,19 +9,22 @@ namespace WcfService
     public interface IDatabaseService
     {
         [OperationContract]
-        ArrayList getAllUsers();
+        List<User> GetAllUsers();
 
         [OperationContract]
-        int getUserDatabaseSize();
+        int GetUserDatabaseSize();
 
         [OperationContract]
-        void addUser(User user);
+        User GetUser(string username);
 
         [OperationContract]
-        void updateUser(User user);
+        User AddUser(User user);
 
         [OperationContract]
-        void deleteUser(User user);
+        User UpdateUser(User user);
+
+        [OperationContract]
+        User DeleteUser(string username);
     }
 
     [DataContract]

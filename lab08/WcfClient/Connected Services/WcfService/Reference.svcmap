@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="76af34b6-6fc4-4f25-93ce-b1b3fd945ddf" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="07e2c811-99a0-4b07-9c3e-5e29d1560057" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -9,7 +9,9 @@
     <GenerateInternalTypes>false</GenerateInternalTypes>
     <GenerateMessageContracts>false</GenerateMessageContracts>
     <NamespaceMappings />
-    <CollectionMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <UseSerializerForFaults>true</UseSerializerForFaults>
@@ -19,14 +21,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:10000/MyCalculator" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:10000/DatabaseService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="MyCalculator.xsd" MetadataType="Schema" ID="4b893567-7908-47f1-a0ec-3dc22ea7403b" SourceId="1" SourceUrl="http://localhost:10000/MyCalculator?xsd=xsd1" />
-    <MetadataFile FileName="MyCalculator.wsdl" MetadataType="Wsdl" ID="10eb2e3b-0f4b-4494-8228-88dc1e20e840" SourceId="1" SourceUrl="http://localhost:10000/MyCalculator?wsdl" />
-    <MetadataFile FileName="MyCalculator2.xsd" MetadataType="Schema" ID="956a4888-08c6-430d-bcca-44614432384e" SourceId="1" SourceUrl="http://localhost:10000/MyCalculator?xsd=xsd2" />
-    <MetadataFile FileName="MyCalculator1.xsd" MetadataType="Schema" ID="e810573d-608c-4bb0-b555-0d5f330bc7af" SourceId="1" SourceUrl="http://localhost:10000/MyCalculator?xsd=xsd0" />
-    <MetadataFile FileName="MyCalculator.disco" MetadataType="Disco" ID="5390c754-91cd-4cbf-8c9d-0aa59b72940e" SourceId="1" SourceUrl="http://localhost:10000/MyCalculator?disco" />
+    <MetadataFile FileName="DatabaseService.xsd" MetadataType="Schema" ID="85a8a9e9-1acc-46c8-92ba-edad20a2a7a2" SourceId="1" SourceUrl="http://localhost:10000/DatabaseService?xsd=xsd3" />
+    <MetadataFile FileName="DatabaseService1.xsd" MetadataType="Schema" ID="2bcff948-4cee-449f-91dc-a827082e9522" SourceId="1" SourceUrl="http://localhost:10000/DatabaseService?xsd=xsd2" />
+    <MetadataFile FileName="DatabaseService.wsdl" MetadataType="Wsdl" ID="b2732d22-c441-4690-befc-474dfe19d386" SourceId="1" SourceUrl="http://localhost:10000/DatabaseService?wsdl" />
+    <MetadataFile FileName="DatabaseService.disco" MetadataType="Disco" ID="a2eea29a-50b4-4c13-8bcb-411844efc41c" SourceId="1" SourceUrl="http://localhost:10000/DatabaseService?disco" />
+    <MetadataFile FileName="DatabaseService2.xsd" MetadataType="Schema" ID="d2119d25-885a-4eea-835d-4cb2fc33aeab" SourceId="1" SourceUrl="http://localhost:10000/DatabaseService?xsd=xsd1" />
+    <MetadataFile FileName="DatabaseService3.xsd" MetadataType="Schema" ID="d367686b-7d0f-4263-8183-95853a6edd77" SourceId="1" SourceUrl="http://localhost:10000/DatabaseService?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
