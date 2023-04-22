@@ -1,6 +1,8 @@
 ﻿using System;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using WcfClient.Services;
+using WcfClient.WcfService;
 
 namespace WcfClient
 {
@@ -9,6 +11,11 @@ namespace WcfClient
         static void Main(string[] args)
         {
             MyData.Info();
+            Console.WriteLine("... The client is started");
+            
+            DatabaseServiceHandler handler = new DatabaseServiceHandler();  
+
+            
 
             int operation = 0;
             do
@@ -31,16 +38,16 @@ namespace WcfClient
                     case 0:
                         break;
                     case 1:
-                        DatabaseServiceHandler.GetAllUsers();
+                        handler.GetAllUsers();
                         break;
                     case 2:
-                        DatabaseServiceHandler.AddUser();
+                        handler.AddUser();
                         break;
                     case 3:
-                        DatabaseServiceHandler.UpdateUser();
+                        handler.UpdateUser();
                         break;
                     case 4:
-                        DatabaseServiceHandler.DeleteUser();
+                        handler.DeleteUser();
                         break;
                     default:
                         Console.WriteLine("Invalid input.");

@@ -13,9 +13,7 @@ namespace WcfServiceHost
             Uri baseAdress = new Uri("http://localhost:10000/DatabaseService");
 
             ServiceHost myHost = new ServiceHost(typeof(DatabaseService), baseAdress);
-            ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
-            smb.HttpGetEnabled = true;
-            myHost.Description.Behaviors.Add(smb);
+       
 
             BasicHttpBinding myBinding = new BasicHttpBinding();
             WSHttpBinding binding2 = new WSHttpBinding();
@@ -24,6 +22,9 @@ namespace WcfServiceHost
             ServiceEndpoint endpoint1 = myHost.AddServiceEndpoint(typeof(IDatabaseService), myBinding, "endpoint1");
             ServiceEndpoint endpoint2 = myHost.AddServiceEndpoint(typeof(IDatabaseService), binding2, "endpoint2");
 
+            ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
+            smb.HttpGetEnabled = true;
+            myHost.Description.Behaviors.Add(smb);
 
             try
             {

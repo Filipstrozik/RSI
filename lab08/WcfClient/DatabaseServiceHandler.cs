@@ -7,26 +7,41 @@ namespace WcfClient
 {
     public class DatabaseServiceHandler
     {
+        private IDatabaseService _basicClient;
+        private DatabaseServiceClient _wsClient;
 
-        static DatabaseServiceClient _client = new DatabaseServiceClient("BasicHttpBinding_IDatabaseService");
 
-
-        static public void Close()
+        public DatabaseServiceHandler() 
         {
-            Console.WriteLine("Goodbye!");
-            _client.Close();
+            Uri baseAddress;
+            BasicHttpBinding myBinding = new BasicHttpBinding();
+            baseAddress = new Uri("http://localhost:10000/DatabaseService/endpoint1");
+
+            EndpointAddress eAddress = new EndpointAddress(baseAddress);
+            ChannelFactory<IDatabaseService> myCF = new ChannelFactory<IDatabaseService>(myBinding, eAddress);
+            _basicClient = myCF.CreateChannel();
+
+            _wsClient = new DatabaseServiceClient("WSHttpBinding_IDatabaseService");
         }
 
-        static public void GetAllUsers()
+
+        public void Close()
+        {
+            Console.WriteLine("Goodbye!");
+            ((IClientChannel)_wsClient).Close();
+        }
+
+        public void GetAllUsers()
         {
 
             try
             {
-                var a = _client.GetAllUsers();
-                Console.WriteLine(a.ToString());
-                foreach (var user in a.ToList())
+                var a = _wsClient.GetAllUsers();
+                foreach (User user in a.ToList())
                 {
-                    Console.WriteLine(user);
+                    Console.WriteLine(user.Name);
+                    Console.WriteLine(user.Age);
+                    Console.WriteLine(user.Email);
                 }
             }
             catch (FaultException<string> ex)
@@ -35,13 +50,13 @@ namespace WcfClient
             }
         }
 
-        static public void GetUser()
+        public void GetUser()
         {
             Console.Write("Enter user name: ");
             string name = Console.ReadLine();
             try
             {
-                var foundUser = _client.GetUser(name) as User;
+                var foundUser = _wsClient.GetUser(name) as User;
             }
             catch (FaultException<string> ex)
             {
@@ -49,11 +64,11 @@ namespace WcfClient
             }
         }
 
-        static public int GetUserDatabaseSize()
+        public int GetUserDatabaseSize()
         {
             try
             {
-                return _client.GetUserDatabaseSize();
+                return _wsClient.GetUserDatabaseSize();
             }
             catch (FaultException<string> ex)
             {
@@ -62,7 +77,7 @@ namespace WcfClient
             }
         }
 
-        static public void AddUser()
+        public void AddUser()
         {
             Console.Write("Enter user name: ");
             string name = Console.ReadLine();
@@ -75,7 +90,7 @@ namespace WcfClient
 
             try
             {
-                _client.AddUser(user);
+                _wsClient.AddUser(user);
                 Console.WriteLine($"User '{user.Name}' added to the database.");
             }
             catch (FaultException<string> ex)
@@ -84,7 +99,7 @@ namespace WcfClient
             }
         }
 
-        static public void UpdateUser()
+        public void UpdateUser()
         {
             Console.Write("Enter user name: ");
             string name = Console.ReadLine();
@@ -97,7 +112,7 @@ namespace WcfClient
 
             try
             {
-                _client.UpdateUser(user);
+                _wsClient.UpdateUser(user);
                 Console.WriteLine($"User '{user.Name}' updated in the database.");
             }
             catch (FaultException<string> ex)
@@ -106,14 +121,14 @@ namespace WcfClient
             }
         }
 
-        static public void DeleteUser()
+        public void DeleteUser()
         {
             Console.Write("Enter user name: ");
             string name = Console.ReadLine();
 
             try
             {
-                _client.DeleteUser(name);
+                _wsClient.DeleteUser(name);
                 Console.WriteLine($"User '{name}' deleted from the database.");
             }
             catch (FaultException<string> ex)

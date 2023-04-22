@@ -6,6 +6,7 @@ using System.ServiceModel;
 namespace WcfService
 {
     [ServiceContract(ProtectionLevel = System.Net.Security.ProtectionLevel.None)]
+    [ServiceKnownType(typeof(User))]
     public interface IDatabaseService
     {
         [OperationContract]

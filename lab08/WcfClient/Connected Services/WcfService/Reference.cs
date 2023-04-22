@@ -95,12 +95,10 @@ namespace WcfClient.WcfService {
     public interface IDatabaseService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetAllUsers", ReplyAction="http://tempuri.org/IDatabaseService/GetAllUsersResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(WcfClient.WcfService.User))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.Generic.List<object>))]
-        System.Collections.Generic.List<object> GetAllUsers();
+        WcfClient.WcfService.User[] GetAllUsers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetAllUsers", ReplyAction="http://tempuri.org/IDatabaseService/GetAllUsersResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<object>> GetAllUsersAsync();
+        System.Threading.Tasks.Task<WcfClient.WcfService.User[]> GetAllUsersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetUserDatabaseSize", ReplyAction="http://tempuri.org/IDatabaseService/GetUserDatabaseSizeResponse")]
         int GetUserDatabaseSize();
@@ -160,11 +158,11 @@ namespace WcfClient.WcfService {
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<object> GetAllUsers() {
+        public WcfClient.WcfService.User[] GetAllUsers() {
             return base.Channel.GetAllUsers();
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<object>> GetAllUsersAsync() {
+        public System.Threading.Tasks.Task<WcfClient.WcfService.User[]> GetAllUsersAsync() {
             return base.Channel.GetAllUsersAsync();
         }
         
