@@ -95,10 +95,12 @@ namespace WcfClient.WcfService {
     public interface IDatabaseService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetAllUsers", ReplyAction="http://tempuri.org/IDatabaseService/GetAllUsersResponse")]
-        System.Collections.Generic.List<WcfClient.WcfService.User> GetAllUsers();
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.ArrayList))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(WcfClient.WcfService.User))]
+        System.Collections.ArrayList GetAllUsers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetAllUsers", ReplyAction="http://tempuri.org/IDatabaseService/GetAllUsersResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<WcfClient.WcfService.User>> GetAllUsersAsync();
+        System.Threading.Tasks.Task<System.Collections.ArrayList> GetAllUsersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/GetUserDatabaseSize", ReplyAction="http://tempuri.org/IDatabaseService/GetUserDatabaseSizeResponse")]
         int GetUserDatabaseSize();
@@ -131,10 +133,12 @@ namespace WcfClient.WcfService {
         System.Threading.Tasks.Task<WcfClient.WcfService.User> DeleteUserAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/SortBy", ReplyAction="http://tempuri.org/IDatabaseService/SortByResponse")]
-        System.Collections.Generic.List<WcfClient.WcfService.User> SortBy(string property);
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Collections.ArrayList))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(WcfClient.WcfService.User))]
+        System.Collections.ArrayList SortBy(string property);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseService/SortBy", ReplyAction="http://tempuri.org/IDatabaseService/SortByResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<WcfClient.WcfService.User>> SortByAsync(string property);
+        System.Threading.Tasks.Task<System.Collections.ArrayList> SortByAsync(string property);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -164,11 +168,11 @@ namespace WcfClient.WcfService {
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<WcfClient.WcfService.User> GetAllUsers() {
+        public System.Collections.ArrayList GetAllUsers() {
             return base.Channel.GetAllUsers();
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<WcfClient.WcfService.User>> GetAllUsersAsync() {
+        public System.Threading.Tasks.Task<System.Collections.ArrayList> GetAllUsersAsync() {
             return base.Channel.GetAllUsersAsync();
         }
         
@@ -212,11 +216,11 @@ namespace WcfClient.WcfService {
             return base.Channel.DeleteUserAsync(username);
         }
         
-        public System.Collections.Generic.List<WcfClient.WcfService.User> SortBy(string property) {
+        public System.Collections.ArrayList SortBy(string property) {
             return base.Channel.SortBy(property);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<WcfClient.WcfService.User>> SortByAsync(string property) {
+        public System.Threading.Tasks.Task<System.Collections.ArrayList> SortByAsync(string property) {
             return base.Channel.SortByAsync(property);
         }
     }

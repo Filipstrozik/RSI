@@ -37,7 +37,7 @@ namespace WcfClient
             try
             {
                 var a = _wsClient.GetAllUsers();
-                foreach (User user in a.ToList())
+                foreach (User user in a)
                 {
                     Console.WriteLine(user.Name);
                     Console.WriteLine(user.Age);
@@ -147,7 +147,7 @@ namespace WcfClient
                 var a = await _wsClient.SortByAsync(propertyName);
                 Console.WriteLine($"Sorted Users by: {propertyName}");
 
-                foreach (User user in a.ToList())
+                foreach (User user in a)
                 {
                     Console.WriteLine(user.Name);
                     Console.WriteLine(user.Age);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:10000/DatabaseService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:import schemaLocation="http://localhost:10000/DatabaseService?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/WcfService" />
   <xs:element name="GetAllUsers">
     <xs:complexType>
@@ -9,7 +10,7 @@
   <xs:element name="GetAllUsersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="GetAllUsersResult" nillable="true" type="q1:ArrayOfUser" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetAllUsersResult" nillable="true" type="q1:ArrayOfanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -91,7 +92,7 @@
   <xs:element name="SortByResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="SortByResult" nillable="true" type="q8:ArrayOfUser" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SortByResult" nillable="true" type="q8:ArrayOfanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

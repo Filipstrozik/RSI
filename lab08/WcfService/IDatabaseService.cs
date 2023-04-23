@@ -11,7 +11,7 @@ namespace WcfService
     public interface IDatabaseService
     {
         [OperationContract]
-        List<User> GetAllUsers();
+        ArrayList GetAllUsers();
 
         [OperationContract]
         int GetUserDatabaseSize();
@@ -29,7 +29,7 @@ namespace WcfService
         User DeleteUser(string username);
 
         [OperationContract]
-        Task<List<User>> SortBy(string property);
+        Task<ArrayList> SortBy(string property);
     }
 
     [DataContract]

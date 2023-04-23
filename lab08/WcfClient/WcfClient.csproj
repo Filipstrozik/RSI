@@ -99,6 +99,9 @@
     <None Include="Connected Services\WcfService\DatabaseService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\WcfService\DatabaseService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\WcfService\WcfClient.WcfService.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

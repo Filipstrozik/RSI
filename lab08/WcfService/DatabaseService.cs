@@ -11,7 +11,7 @@ namespace WcfService
     ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class DatabaseService : IDatabaseService
     {
-        private List<User> _users = new List<User>();
+        private ArrayList _users = new ArrayList();
 
         public DatabaseService()
         {
@@ -19,7 +19,7 @@ namespace WcfService
             _users.Add(newUser);
         }
 
-        public List<User> GetAllUsers()
+        public ArrayList GetAllUsers()
         {
             Console.WriteLine($"...called List<User> GetAllUsers()");
 
@@ -95,20 +95,20 @@ namespace WcfService
             throw new FaultException("User does not exists in database.");
         }
 
-        public async Task<List<User>> SortBy(string property)
+        public async Task<ArrayList> SortBy(string property)
         {
             Console.WriteLine($"...called Task<List<User>> Sort(string property)");
 
             switch (property)
             {
                 case "Name":
-                    _users.Sort((u1, u2) => u1.Name.CompareTo(u2.Name));
+                    _users.Sort(new UserComparerByName());
                     break;
                 case "Age":
-                    _users.Sort((u1, u2) => u1.Age.CompareTo(u2.Age));
+                    _users.Sort(new UserComparerByAge());
                     break;
                 case "Email":
-                    _users.Sort((u1, u2) => u1.Email.CompareTo(u2.Email));
+                    _users.Sort(new UserComparerByEmail());
                     break;
                 default:
                     throw new FaultException($"Invalid property name: {property}");
@@ -118,5 +118,35 @@ namespace WcfService
             return _users;
         }
 
+    }
+
+    public class UserComparerByName : IComparer
+    {
+        public int Compare(object x, object y)
+        {
+            User u1 = (User)x;
+            User u2 = (User)y;
+            return u1.Name.CompareTo(u2.Name);
+        }
+    }
+
+    public class UserComparerByAge : IComparer
+    {
+        public int Compare(object x, object y)
+        {
+            User u1 = (User)x;
+            User u2 = (User)y;
+            return u1.Age.CompareTo(u2.Age);
+        }
+    }
+
+    public class UserComparerByEmail : IComparer
+    {
+        public int Compare(object x, object y)
+        {
+            User u1 = (User)x;
+            User u2 = (User)y;
+            return u1.Email.CompareTo(u2.Email);
+        }
     }
 }
