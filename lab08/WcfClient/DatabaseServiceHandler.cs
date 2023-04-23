@@ -44,7 +44,7 @@ namespace WcfClient
                     Console.WriteLine(user.Email);
                 }
             }
-            catch (FaultException<string> ex)
+            catch (FaultException ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
@@ -58,7 +58,7 @@ namespace WcfClient
             {
                 var foundUser = _wsClient.GetUser(name) as User;
             }
-            catch (FaultException<string> ex)
+            catch (FaultException ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
@@ -70,7 +70,7 @@ namespace WcfClient
             {
                 return _wsClient.GetUserDatabaseSize();
             }
-            catch (FaultException<string> ex)
+            catch (FaultException ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
                 return -1;
@@ -93,7 +93,7 @@ namespace WcfClient
                 _wsClient.AddUser(user);
                 Console.WriteLine($"User '{user.Name}' added to the database.");
             }
-            catch (FaultException<string> ex)
+            catch (FaultException ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
@@ -115,7 +115,7 @@ namespace WcfClient
                 _wsClient.UpdateUser(user);
                 Console.WriteLine($"User '{user.Name}' updated in the database.");
             }
-            catch (FaultException<string> ex)
+            catch (FaultException ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
@@ -131,7 +131,31 @@ namespace WcfClient
                 _wsClient.DeleteUser(name);
                 Console.WriteLine($"User '{name}' deleted from the database.");
             }
-            catch (FaultException<string> ex)
+            catch (FaultException ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        public async void SortUsers()
+        {
+            Console.Write("Enter property users should be sorted by: ");
+            string propertyName = Console.ReadLine();
+
+            try
+            {
+                var a = await _wsClient.SortByAsync(propertyName);
+                Console.WriteLine($"Sorted Users by: {propertyName}");
+
+                foreach (User user in a.ToList())
+                {
+                    Console.WriteLine(user.Name);
+                    Console.WriteLine(user.Age);
+                    Console.WriteLine(user.Email);
+                }
+                
+            }
+            catch (FaultException ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }

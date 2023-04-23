@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace WcfService
 {
@@ -26,6 +27,9 @@ namespace WcfService
 
         [OperationContract]
         User DeleteUser(string username);
+
+        [OperationContract]
+        Task<List<User>> SortBy(string property);
     }
 
     [DataContract]
@@ -40,5 +44,4 @@ namespace WcfService
         [DataMember]
         public string Email { get; set; }
     }
-
 }

@@ -8,7 +8,7 @@ namespace WcfClient
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             MyData.Info();
             Console.WriteLine("... The client is started");
@@ -23,8 +23,10 @@ namespace WcfClient
                 Console.WriteLine("Choose an operation:");
                 Console.WriteLine("1. Show all users");
                 Console.WriteLine("2. Add user");
-                Console.WriteLine("3. Update user");
-                Console.WriteLine("4. Delete user");
+                Console.WriteLine("3. Get user");
+                Console.WriteLine("4. Update user");
+                Console.WriteLine("5. Delete user");
+                Console.WriteLine("6. Sort");
                 Console.WriteLine("0. Exit");
 
                 if (!int.TryParse(Console.ReadLine(), out operation))
@@ -44,10 +46,16 @@ namespace WcfClient
                         handler.AddUser();
                         break;
                     case 3:
-                        handler.UpdateUser();
+                        handler.GetUser();
                         break;
                     case 4:
+                        handler.UpdateUser();
+                        break;
+                    case 5:
                         handler.DeleteUser();
+                        break;
+                    case 6:
+                        handler.SortUsers();
                         break;
                     default:
                         Console.WriteLine("Invalid input.");

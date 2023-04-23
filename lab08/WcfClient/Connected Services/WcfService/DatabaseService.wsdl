@@ -50,6 +50,12 @@
   <wsdl:message name="IDatabaseService_DeleteUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IDatabaseService_SortBy_InputMessage">
+    <wsdl:part name="parameters" element="tns:SortBy" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_SortBy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SortByResponse" />
+  </wsdl:message>
   <wsdl:portType name="IDatabaseService">
     <wsdl:operation name="GetAllUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetAllUsers" message="tns:IDatabaseService_GetAllUsers_InputMessage" />
@@ -74,6 +80,10 @@
     <wsdl:operation name="DeleteUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/DeleteUser" message="tns:IDatabaseService_DeleteUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/DeleteUserResponse" message="tns:IDatabaseService_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SortBy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/SortBy" message="tns:IDatabaseService_SortBy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/SortByResponse" message="tns:IDatabaseService_SortBy_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IDatabaseService" type="tns:IDatabaseService">
@@ -132,6 +142,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SortBy">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/SortBy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WSHttpBinding_IDatabaseService" type="tns:IDatabaseService">
     <wsp:PolicyReference URI="#WSHttpBinding_IDatabaseService_policy" />
@@ -183,6 +202,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteUser">
       <soap12:operation soapAction="http://tempuri.org/IDatabaseService/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SortBy">
+      <soap12:operation soapAction="http://tempuri.org/IDatabaseService/SortBy" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

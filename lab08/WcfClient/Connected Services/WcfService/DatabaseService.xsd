@@ -81,4 +81,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SortBy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="property" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SortByResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WcfService" minOccurs="0" name="SortByResult" nillable="true" type="q8:ArrayOfUser" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

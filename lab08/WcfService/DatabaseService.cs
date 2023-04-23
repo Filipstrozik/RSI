@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace WcfService
 {
@@ -24,6 +25,7 @@ namespace WcfService
 
             lock (_users)
             {
+                Console.WriteLine($"...returning {_users}");
                 return _users;
             }
         }
@@ -31,7 +33,7 @@ namespace WcfService
         public int GetUserDatabaseSize()
         {
             Console.WriteLine($"...called int GetUserDatabaseSize()");
-
+            Console.WriteLine($"...returning {_users.Count}");
             return _users.Count;
         }
 
@@ -42,10 +44,11 @@ namespace WcfService
             {
                 if (user.Name == username)
                 {
+                    Console.WriteLine($"...returning {user}");
                     return user;
                 }
             }
-            throw new ArgumentException("User does not exists in database.");
+            throw new FaultException("User does not exists in database.");
         }
 
         public User AddUser(User user)
@@ -54,10 +57,11 @@ namespace WcfService
 
             if (_users.Contains(user))
             {
-                throw new ArgumentException("User already exists in database.");
+                throw new FaultException("User already exists in database.");
             }
 
             _users.Add(user);
+            Console.WriteLine($"...returning {user}");
             return user;
         }
 
@@ -67,10 +71,11 @@ namespace WcfService
 
             if (!_users.Contains(user))
             {
-                throw new ArgumentException("User does not exist in database.");
+                throw new FaultException("User does not exist in database.");
             }
 
             _users[_users.IndexOf(user)] = user;
+            Console.WriteLine($"...returning {user}");
             return user;
         }
 
@@ -83,10 +88,34 @@ namespace WcfService
                 if (user.Name == username)
                 {
                     _users.Remove(user);
+                    Console.WriteLine($"...returning {user}");
                     return user;
                 }
             }
-            throw new ArgumentException("User does not exists in database.");
+            throw new FaultException("User does not exists in database.");
+        }
+
+        public async Task<List<User>> SortBy(string property)
+        {
+            Console.WriteLine($"...called Task<List<User>> Sort(string property)");
+
+            switch (property)
+            {
+                case "Name":
+                    _users.Sort((u1, u2) => u1.Name.CompareTo(u2.Name));
+                    break;
+                case "Age":
+                    _users.Sort((u1, u2) => u1.Age.CompareTo(u2.Age));
+                    break;
+                case "Email":
+                    _users.Sort((u1, u2) => u1.Email.CompareTo(u2.Email));
+                    break;
+                default:
+                    throw new FaultException($"Invalid property name: {property}");
+            }
+            await Task.Delay(2000);
+            Console.WriteLine($"...returning {_users}");
+            return _users;
         }
 
     }
