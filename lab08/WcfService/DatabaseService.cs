@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.ServiceModel;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WcfService
@@ -12,10 +11,11 @@ namespace WcfService
     public class DatabaseService : IDatabaseService
     {
         private ArrayList _users = new ArrayList();
+        private int _highestID = 1;
 
         public DatabaseService()
         {
-            User newUser = new User { Name = "Filip", Age = 21, Email = "filip@god.pl" };
+            User newUser = new User { Name = "Filip", Age = 21, Email = "filip@god.pl", ID = 0};
             _users.Add(newUser);
         }
 
@@ -25,6 +25,7 @@ namespace WcfService
 
             lock (_users)
             {
+                Thread.Sleep(2000);
                 Console.WriteLine($"...returning {_users}");
                 return _users;
             }
@@ -37,12 +38,12 @@ namespace WcfService
             return _users.Count;
         }
 
-        public User GetUser(string username)
+        public User GetUser(int ID)
         {
             Console.WriteLine($"...called User GetUser(string username)");
             foreach (User user in _users)
             {
-                if (user.Name == username)
+                if (user.ID == ID)
                 {
                     Console.WriteLine($"...returning {user}");
                     return user;
@@ -60,6 +61,7 @@ namespace WcfService
                 throw new FaultException("User already exists in database.");
             }
 
+            user.ID = _highestID++;
             _users.Add(user);
             Console.WriteLine($"...returning {user}");
             return user;
@@ -69,23 +71,26 @@ namespace WcfService
         {
             Console.WriteLine($"...called User UpdateUser(User user)");
 
-            if (!_users.Contains(user))
+            foreach(User curr_user in _users)
             {
-                throw new FaultException("User does not exist in database.");
+                if (curr_user.ID == user.ID)
+                {
+                    _users[_users.IndexOf(curr_user)] = user;
+                    Console.WriteLine($"...returning {user}");
+                    return user;
+                }
             }
+            throw new FaultException("User does not exist in database.");
 
-            _users[_users.IndexOf(user)] = user;
-            Console.WriteLine($"...returning {user}");
-            return user;
         }
 
-        public User DeleteUser(string username)
+        public User DeleteUser(int ID)
         {
             Console.WriteLine($"...called User DeleteUser(string username)");
 
             foreach (User user in _users)
             {
-                if (user.Name == username)
+                if (user.ID == ID)
                 {
                     _users.Remove(user);
                     Console.WriteLine($"...returning {user}");
@@ -118,6 +123,10 @@ namespace WcfService
             return _users;
         }
 
+        public int GetHighestUserID()
+        {
+            return _highestID;
+        }
     }
 
     public class UserComparerByName : IComparer
@@ -149,4 +158,6 @@ namespace WcfService
             return u1.Email.CompareTo(u2.Email);
         }
     }
+
+
 }

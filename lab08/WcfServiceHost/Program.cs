@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using WcfService;
 
@@ -16,8 +17,10 @@ namespace WcfServiceHost
        
 
             BasicHttpBinding myBinding = new BasicHttpBinding();
+
             WSHttpBinding binding2 = new WSHttpBinding();
             binding2.Security.Mode = SecurityMode.None;
+
 
             ServiceEndpoint endpoint1 = myHost.AddServiceEndpoint(typeof(IDatabaseService), myBinding, "endpoint1");
             ServiceEndpoint endpoint2 = myHost.AddServiceEndpoint(typeof(IDatabaseService), binding2, "endpoint2");

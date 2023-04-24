@@ -15,7 +15,7 @@ namespace WcfClient
         {
             Uri baseAddress;
             BasicHttpBinding myBinding = new BasicHttpBinding();
-            baseAddress = new Uri("http://localhost:10000/DatabaseService/endpoint1");
+            baseAddress = new Uri("http://localhost:10000/DatabaseService");
 
             EndpointAddress eAddress = new EndpointAddress(baseAddress);
             ChannelFactory<IDatabaseService> myCF = new ChannelFactory<IDatabaseService>(myBinding, eAddress);
@@ -39,9 +39,10 @@ namespace WcfClient
                 var a = _wsClient.GetAllUsers();
                 foreach (User user in a)
                 {
-                    Console.WriteLine(user.Name);
-                    Console.WriteLine(user.Age);
-                    Console.WriteLine(user.Email);
+                    Console.Write("ID: " +  user.ID + "\t");
+                    Console.Write("Name: " + user.Name + "\t");
+                    Console.Write("Age: " +  user.Age + "\t");
+                    Console.WriteLine("Email: " + user.Email + "\t");
                 }
             }
             catch (FaultException ex)
@@ -52,11 +53,15 @@ namespace WcfClient
 
         public void GetUser()
         {
-            Console.Write("Enter user name: ");
-            string name = Console.ReadLine();
+            Console.Write("Enter user ID: ");
+            int ID = GetNumberFromUser();
             try
             {
-                var foundUser = _wsClient.GetUser(name) as User;
+                var foundUser = _wsClient.GetUser(ID) as User;
+                Console.Write("ID: " + foundUser.ID + "\t");
+                Console.Write("Name: " + foundUser.Name + "\t");
+                Console.Write("Age: " + foundUser.Age + "\t");
+                Console.WriteLine("Email: " + foundUser.Email + "\t");
             }
             catch (FaultException ex)
             {
@@ -79,14 +84,16 @@ namespace WcfClient
 
         public void AddUser()
         {
+
             Console.Write("Enter user name: ");
             string name = Console.ReadLine();
             Console.Write("Enter user age: ");
-            int age = int.Parse(Console.ReadLine());
+            int age = GetNumberFromUser();
             Console.Write("Enter user email: ");
             string email = Console.ReadLine();
 
-            User user = new User { Name = name, Age = age, Email = email };
+
+            User user = new User { Name = name, Age = age, Email = email};
 
             try
             {
@@ -101,14 +108,16 @@ namespace WcfClient
 
         public void UpdateUser()
         {
+            Console.Write("Enter user ID: ");
+            int ID = GetNumberFromUser();
             Console.Write("Enter user name: ");
             string name = Console.ReadLine();
             Console.Write("Enter user age: ");
-            int age = int.Parse(Console.ReadLine());
+            int age = GetNumberFromUser();
             Console.Write("Enter user email: ");
             string email = Console.ReadLine();
 
-            User user = new User { Name = name, Age = age, Email = email };
+            User user = new User { Name = name, Age = age, Email = email, ID = ID};
 
             try
             {
@@ -123,13 +132,13 @@ namespace WcfClient
 
         public void DeleteUser()
         {
-            Console.Write("Enter user name: ");
-            string name = Console.ReadLine();
+            Console.Write("Enter user ID: ");
+            int ID = GetNumberFromUser();
 
             try
             {
-                _wsClient.DeleteUser(name);
-                Console.WriteLine($"User '{name}' deleted from the database.");
+                _wsClient.DeleteUser(ID);
+                Console.WriteLine($"User '{ID}' deleted from the database.");
             }
             catch (FaultException ex)
             {
@@ -149,9 +158,10 @@ namespace WcfClient
 
                 foreach (User user in a)
                 {
-                    Console.WriteLine(user.Name);
-                    Console.WriteLine(user.Age);
-                    Console.WriteLine(user.Email);
+                    Console.Write("ID: " + user.ID + "\t");
+                    Console.Write("Name: " + user.Name + "\t");
+                    Console.Write("Age: " + user.Age + "\t");
+                    Console.WriteLine("Email: " + user.Email + "\t");
                 }
                 
             }
@@ -159,6 +169,17 @@ namespace WcfClient
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
+        }
+
+        static private int GetNumberFromUser()
+        {
+            int number;
+            if (!int.TryParse(Console.ReadLine(), out number))
+            {
+                Console.WriteLine("Invalid input.");
+                return GetNumberFromUser();
+            }
+            return number;
         }
     }
 }

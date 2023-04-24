@@ -17,7 +17,7 @@ namespace WcfService
         int GetUserDatabaseSize();
 
         [OperationContract]
-        User GetUser(string username);
+        User GetUser(int ID);
 
         [OperationContract]
         User AddUser(User user);
@@ -26,7 +26,7 @@ namespace WcfService
         User UpdateUser(User user);
 
         [OperationContract]
-        User DeleteUser(string username);
+        User DeleteUser(int ID);
 
         [OperationContract]
         Task<ArrayList> SortBy(string property);
@@ -43,5 +43,8 @@ namespace WcfService
 
         [DataMember]
         public string Email { get; set; }
+
+        [DataMember]
+        public int ID { get; set; }
     }
 }
