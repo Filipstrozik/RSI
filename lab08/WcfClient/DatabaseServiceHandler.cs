@@ -49,6 +49,10 @@ namespace WcfClient
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
+            catch(TimeoutException tex)
+            {
+                Console.WriteLine(tex.Message);
+            }
         }
 
         public void GetSize()

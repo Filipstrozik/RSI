@@ -1,8 +1,6 @@
 ﻿using System;
-using System.ServiceModel;
 using System.Threading.Tasks;
 using WcfClient.Services;
-using WcfClient.WcfService;
 
 namespace WcfClient
 {
@@ -14,8 +12,6 @@ namespace WcfClient
             Console.WriteLine("... The client is started");
             
             DatabaseServiceHandler handler = new DatabaseServiceHandler();  
-
-            
 
             int operation = 0;
             do
