@@ -15,7 +15,7 @@ namespace WcfClient
         {
             Uri baseAddress;
             BasicHttpBinding myBinding = new BasicHttpBinding();
-            baseAddress = new Uri("http://localhost:10000/DatabaseService");
+            baseAddress = new Uri("http://10.182.36.179:10000/DatabaseService");
 
             EndpointAddress eAddress = new EndpointAddress(baseAddress);
             ChannelFactory<IDatabaseService> myCF = new ChannelFactory<IDatabaseService>(myBinding, eAddress);
@@ -44,6 +44,20 @@ namespace WcfClient
                     Console.Write("Age: " +  user.Age + "\t");
                     Console.WriteLine("Email: " + user.Email + "\t");
                 }
+            }
+            catch (FaultException ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+
+        public void GetSize()
+        {
+
+            try
+            {
+                var size = _wsClient.GetUserDatabaseSize();
+                Console.WriteLine($"User Database size: {size}");
             }
             catch (FaultException ex)
             {

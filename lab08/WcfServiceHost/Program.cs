@@ -11,7 +11,7 @@ namespace WcfServiceHost
         static void Main(string[] args)
         {
             MyData.Info();
-            Uri baseAdress = new Uri("http://localhost:10000/DatabaseService");
+            Uri baseAdress = new Uri("http://10.182.36.179:10000/DatabaseService");
 
             ServiceHost myHost = new ServiceHost(typeof(DatabaseService), baseAdress);
        

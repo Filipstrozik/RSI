@@ -27,6 +27,7 @@ namespace WcfClient
                 Console.WriteLine("4. Update user");
                 Console.WriteLine("5. Delete user");
                 Console.WriteLine("6. Sort");
+                Console.WriteLine("7. Size");
                 Console.WriteLine("0. Exit");
 
                 if (!int.TryParse(Console.ReadLine(), out operation))
@@ -56,6 +57,9 @@ namespace WcfClient
                         break;
                     case 6:
                         handler.SortUsers();
+                        break;
+                    case 7:
+                        handler.GetSize();
                         break;
                     default:
                         Console.WriteLine("Invalid input.");

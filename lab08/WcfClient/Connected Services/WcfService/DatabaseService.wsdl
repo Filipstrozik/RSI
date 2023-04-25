@@ -9,10 +9,10 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:10000/DatabaseService?xsd=xsd2" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:10000/DatabaseService?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:10000/DatabaseService?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/WcfService" />
-      <xsd:import schemaLocation="http://localhost:10000/DatabaseService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://10.182.36.179:10000/DatabaseService?xsd=xsd2" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://10.182.36.179:10000/DatabaseService?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://10.182.36.179:10000/DatabaseService?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/WcfService" />
+      <xsd:import schemaLocation="http://10.182.36.179:10000/DatabaseService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IDatabaseService_GetAllUsers_InputMessage">
@@ -222,12 +222,12 @@
   </wsdl:binding>
   <wsdl:service name="DatabaseService">
     <wsdl:port name="BasicHttpBinding_IDatabaseService" binding="tns:BasicHttpBinding_IDatabaseService">
-      <soap:address location="http://localhost:10000/DatabaseService/endpoint1" />
+      <soap:address location="http://10.182.36.179:10000/DatabaseService/endpoint1" />
     </wsdl:port>
     <wsdl:port name="WSHttpBinding_IDatabaseService" binding="tns:WSHttpBinding_IDatabaseService">
-      <soap12:address location="http://localhost:10000/DatabaseService/endpoint2" />
+      <soap12:address location="http://10.182.36.179:10000/DatabaseService/endpoint2" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://localhost:10000/DatabaseService/endpoint2</wsa10:Address>
+        <wsa10:Address>http://10.182.36.179:10000/DatabaseService/endpoint2</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
