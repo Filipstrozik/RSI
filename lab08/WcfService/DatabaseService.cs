@@ -11,12 +11,13 @@ namespace WcfService
     public class DatabaseService : IDatabaseService
     {
         private ArrayList _users = new ArrayList();
-        private int _highestID = 1;
+        private int _highestID = 2;
 
         public DatabaseService()
         {
             User newUser = new User { Name = "Filip", Age = 21, Email = "filip@god.pl", ID = 0};
             _users.Add(newUser);
+            _users.Add(new User { Name = "Piotr", Age = 22, Email = "piotrG@god.pl", ID = 1 });
         }
 
         public ArrayList GetAllUsers()
@@ -25,7 +26,7 @@ namespace WcfService
 
             lock (_users)
             {
-                Thread.Sleep(2000);
+
                 Console.WriteLine($"...returning {_users}");
                 return _users;
             }
