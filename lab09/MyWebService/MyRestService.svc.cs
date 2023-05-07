@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.ServiceModel;
@@ -34,7 +33,7 @@ namespace MyWebService
         public string addXml(Person person)
         {
             if (person == null)
-                throw new WebFaultException<string>("400:BadRequest",
+                throw new WebFaultException<string>("dupa",
                 HttpStatusCode.BadRequest);
             // generate new Id based on the last Id in the list
             int newId = _persons.Last().Id + 1; // TODO: maybe change
@@ -107,6 +106,48 @@ namespace MyWebService
             }
             _persons.RemoveAt(idx);
             return "Removed item with ID=" + Id;
+        }
+
+        public string updateXml(string Id, Person item)
+        {
+            int id = int.Parse(Id);
+            int idx = _persons.FindIndex(p => p.Id == id);
+
+            if (idx == -1)
+            {
+                // Person not found
+                throw new WebFaultException<string>("404: Not Found", HttpStatusCode.NotFound);
+            }
+            else
+            {
+                _persons[idx] = item;
+
+            }
+
+            return "Person updated successfully.";
+        }
+
+        public string updateJson(string Id, Person item)
+        {
+            int id = int.Parse(Id);
+            int idx = _persons.FindIndex(p => p.Id == id);
+
+            if (idx == -1)
+            {
+                throw new WebFaultException<string>("404: Not Found", HttpStatusCode.NotFound);
+            }
+            else
+            {
+                _persons[idx] = item;
+            }
+            return "Person updated successfully.";
+
+        }
+
+
+        public int getSize()
+        {
+            return _persons.Count;
         }
     }
 }

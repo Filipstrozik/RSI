@@ -5,44 +5,79 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        //uri    http://localhost:50985/MyRestService.svc/persons
+        //uri    http://localhost:50985/MyRestService.svc/json/persons
+
+        //xml data add new      <Person><Name>Piotr G</Name><Age>21</Age><Email>piotrg@g.com</Email></Person>
+        //json data add new     { "Name": "Filip Strozik", "Age": 21, "Email": "filips@example.com" }
+
+        //json update           { "Id": 1, "Name": "John Doe", "Age": 35, "Email": "johndoe@example.com" }
+        //xml update            <Person> <Id>2</Id> <Name>John Doe</Name> <Age>35</Age> <Email>johndoe@example.com</Email> </Person>
+
+        //json delete          { "Id": 1 }
+        //xml delete            <Person><Id>2</Id></Person>
         do
         {
             try
             {
-                Console.WriteLine("Enter the format (xml or json):");
-                string format = Console.ReadLine();
-                Console.WriteLine("Enter the method (GET or POST ...):");
+                Console.WriteLine("Enter the method (GET, POST, PUT, or DELETE):");
                 string method = Console.ReadLine();
+
                 Console.WriteLine("Enter URI:");
                 string uri = Console.ReadLine();
                 HttpWebRequest req = WebRequest.Create(uri) as HttpWebRequest;
                 req.KeepAlive = false;
                 req.Method = method.ToUpper();
-                if (format == "xml")
-                    req.ContentType = "text/xml";
-                else if (format == "json") 
-                    req.ContentType = "application/json";
-                else
+
+                string dataFormat = "XML";
+                if(method != "GET")
                 {
-                    Console.WriteLine("Entered bad data!");
-                    return;
+                    Console.WriteLine("Enter data format (JSON or XML):");
+                    dataFormat = Console.ReadLine().ToUpper();
+
+                    if (dataFormat == "JSON")
+                        req.ContentType = "application/json";
+                    else if (dataFormat == "XML")
+                        req.ContentType = "application/xml";
+                    else
+                        throw new ArgumentException("Invalid data format.");
                 }
+
                 switch (method.ToUpper())
                 {
                     case "GET":
                         break;
-                    case "POST":
-                        Console.WriteLine("Paste XML or JSON content  (in one line!)");
 
-                        string dane = Console.ReadLine();
-                        // request message recoding:
-                        byte[] bufor = Encoding.UTF8.GetBytes(dane);
-                        req.ContentLength = bufor.Length;
-                        Stream postData = req.GetRequestStream();
-                        postData.Write(bufor, 0, bufor.Length);
-                        postData.Close();
+                    case "POST":
+                        Console.WriteLine("Enter data :");
+                        string postData = Console.ReadLine();
+                        byte[] postBuffer = Encoding.UTF8.GetBytes(postData);
+                        req.ContentLength = postBuffer.Length;
+                        Stream postStream = req.GetRequestStream();;
+                        postStream.Write(postBuffer, 0, postBuffer.Length);
+                        postStream.Close();
                         break;
-                    //here possible other cases 
+
+                    case "PUT":
+                        Console.WriteLine("Enter data :");
+                        string putData = Console.ReadLine();
+                        byte[] putBuffer = Encoding.UTF8.GetBytes(putData);
+                        req.ContentLength = putBuffer.Length;
+                        Stream putStream = req.GetRequestStream();
+                        putStream.Write(putBuffer, 0, putBuffer.Length);
+                        putStream.Close();
+                        break;
+
+                    case "DELETE":
+                        Console.WriteLine("Enter data (in JSON or XML format):");
+                        string deleteData = Console.ReadLine();
+                        byte[] deleteBuffer = Encoding.UTF8.GetBytes(deleteData);
+                        req.ContentLength = deleteBuffer.Length;
+
+                        Console.WriteLine("Enter data format (JSON or XML):");
+                        dataFormat = Console.ReadLine().ToUpper();
+                        break;
+
                     default:
                         break;
                 }
@@ -59,8 +94,7 @@ internal class Program
             {
                 Console.WriteLine(ex.Message.ToString());
             }
-            Console.WriteLine();
-            Console.WriteLine("Do you want to continue?");
+            Console.WriteLine("\n Do you want to continue?");
         } while (Console.ReadLine().ToUpper() == "Y");
     }
 }

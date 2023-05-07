@@ -45,6 +45,22 @@ namespace MyWebService
         [OperationContract]
         [WebInvoke(UriTemplate = "/json/persons{id}", Method = "DELETE")]
         string deleteJson(string Id);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/persons/{id}",
+        Method = "PUT", 
+        RequestFormat = WebMessageFormat.Xml)]
+        string updateXml(string Id, Person item);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/json/persons/{id}",
+        Method = "PUT",
+        RequestFormat = WebMessageFormat.Json)]
+        string updateJson(string Id, Person item);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/persons/size")]
+        int getSize();
     }
 
     [DataContract]
