@@ -8,14 +8,14 @@ internal class Program
         //uri    http://localhost:50985/MyRestService.svc/persons
         //uri    http://localhost:50985/MyRestService.svc/json/persons
 
-        //xml data add new      <Person><Name>Piotr G</Name><Age>21</Age><Email>piotrg@g.com</Email></Person>
+        //xml data add new      <Person xmlns="http://schemas.datacontract.org/2004/07/MyWebService"><Name>Piotr G</Name><Age>21</Age><Email>piotrg@g.com</Email></Person>
         //json data add new     { "Name": "Filip Strozik", "Age": 21, "Email": "filips@example.com" }
 
         //json update           { "Id": 1, "Name": "John Doe", "Age": 35, "Email": "johndoe@example.com" }
-        //xml update            <Person> <Id>2</Id> <Name>John Doe</Name> <Age>35</Age> <Email>johndoe@example.com</Email> </Person>
+        //xml update            <Person xmlns="http://schemas.datacontract.org/2004/07/MyWebService"> <Id>2</Id> <Name>John Doe</Name> <Age>35</Age> <Email>johndoe@example.com</Email> </Person>
 
         //json delete          { "Id": 1 }
-        //xml delete            <Person><Id>2</Id></Person>
+        //xml delete            <Person xmlns="http://schemas.datacontract.org/2004/07/MyWebService"><Id>2</Id></Person>
         do
         {
             try
@@ -38,7 +38,7 @@ internal class Program
                     if (dataFormat == "JSON")
                         req.ContentType = "application/json";
                     else if (dataFormat == "XML")
-                        req.ContentType = "application/xml";
+                        req.ContentType = "text/xml";
                     else
                         throw new ArgumentException("Invalid data format.");
                 }

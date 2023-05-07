@@ -144,7 +144,6 @@ namespace MyWebService
 
         }
 
-
         public int getSize()
         {
             return _persons.Count;
