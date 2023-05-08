@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\filip\Documents\code\services</_PublishTargetUrl>
+    <History>True|2023-05-08T14:42:21.0523125Z;True|2023-05-08T16:36:38.1585962+02:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/MyWebService.dll">
+      <publishTime>05/08/2023 16:36:37</publishTime>
+    </File>
+    <File Include="bin/MyWebService.pdb">
+      <publishTime>05/08/2023 16:36:37</publishTime>
+    </File>
+    <File Include="MyRestService.svc">
+      <publishTime>05/05/2023 22:11:26</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/08/2023 16:42:21</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
