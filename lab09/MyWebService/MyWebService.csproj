@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="IRestService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MyData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

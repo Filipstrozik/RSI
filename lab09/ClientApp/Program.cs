@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using ClientApp;
+using System.Net;
 using System.Text;
 
 internal class Program
@@ -16,6 +17,8 @@ internal class Program
 
         //json delete          { "Id": 1 }
         //xml delete            <Person xmlns="http://schemas.datacontract.org/2004/07/MyWebService"><Id>2</Id></Person>
+
+        MyData.Info();
         do
         {
             try
