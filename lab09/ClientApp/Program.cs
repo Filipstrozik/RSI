@@ -6,8 +6,8 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        //uri    http://localhost:50985/MyRestService.svc/persons
-        //uri    http://localhost:50985/MyRestService.svc/json/persons
+        //uri    http://10.182.36.179:50985/MyRestService.svc/persons
+        //uri    http://10.182.36.179:50985/MyRestService.svc/json/persons
 
         //xml data add new      <Person xmlns="http://schemas.datacontract.org/2004/07/MyWebService"><Name>Piotr G</Name><Age>21</Age><Email>piotrg@g.com</Email></Person>
         //json data add new     { "Name": "Filip Strozik", "Age": 21, "Email": "filips@example.com" }
@@ -33,7 +33,7 @@ internal class Program
                 req.Method = method.ToUpper();
 
                 string dataFormat = "XML";
-                if(method != "GET")
+                if(method != "GET" && method != "DELETE")
                 {
                     Console.WriteLine("Enter data format (JSON or XML):");
                     dataFormat = Console.ReadLine().ToUpper();
@@ -69,16 +69,6 @@ internal class Program
                         Stream putStream = req.GetRequestStream();
                         putStream.Write(putBuffer, 0, putBuffer.Length);
                         putStream.Close();
-                        break;
-
-                    case "DELETE":
-                        Console.WriteLine("Enter data (in JSON or XML format):");
-                        string deleteData = Console.ReadLine();
-                        byte[] deleteBuffer = Encoding.UTF8.GetBytes(deleteData);
-                        req.ContentLength = deleteBuffer.Length;
-
-                        Console.WriteLine("Enter data format (JSON or XML):");
-                        dataFormat = Console.ReadLine().ToUpper();
                         break;
 
                     default:

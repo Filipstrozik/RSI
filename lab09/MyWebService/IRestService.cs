@@ -39,11 +39,11 @@ namespace MyWebService
         string addJson(Person item);
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "/persons{id}", Method = "DELETE")]
+        [WebInvoke(UriTemplate = "/persons/{id}", Method = "DELETE")]
         string deleteXml(string Id);
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "/json/persons{id}", Method = "DELETE")]
+        [WebInvoke(UriTemplate = "/json/persons/{id}", Method = "DELETE")]
         string deleteJson(string Id);
 
         [OperationContract]
