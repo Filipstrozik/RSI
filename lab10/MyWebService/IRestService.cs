@@ -28,15 +28,22 @@ namespace MyWebService
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/json/filter",
-        Method = "POST", ResponseFormat = WebMessageFormat.Json, 
+        Method = "POST", ResponseFormat = WebMessageFormat.Json,
         RequestFormat = WebMessageFormat.Json)]
-        List<Person> filterPersons(Person person);
+        List<Person> filterPersonsJson(Person person);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/persons",
         Method = "POST",
-        RequestFormat = WebMessageFormat.Xml)]
+        RequestFormat = WebMessageFormat.Xml,
+        ResponseFormat =WebMessageFormat.Xml)]
         string addXml(Person item);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/filter",
+        Method = "POST", ResponseFormat = WebMessageFormat.Xml,
+        RequestFormat = WebMessageFormat.Xml)]
+        List<Person> filterPersonsXml(Person person);
 
 
         [OperationContract]

@@ -6,12 +6,14 @@ $(document).ready(function () {
         var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons" : "http://localhost:50985/MyRestService.svc/json/persons";
         console.log(endpoint)
         $.ajax({
+            async: false,
             url: endpoint,
             type: "GET",
             dataType: isXML ? "xml" : "json",
-            success: function (response) {
+            success: function (response, status, xhr) {
                 // Handle the response from the server
                 console.log(response); // You can perform actions with the response here
+
                 // Clear the table
                 $("#personresult").empty();
                 // Append the table headers
@@ -41,6 +43,7 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 // Handle errors
                 console.log(error);
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
             }
         });
     }
@@ -54,20 +57,25 @@ $(document).ready(function () {
     // Function to add a person using AJAX
     function addPerson(person) {
         var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons" : "http://localhost:50985/MyRestService.svc/json/persons";
-
         $.ajax({
+            async: false,
             url: endpoint,
             type: "POST",
             data: isXML ? personToXml(person) : JSON.stringify(person),
             contentType: isXML ? "text/xml" : "application/json",
-            success: function (response) {
+            success: function (response, status, xhr) {
                 // Handle the response from the server
                 console.log(response); // You can perform actions with the response here
+                // get the response message from the server and insert it to #responde element in html
+                $("#response").css("color", "green");
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
             },
             error: function (xhr, status, error) {
                 // Handle errors
                 console.log(personToXml(person));
                 console.log(error);
+                $("#response").css("color", "red");
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
             }
         });
     }
@@ -77,17 +85,23 @@ $(document).ready(function () {
         var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons/" + id : "http://localhost:50985/MyRestService.svc/json/persons/" + id;
 
         $.ajax({
+            async: false,
             url: endpoint,
             type: "PUT",
             data: isXML ? personToXml(person) : JSON.stringify(person),
             contentType: isXML ? "application/xml" : "application/json",
-            success: function (response) {
+            success: function (response, status, xhr) {
                 // Handle the response from the server
                 console.log(response); // You can perform actions with the response here
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
+                $("#response").css("color", "green");
             },
             error: function (xhr, status, error) {
                 // Handle errors
                 console.log(error);
+                // make response text color red
+                $("#response").css("color", "red");
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
             }
         });
     }
@@ -141,28 +155,36 @@ $(document).ready(function () {
         getPersons();
     });
 
-    function deletePerson(id) {
+    async function deletePerson(id) {
         var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons/" + id : "http://localhost:50985/MyRestService.svc/json/persons/" + id;
+        // await to get the response from the server
 
         $.ajax({
+            async: false,
             url: endpoint,
             type: "DELETE",
-            success: function (response) {
+            success: function (response, status, xhr) {
                 // Handle the response from the server
                 console.log(response); // You can perform actions with the response here
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
+                $("#response").css("color", "green");
             },
             error: function (xhr, status, error) {
                 // Handle errors
                 console.log(error);
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
+                $("#response").css("color", "red");
             }
         });
     }
 
     // Add an event listener to the "Delete" button
-    $("#delete").click(function () {
+    $("#delete").click(async function () {
         // Implement your logic here to delete a person
         var id = $("#id").val();
 
+
+        // make sure to call the getPersons function after deleting a person
         deletePerson(id);
         getPersons();
     });
@@ -174,9 +196,11 @@ $(document).ready(function () {
             url: endpoint,
             type: "GET",
             dataType: isXML ? "xml" : "json",
-            success: function (response) {
+            success: function (response, status, xhr) {
                 // Handle the response from the server
                 console.log(response); // You can perform actions with the response here
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
+                $("#response").css("color", "green");
 
                 if (isXML) {
                     var person = $(response).find("Person");
@@ -202,6 +226,8 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 // Handle errors
                 console.log(error);
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
+                $("#response").css("color", "red");
             }
         });
     }
@@ -215,6 +241,7 @@ $(document).ready(function () {
 
     $("#clear").click(function () {
         // clear input fields
+        $("#response").empty();
         $("#id").val("");
         $("#name").val("");
         $("#email").val("");
@@ -230,13 +257,16 @@ $(document).ready(function () {
             type: "POST",
             data: isXML ? personToXml(person) : JSON.stringify(person),
             contentType: isXML ? "application/xml" : "application/json",
-            success: function (response) {
+            success: function (response, status, xhr) {
                 // Handle the response from the server
                 console.log(response); // You can perform actions with the response here
                 // Clear the table
                 $("#personresult").empty();
                 // Append the table headers
                 $("#personresult").append("<tr><th>Id</th><th>Name</th><th>Email</th><th>Age</th></tr>");
+
+                $("#response").css("color", "green");
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
 
                 if (isXML) {
                     var persons = $(response).find("Person");
@@ -260,6 +290,9 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 // Handle errors
                 console.log(error);
+
+                $("#response").css("color", "red");
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
             }
         });
     }
@@ -295,12 +328,21 @@ $(document).ready(function () {
     });
 
     function personToXml(person) {
+        console.log(person);
         var xml = "<Person xmlns=\"http://schemas.datacontract.org/2004/07/MyWebService\">";
-        // xml += "<Id>" + person.Id + "</Id>";
         xml += "<Name>" + person.Name + "</Name>";
+        // xml += "<Id>" + person.Id + "</Id>";
+
+        // if person has no age, set age to 0
+        if (person.Age == null) {
+            xml += "<Age>0</Age>";
+        }
+        else {
+            xml += "<Age>" + person.Age + "</Age>";
+        }
         xml += "<Email>" + person.Email + "</Email>";
-        xml += "<Age>" + person.Age + "</Age>";
         xml += "</Person>";
+        console.log(xml);
         return xml;
     }
 
