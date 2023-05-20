@@ -1,9 +1,14 @@
+var isXML = true;
+
 $(document).ready(function () {
     // Function to get all persons using AJAX
     function getPersons() {
+        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons" : "http://localhost:50985/MyRestService.svc/json/persons";
+        console.log(endpoint)
         $.ajax({
-            url: "http://localhost:50985/MyRestService.svc/json/persons", // Replace with your actual API endpoint
+            url: endpoint,
             type: "GET",
+            dataType: isXML ? "xml" : "json",
             success: function (response) {
                 // Handle the response from the server
                 console.log(response); // You can perform actions with the response here
@@ -12,11 +17,25 @@ $(document).ready(function () {
                 // Append the table headers
                 $("#personresult").append("<tr><th>Id</th><th>Name</th><th>Email</th><th>Age</th></tr>");
 
-                // Loop through the response and append the data to the table
-                for (var i = 0; i < response.length; i++) {
-                    var person = response[i];
-                    // add id to the table
-                    $("#personresult").append("<tr><td>" + person.Id + "</td><td>" + person.Name + "</td><td>" + person.Email + "</td><td>" + person.Age + "</td></tr>");
+                if (isXML) {
+                    // Parse XML response
+                    var persons = $(response).find("Person");
+                    persons.each(function () {
+                        var person = $(this);
+                        var id = person.find("Id").text();
+                        var name = person.find("Name").text();
+                        var email = person.find("Email").text();
+                        var age = person.find("Age").text();
+
+                        $("#personresult").append("<tr><td>" + id + "</td><td>" + name + "</td><td>" + email + "</td><td>" + age + "</td></tr>");
+                    });
+                } else {
+                    // Loop through the JSON response and append the data to the table
+                    for (var i = 0; i < response.length; i++) {
+                        var person = response[i];
+                        // add id to the table
+                        $("#personresult").append("<tr><td>" + person.Id + "</td><td>" + person.Name + "</td><td>" + person.Email + "</td><td>" + person.Age + "</td></tr>");
+                    }
                 }
             },
             error: function (xhr, status, error) {
@@ -34,29 +53,34 @@ $(document).ready(function () {
 
     // Function to add a person using AJAX
     function addPerson(person) {
+        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons" : "http://localhost:50985/MyRestService.svc/json/persons";
+
         $.ajax({
-            url: "http://localhost:50985/MyRestService.svc/json/persons", // Replace with your actual API endpoint
+            url: endpoint,
             type: "POST",
-            data: JSON.stringify(person),
-            contentType: "application/json",
+            data: isXML ? personToXml(person) : JSON.stringify(person),
+            contentType: isXML ? "text/xml" : "application/json",
             success: function (response) {
                 // Handle the response from the server
                 console.log(response); // You can perform actions with the response here
             },
             error: function (xhr, status, error) {
                 // Handle errors
+                console.log(personToXml(person));
                 console.log(error);
             }
         });
     }
 
     // Fuction to update a person using AJAX
-    function updatePerson(id,person) {
+    function updatePerson(id, person) {
+        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons/" + id : "http://localhost:50985/MyRestService.svc/json/persons/" + id;
+
         $.ajax({
-            url: "http://localhost:50985/MyRestService.svc/json/persons/" + id, // Replace with your actual API endpoint
+            url: endpoint,
             type: "PUT",
-            data: JSON.stringify(person),
-            contentType: "application/json",
+            data: isXML ? personToXml(person) : JSON.stringify(person),
+            contentType: isXML ? "application/xml" : "application/json",
             success: function (response) {
                 // Handle the response from the server
                 console.log(response); // You can perform actions with the response here
@@ -117,9 +141,11 @@ $(document).ready(function () {
         getPersons();
     });
 
-    function deletePerson(id) { 
+    function deletePerson(id) {
+        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons/" + id : "http://localhost:50985/MyRestService.svc/json/persons/" + id;
+
         $.ajax({
-            url: "http://localhost:50985/MyRestService.svc/json/persons/" + id, // Replace with your actual API endpoint
+            url: endpoint,
             type: "DELETE",
             success: function (response) {
                 // Handle the response from the server
@@ -138,21 +164,40 @@ $(document).ready(function () {
         var id = $("#id").val();
 
         deletePerson(id);
-
         getPersons();
     });
 
     function getPerson(id) {
-        // Implement your logic here to get a person
+        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons/" + id : "http://localhost:50985/MyRestService.svc/json/persons/" + id;
+
         $.ajax({
-            url: "http://localhost:50985/MyRestService.svc/json/persons/" + id, // Replace with your actual API endpoint
+            url: endpoint,
             type: "GET",
+            dataType: isXML ? "xml" : "json",
             success: function (response) {
-                // insert get person valuse to input fields
-                $("#id").val(response.Id);
-                $("#name").val(response.Name);
-                $("#email").val(response.Email);
-                $("#age").val(response.Age);
+                // Handle the response from the server
+                console.log(response); // You can perform actions with the response here
+
+                if (isXML) {
+                    var person = $(response).find("Person");
+                    var id = person.find("Id").text();
+                    var name = person.find("Name").text();
+                    var email = person.find("Email").text();
+                    var age = person.find("Age").text();
+
+                    // insert get person values to input fields
+                    $("#id").val(id);
+                    $("#name").val(name);
+                    $("#email").val(email);
+                    $("#age").val(age);
+                } else {
+                    var person = response;
+                    // insert get person values to input fields
+                    $("#id").val(person.Id);
+                    $("#name").val(person.Name);
+                    $("#email").val(person.Email);
+                    $("#age").val(person.Age);
+                }
             },
             error: function (xhr, status, error) {
                 // Handle errors
@@ -160,7 +205,6 @@ $(document).ready(function () {
             }
         });
     }
-
     // Add an event listener to the "Search" button
     $("#search").click(function () {
         // get id from input
@@ -179,24 +223,38 @@ $(document).ready(function () {
 
 
     function filterPersons(person) {
-        // Implement your logic here to filter persons
+        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/filter" : "http://localhost:50985/MyRestService.svc/json/filter";
+
         $.ajax({
-            url: "http://localhost:50985/MyRestService.svc/json/filter", // Replace with your actual API endpoint
+            url: endpoint,
             type: "POST",
-            data: JSON.stringify(person),
-            contentType: "application/json; charset=utf-8",
+            data: isXML ? personToXml(person) : JSON.stringify(person),
+            contentType: isXML ? "application/xml" : "application/json",
             success: function (response) {
+                // Handle the response from the server
                 console.log(response); // You can perform actions with the response here
                 // Clear the table
                 $("#personresult").empty();
                 // Append the table headers
                 $("#personresult").append("<tr><th>Id</th><th>Name</th><th>Email</th><th>Age</th></tr>");
 
-                // Loop through the response and append the data to the table
-                for (var i = 0; i < response.length; i++) {
-                    var person = response[i];
-                    // add id to the table
-                    $("#personresult").append("<tr><td>" + person.Id + "</td><td>" + person.Name + "</td><td>" + person.Email + "</td><td>" + person.Age + "</td></tr>");
+                if (isXML) {
+                    var persons = $(response).find("Person");
+                    persons.each(function () {
+                        var person = $(this);
+                        var id = person.find("Id").text();
+                        var name = person.find("Name").text();
+                        var email = person.find("Email").text();
+                        var age = person.find("Age").text();
+
+                        $("#personresult").append("<tr><td>" + id + "</td><td>" + name + "</td><td>" + email + "</td><td>" + age + "</td></tr>");
+                    });
+                } else {
+                    for (var i = 0; i < response.length; i++) {
+                        var person = response[i];
+                        // add id to the table
+                        $("#personresult").append("<tr><td>" + person.Id + "</td><td>" + person.Name + "</td><td>" + person.Email + "</td><td>" + person.Age + "</td></tr>");
+                    }
                 }
             },
             error: function (xhr, status, error) {
@@ -236,6 +294,32 @@ $(document).ready(function () {
         filterPersons(newPerson);
     });
 
+    function personToXml(person) {
+        var xml = "<Person xmlns=\"http://schemas.datacontract.org/2004/07/MyWebService\">";
+        // xml += "<Id>" + person.Id + "</Id>";
+        xml += "<Name>" + person.Name + "</Name>";
+        xml += "<Email>" + person.Email + "</Email>";
+        xml += "<Age>" + person.Age + "</Age>";
+        xml += "</Person>";
+        return xml;
+    }
+
+
+    $("#jsonbutton").click(function () {
+        // when adding get the values from the input fields
+        isXML = false;
+        console.log(isXML);
+        document.getElementById("dataformat").innerHTML = "JSON";
+    });
+    
+    $("#xmlbutton").click(function () {
+        // when adding get the values from the input fields
+        isXML = true;
+        console.log(isXML);
+        document.getElementById("dataformat").innerHTML = "XML";
+    });
+
     // Call the getPersons function initially to retrieve all persons
     getPersons();
 });
+
