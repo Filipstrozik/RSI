@@ -46,6 +46,7 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 // Handle errors
                 console.log(error);
+                $("#response").css("color", "red");
                 $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
             }
         });
@@ -374,16 +375,12 @@ $(document).ready(function () {
             success: function (response, status, xhr) {
                 // Handle the response from the server
                 console.log(response); // You can perform actions with the response here
-                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
-                $("#response").css("color", "green");
                 var intValue = parseInt($(response).text()); // Extract and parse the integer value
                 document.getElementById("listsize").innerHTML = intValue.toString(); // Assign the integer value as innerHTML
             },
             error: function (xhr, status, error) {
                 // Handle errors
                 console.log(error);
-                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
-                $("#response").css("color", "red");
             }
         });
     }
