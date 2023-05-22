@@ -78,6 +78,21 @@
         #personresult th {
             background-color: #f2f2f2;
         }
+
+        #listsize-container {
+            display: flex;
+            align-items: center;
+        }
+
+        #listsize-label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        #listsize {
+            font-size: 16px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -85,8 +100,10 @@
     <h2>Ajax Client</h2>
     <input type="button" value="JSON" id="jsonbutton">
     <input type="button" value="XML" id="xmlbutton">
-    <p>Current data format:</p>
-    <p id="dataformat">XML</p>
+    <p id="listsize-container">
+        <span id="listsize-label">Current data format:</span>
+        <span id="dataformat">XML</span>
+    </p>
     <br><br>
     <div id="response"></div>
     <br><br>    
@@ -122,6 +139,10 @@
         </table>
     </form>
     <div id="result"></div>
+    <p id="listsize-container">
+        <span id="listsize-label">Current list size:</span>
+        <span id="listsize"></span>
+    </p>
     <table id="personresult">
         <tr>
             <th>Id</th>

@@ -1,9 +1,12 @@
 var isXML = true;
+var URL_JSON = "http://localhost:8080/MyRestService.svc/json/persons"
+var URL_XML = "http://localhost:8080/MyRestService.svc/persons"
+var URL_BASE = "http://localhost:8080/MyRestService.svc"
 
 $(document).ready(function () {
     // Function to get all persons using AJAX
     function getPersons() {
-        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons" : "http://localhost:50985/MyRestService.svc/json/persons";
+        var endpoint = isXML ? URL_XML : URL_JSON;
         console.log(endpoint)
         $.ajax({
             async: false,
@@ -18,7 +21,7 @@ $(document).ready(function () {
                 $("#personresult").empty();
                 // Append the table headers
                 $("#personresult").append("<tr><th>Id</th><th>Name</th><th>Email</th><th>Age</th></tr>");
-
+                getListSize()
                 if (isXML) {
                     // Parse XML response
                     var persons = $(response).find("Person");
@@ -56,7 +59,7 @@ $(document).ready(function () {
 
     // Function to add a person using AJAX
     function addPerson(person) {
-        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons" : "http://localhost:50985/MyRestService.svc/json/persons";
+        var endpoint = isXML ? URL_XML : URL_JSON;
         $.ajax({
             async: false,
             url: endpoint,
@@ -82,7 +85,7 @@ $(document).ready(function () {
 
     // Fuction to update a person using AJAX
     function updatePerson(id, person) {
-        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons/" + id : "http://localhost:50985/MyRestService.svc/json/persons/" + id;
+        var endpoint = isXML ? URL_XML + "/" + id : URL_JSON + "/" + id;
 
         $.ajax({
             async: false,
@@ -156,7 +159,7 @@ $(document).ready(function () {
     });
 
     async function deletePerson(id) {
-        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons/" + id : "http://localhost:50985/MyRestService.svc/json/persons/" + id;
+        var endpoint = isXML ? URL_XML + "/" + id : URL_JSON + "/" + id;
         // await to get the response from the server
 
         $.ajax({
@@ -190,7 +193,7 @@ $(document).ready(function () {
     });
 
     function getPerson(id) {
-        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/persons/" + id : "http://localhost:50985/MyRestService.svc/json/persons/" + id;
+        var endpoint = isXML ? URL_XML + "/" + id : URL_JSON + "/" + id;
 
         $.ajax({
             url: endpoint,
@@ -250,7 +253,7 @@ $(document).ready(function () {
 
 
     function filterPersons(person) {
-        var endpoint = isXML ? "http://localhost:50985/MyRestService.svc/filter" : "http://localhost:50985/MyRestService.svc/json/filter";
+        var endpoint = isXML ? URL_BASE + "/filter" : URL_BASE + "/json/filter";
 
         $.ajax({
             url: endpoint,
@@ -360,6 +363,30 @@ $(document).ready(function () {
         console.log(isXML);
         document.getElementById("dataformat").innerHTML = "XML";
     });
+
+    function getListSize() {
+        var endpoint = URL_XML + "/size"
+
+        $.ajax({
+            url: endpoint,
+            type: "GET",
+            dataType: isXML ? "xml" : "json",
+            success: function (response, status, xhr) {
+                // Handle the response from the server
+                console.log(response); // You can perform actions with the response here
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
+                $("#response").css("color", "green");
+                var intValue = parseInt($(response).text()); // Extract and parse the integer value
+                document.getElementById("listsize").innerHTML = intValue.toString(); // Assign the integer value as innerHTML
+            },
+            error: function (xhr, status, error) {
+                // Handle errors
+                console.log(error);
+                $("#response").text(xhr.statusText + " - Status Code: " + xhr.status);
+                $("#response").css("color", "red");
+            }
+        });
+    }
 
     // Call the getPersons function initially to retrieve all persons
     getPersons();
