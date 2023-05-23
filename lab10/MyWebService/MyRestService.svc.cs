@@ -232,5 +232,17 @@ namespace MyWebService
             Debug.Print("int getSize()");
             return _persons.Count;
         }
+
+        public string getAuthorsJson()
+        {
+            Debug.Print("string getAuthorsJson()");
+            return "Authors: Filip Strózik, Piotr Grygoruk";
+        }
+
+        public string getAuthorsXml()
+        {
+            Debug.Print("string getAuthorsXml())");
+            return "Authors: Filip Strózik, Piotr Grygoruk";
+        }
     }
 }

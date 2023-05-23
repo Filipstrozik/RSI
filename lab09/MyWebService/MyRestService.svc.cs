@@ -27,7 +27,7 @@ namespace MyWebService
             Debug.Print("Person getByIdXml(string Id)");
             int id = int.Parse(Id);
             int idx = _persons.FindIndex(p => p.Id == id);
-            if(idx == -1)
+            if (idx == -1)
             {
                 throw new WebFaultException<string>("404: Not Found", HttpStatusCode.NotFound);
             }
@@ -91,7 +91,7 @@ namespace MyWebService
                 HttpStatusCode.BadRequest);
             // generate new Id based on the last Id in the list
 
-            int newId = _persons.Count + 1; 
+            int newId = _persons.Count + 1;
             int idx = _persons.FindIndex(b => b.Id == newId);
             if (idx == -1)
             {
@@ -158,6 +158,18 @@ namespace MyWebService
         {
             Debug.Print("int getSize()");
             return _persons.Count;
+        }
+
+        public string getAuthorsJson()
+        {
+            Debug.Print("string getAuthorsJson()");
+            return "Authors: Filip Strózik, Piotry Grygoruk";
+        }
+
+        public string getAuthorsXml()
+        {
+            Debug.Print("string getAuthorsXml())");
+            return "Authors: Filip Strózik, Piotry Grygoruk";
         }
     }
 }

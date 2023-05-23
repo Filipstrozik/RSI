@@ -251,12 +251,12 @@ $(document).ready(function () {
     });
 
     $("#clear").click(function () {
-        // clear input fields
         $("#response").empty();
         $("#id").val("");
         $("#name").val("");
         $("#email").val("");
         $("#age").val("");
+        $("#authors").empty();
     });
 
 
@@ -391,6 +391,37 @@ $(document).ready(function () {
             }
         });
     }
+
+    getAuthors = function () {
+        var endpoint = isXML ? URL_BASE + "/authors" : URL_BASE + "/json/authors";
+        $.ajax({
+            url: endpoint,
+            type: "GET",
+            dataType: isXML ? "xml" : "json",
+            success: function (response, status, xhr) {
+                // Handle the response from the server
+                console.log(response); // You can perform actions with the response here
+                // get #authors and insert text from response
+
+                // if response is xml
+                if (isXML) {
+                    $("#authors").text($(response).text());
+                }
+                else {
+                    $("#authors").text(response);
+                }
+                $("#authors").css("color", "green");
+            },
+            error: function (xhr, status, error) {
+                // Handle errors
+                console.log(error);
+            }
+        });
+    }
+
+    $("#authorsbutton").click(function () {
+        getAuthors();
+    });
 
     // Call the getPersons function initially to retrieve all persons
     getPersons();

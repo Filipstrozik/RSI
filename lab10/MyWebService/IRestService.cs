@@ -75,6 +75,16 @@ namespace MyWebService
         [OperationContract]
         [WebGet(UriTemplate = "/persons/size")]
         int getSize();
+
+        // greate a operation to get a string at /authors will return in json fromat as a string
+        [OperationContract]
+        [WebGet(UriTemplate = "/json/authors", ResponseFormat = WebMessageFormat.Json)]
+        string getAuthorsJson();
+
+        // greate a operation to get a string at /authors will return in xml fromat as a string
+        [OperationContract]
+        [WebGet(UriTemplate = "/authors", ResponseFormat = WebMessageFormat.Xml)]
+        string getAuthorsXml();
     }
 
     [DataContract]

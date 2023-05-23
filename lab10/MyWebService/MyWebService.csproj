@@ -102,9 +102,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50985</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8080/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost:8080/</IISAppRootUrl>
+          <IISUrl>http://10.182.36.179:8080/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
