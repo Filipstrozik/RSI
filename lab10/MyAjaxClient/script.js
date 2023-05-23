@@ -1,7 +1,14 @@
 var isXML = true;
-var URL_JSON = "http://localhost:8080/MyRestService.svc/json/persons"
-var URL_XML = "http://localhost:8080/MyRestService.svc/persons"
-var URL_BASE = "http://localhost:8080/MyRestService.svc"
+// create a ip address variable
+var ip = "10.182.36.179"
+// create a port variable
+var port = "8080"
+// create a base url variable
+var URL_BASE = "http://" + ip + ":" + port + "/MyRestService.svc"
+// create a json url variable
+var URL_JSON = URL_BASE + "/json/persons"
+// create a xml url variable
+var URL_XML = URL_BASE + "/persons"
 
 $(document).ready(function () {
     // Function to get all persons using AJAX
