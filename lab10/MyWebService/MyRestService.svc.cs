@@ -55,7 +55,7 @@ namespace MyWebService
 
             int newId = getNextId();
 
-            int idx = _persons.FindIndex(b => b.Id == newId);
+            int idx = _persons.FindIndex(b => b.Id == newId || b.Email == person.Email);
             if (idx == -1)
             {
                 person.Id = newId;
@@ -160,7 +160,7 @@ namespace MyWebService
                 HttpStatusCode.BadRequest);
 
             int newId = getNextId();
-            int idx = _persons.FindIndex(b => b.Id == newId);
+            int idx = _persons.FindIndex(b => b.Id == newId || b.Email == person.Email);
             if (idx == -1)
             {
                 person.Id = newId;
@@ -200,6 +200,18 @@ namespace MyWebService
             if (personToUpdate == null)
                 throw new WebFaultException<string>("404: Not Found", HttpStatusCode.NotFound);
 
+            // check if email is unique
+            if (item.Email != null)
+            {
+                foreach (Person p in _persons)
+                {
+                    if (p.Email.Equals(item.Email))
+                    {
+                        throw new WebFaultException<string>("409: Conflict",
+                        HttpStatusCode.Conflict);
+                    }
+                }
+            }
             personToUpdate.Name = item.Name;
             personToUpdate.Age = item.Age;
             personToUpdate.Email = item.Email;
@@ -218,6 +230,19 @@ namespace MyWebService
             // if the person is not found throw an exception
             if (personToUpdate == null)
                 throw new WebFaultException<string>("404: Not Found", HttpStatusCode.NotFound);
+
+            // check if email is unique
+            if (item.Email != null)
+            {
+                foreach (Person p in _persons)
+                {
+                    if (p.Email.Equals(item.Email))
+                    {
+                        throw new WebFaultException<string>("409: Conflict",
+                        HttpStatusCode.Conflict);
+                    }
+                }
+            }
 
             personToUpdate.Name = item.Name;
             personToUpdate.Age = item.Age;
