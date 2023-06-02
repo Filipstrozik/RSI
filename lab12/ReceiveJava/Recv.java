@@ -4,16 +4,22 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 import java.nio.charset.StandardCharsets;
 
+
+// javac -cp amqp-client-5.16.0.jar Recv.java
+// java -cp .;amqp-client-5.16.0.jar;slf4j-api-1.7.36.jar;slf4j-simple-1.7.36.jar Recv
+
 public class Recv {
 
     private final static String QUEUE_NAME = "hello";
+    private final static int NO_SENDERS = 2;
+    private static int endMarkerCount = 0;
 
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
-        factory.setPort(5672);
-        factory.setUsername("guest");
-        factory.setPassword("guest");
+        // factory.setPort(5672);
+        // factory.setUsername("guest");
+        // factory.setPassword("guest");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
@@ -23,6 +29,20 @@ public class Recv {
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println(" [x] Received '" + message + "'");
+
+            if (message.equals("EndMarker")) {
+                endMarkerCount++;
+                if (endMarkerCount >= NO_SENDERS) {
+                    System.out.println("Received " + NO_SENDERS + " end markers. Exiting...");
+                    channel.basicCancel(consumerTag);
+                    try {
+                        channel.close();
+                        connection.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         };
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
     }
