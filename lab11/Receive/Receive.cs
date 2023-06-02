@@ -4,7 +4,7 @@ using RabbitMQ.Client.Events;
 
 MyData.Info();
 
-var factory = new ConnectionFactory { HostName = "192.168.0.80", Port = 5672, UserName = "guest", Password = "guest" };
+var factory = new ConnectionFactory { HostName = "10.182.36.179", Port = 5672, UserName = "guest", Password = "guest" };
 using var connection = factory.CreateConnection();
 using var channel = connection.CreateModel();
 

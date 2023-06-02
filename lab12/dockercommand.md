@@ -40,3 +40,10 @@ krótki opis protokołu rabbit MQ
 // a: AMQP jest to protokół komunikacyjny, który pozwala na przesyłanie wiadomości między aplikacjami.
 // AMQP jest protokołem typu publish-subscribe, co oznacza, że wiadomości są wysyłane do kolejki, a następnie do subskrybentów.
 
+Putting it all together
+You can compile both of these with just the RabbitMQ java client on the classpath:
+
+javac -cp amqp-client-5.16.0.jar Send.java Recv.java
+To run them, you'll need rabbitmq-client.jar and its dependencies on the classpath. In a terminal, run the consumer (receiver):
+
+java -cp .:amqp-client-5.16.0.jar:slf4j-api-1.7.36.jar:slf4j-simple-1.7.36.jar Recv
