@@ -2,6 +2,7 @@
 using System.Text;
 using RabbitMQ.Client;
 using System.Threading;
+using Newtonsoft.Json;
 
 public class Program
 {
@@ -20,10 +21,10 @@ public class Program
         using var channel = connection.CreateModel();
 
         DateTime endTime = DateTime.Now.AddSeconds(DurationSeconds);
-
+        int counter = 0;
         while (DateTime.Now < endTime)
         {
-            string message = "Piotr " + DateTime.Now.ToString("h:mm:ss tt");
+            string message = JsonConvert.SerializeObject(new { Name = "Piotr", Time = DateTime.Now.ToString("hh:mm:ss"), Counter = counter++ });
             var body = Encoding.UTF8.GetBytes(message);
 
             channel.BasicPublish(exchange: "",

@@ -3,6 +3,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 import java.nio.charset.StandardCharsets;
+import com.google.gson.Gson;
 
 
 // javac -cp amqp-client-5.16.0.jar Recv.java
@@ -43,7 +44,16 @@ public class Recv {
                     }
                 }
             }
+
+            Gson gson = new Gson();
+            Message messageDeserialized = gson.fromJson(message, Message.class);
+
+            System.out.println("Name: " + messageDeserialized.getName());
+            System.out.println("Time: " + messageDeserialized.getTime());
+            System.out.println("Counter: " + messageDeserialized.getCounter());
+
         };
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
     }
 }
+

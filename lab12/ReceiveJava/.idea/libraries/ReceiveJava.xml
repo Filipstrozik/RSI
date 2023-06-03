@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="ReceiveJava">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/amqp-client-5.16.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/slf4j-simple-1.7.36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/slf4j-api-1.7.36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/gson-2.10.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
