@@ -44,14 +44,14 @@ public class Recv {
                     }
                 }
             }
+            else {
+                Gson gson = new Gson();
+                Message messageDeserialized = gson.fromJson(message, Message.class);
 
-            Gson gson = new Gson();
-            Message messageDeserialized = gson.fromJson(message, Message.class);
-
-            System.out.println("Name: " + messageDeserialized.getName());
-            System.out.println("Time: " + messageDeserialized.getTime());
-            System.out.println("Counter: " + messageDeserialized.getCounter());
-
+                System.out.println("Name: " + messageDeserialized.getName());
+                System.out.println("Time: " + messageDeserialized.getTime());
+                System.out.println("Counter: " + messageDeserialized.getCounter());
+            }
         };
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
     }

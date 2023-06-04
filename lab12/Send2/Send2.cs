@@ -14,8 +14,8 @@ public class Program
     {
         MyData.Info();
 
-        var factory = new ConnectionFactory { HostName = "localhost" };
         // var factory = new ConnectionFactory { HostName = "10.182.36.179", Port = 5672, UserName = "guest", Password = "guest" };
+        var factory = new ConnectionFactory { HostName = "localhost" };
 
         using var connection = factory.CreateConnection();
         using var channel = connection.CreateModel();
@@ -24,7 +24,9 @@ public class Program
         int counter = 0;
         while (DateTime.Now < endTime)
         {
-            string message = JsonConvert.SerializeObject(new { Name = "Piotr", Time = DateTime.Now.ToString("hh:mm:ss"), Counter = counter++ });
+            // serialize message to JSON format
+            string message = JsonConvert.SerializeObject(new { name = "Piotr", time = DateTime.Now.ToString("hh:mm:ss"), counter = counter++ });
+
             var body = Encoding.UTF8.GetBytes(message);
 
             channel.BasicPublish(exchange: "",

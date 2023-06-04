@@ -36,9 +36,9 @@ public class Program
 
             Console.WriteLine($" [x] Sent {message}");
 
-            // Random sleep between 0.75 and 1.5 seconds
+            // Random sleep between 0.75 and 1.25 seconds
             Random rnd = new Random();
-            int sleep = rnd.Next(750, 1500);
+            int sleep = rnd.Next(750, 1250);
             Thread.Sleep(sleep);
         }
 
