@@ -1,3 +1,4 @@
+import com.google.gson.GsonBuilder;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -5,6 +6,8 @@ import com.rabbitmq.client.DeliverCallback;
 import java.nio.charset.StandardCharsets;
 import com.google.gson.Gson;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 // javac -cp amqp-client-5.16.0.jar Recv.java
 // java -cp .;amqp-client-5.16.0.jar;slf4j-api-1.7.36.jar;slf4j-simple-1.7.36.jar Recv
@@ -45,7 +48,9 @@ public class Recv {
                 }
             }
             else {
-                Gson gson = new Gson();
+                Gson gson = new GsonBuilder()
+                        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                        .create();
                 Message messageDeserialized = gson.fromJson(message, Message.class);
 
                 System.out.println("Name: " + messageDeserialized.getName());

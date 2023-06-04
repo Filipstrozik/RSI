@@ -1,15 +1,19 @@
-public class Message {
-    private String time;
-    private String name;
-    private int counter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Message(String var1, String var2, int var3) {
-        this.time = var1;
-        this.name = var2;
-        this.counter = var3;
+public class Message {
+    public LocalDateTime time;
+    public String name;
+    public int counter;
+
+    public Message(String time, String name, int counter) {
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+        this.time = LocalDateTime.parse(time, formatter);
+        this.name = name;
+        this.counter = counter;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return this.time;
     }
 
@@ -21,3 +25,5 @@ public class Message {
         return this.counter;
     }
 }
+
+
