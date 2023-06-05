@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import com.google.gson.Gson;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 // javac -cp amqp-client-5.16.0.jar Recv.java
@@ -49,7 +50,7 @@ public class Recv {
             }
             else {
                 Gson gson = new GsonBuilder()
-                        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                        .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter())
                         .create();
                 Message messageDeserialized = gson.fromJson(message, Message.class);
 

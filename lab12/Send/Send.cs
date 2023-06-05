@@ -25,7 +25,7 @@ public class Program
         while (DateTime.Now < endTime)
         {
             // serialize message to JSON format
-            string message = JsonConvert.SerializeObject(new { name = "Filip", time = DateTime.Now, counter = counter++ });
+            string message = JsonConvert.SerializeObject(new { name = "Filip", time = DateTime.Now.TimeOfDay, counter = counter++ });
 
             var body = Encoding.UTF8.GetBytes(message);
 

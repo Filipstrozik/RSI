@@ -4,14 +4,14 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
-    private final DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+public class LocalTimeAdapter extends TypeAdapter<LocalTime> {
+    private final DateTimeFormatter formatter = DateTimeFormatter.ISO_TIME;
 
     @Override
-    public void write(JsonWriter out, LocalDateTime value) throws IOException {
+    public void write(JsonWriter out, LocalTime value) throws IOException {
         if (value == null) {
             out.nullValue();
         } else {
@@ -21,12 +21,12 @@ public class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
     }
 
     @Override
-    public LocalDateTime read(JsonReader in) throws IOException {
+    public LocalTime read(JsonReader in) throws IOException {
         if (in.peek() == JsonToken.NULL) {
             in.nextNull();
             return null;
         }
         String dateString = in.nextString();
-        return LocalDateTime.parse(dateString, formatter);
+        return LocalTime.parse(dateString, formatter);
     }
 }

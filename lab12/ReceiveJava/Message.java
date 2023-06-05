@@ -1,19 +1,12 @@
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Message {
-    public LocalDateTime time;
+    public LocalTime time;
     public String name;
     public int counter;
 
-    public Message(String time, String name, int counter) {
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-        this.time = LocalDateTime.parse(time, formatter);
-        this.name = name;
-        this.counter = counter;
-    }
-
-    public LocalDateTime getTime() {
+    public LocalTime getTime() {
         return this.time;
     }
 
