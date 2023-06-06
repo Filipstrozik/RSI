@@ -15,16 +15,19 @@ import java.time.format.DateTimeFormatter;
 
 public class Recv {
 
-    private final static String QUEUE_NAME = "hello";
+    private final static String QUEUE_NAME = "filip_piotr";
     private final static int NO_SENDERS = 2;
     private static int endMarkerCount = 0;
 
     public static void main(String[] argv) throws Exception {
+
+        MyData.info();
+
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
-        // factory.setPort(5672);
-        // factory.setUsername("guest");
-        // factory.setPassword("guest");
+        factory.setHost("10.182.17.252");
+        factory.setPort(5672);
+        factory.setUsername("admin");
+        factory.setPassword("admin");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 

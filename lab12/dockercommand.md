@@ -47,3 +47,21 @@ javac -cp amqp-client-5.16.0.jar Send.java Recv.java
 To run them, you'll need rabbitmq-client.jar and its dependencies on the classpath. In a terminal, run the consumer (receiver):
 
 java -cp .:amqp-client-5.16.0.jar:slf4j-api-1.7.36.jar:slf4j-simple-1.7.36.jar Recv
+
+10.182.17.252
+admin
+admin
+
+jeden 10 sek
+12 sek drugi
+
+6b-Strozik-Filip.zip
+6.2
+
+CO zawiera raport:?
+konfigurrajca brokera
+jak w senderze i w reciverze ustawiona komunikacja z brokerem
+jak jest zbudowana i serialzowana wiadomosc w senderach
+jak jest deserializowana w reciverze wiadomosc
+screeny wynikow
+My data'
