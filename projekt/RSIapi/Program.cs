@@ -1,12 +1,20 @@
 using Microsoft.EntityFrameworkCore;
 using RSIapi.Context;
 using System.Dynamic;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+MyData.Info();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 var connection = String.Empty;
 /*if (builder.Environment.IsDevelopment())
@@ -21,11 +29,25 @@ else
 
 connection = "Server=tcp:fptodo-server.database.windows.net,1433;Initial Catalog=fptodo-database;Persist Security Info=False;User ID=fptodo-server-admin;Password=D00SKF01GC7I3I24$;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-Console.WriteLine("connecttion string: ");
-Console.WriteLine(connection);
 builder.Services.AddDbContext<ToDoItemContext>(options =>
     options.UseSqlServer(connection));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
