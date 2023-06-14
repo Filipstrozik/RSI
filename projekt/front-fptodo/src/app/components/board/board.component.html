@@ -1,12 +1,11 @@
-<div class="board">
-    <h2>{{ board.name }}</h2>
-    <p>{{ board.description }}</p>
-    <p>Due Time: {{ board.dueTime | date }}</p>
-
-    <h3>ToDo Items:</h3>
-    <ul>
-        <li *ngFor="let item of board.toDoItems">
-            <app-to-do-item [item]="item"></app-to-do-item>
-        </li>
-    </ul>
-</div>
+<mat-card  class="board">
+    <mat-card-header>
+        <mat-card-title>{{ board.name }}</mat-card-title>
+        <mat-card-subtitle>{{ board.dueTime | date }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    <div *ngFor="let item of board.toDoItems">
+        <app-to-do-item [item]="item" [boardId]="board.id"></app-to-do-item>
+    </div>
+    </mat-card-content>
+</mat-card >

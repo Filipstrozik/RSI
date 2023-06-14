@@ -1,7 +1,19 @@
-<div class="to-do-item">
-    <h3>{{ item.name }}</h3>
-    <p>Due Time: {{ item.dueTime | date }}</p>
-    <p>Created: {{ item.isComplete }}</p>
-    <p>Priority: {{ item.priority }}</p>
-    <p>User: {{ item.user?.name || 'Not assigned' }}</p>
-</div>
+<mat-card [matBadge]="item.priority"  matBadgeSize="large" class="to-do-item">
+    <mat-card-header>
+        <mat-checkbox [(ngModel)]="item.isComplete" (change)="changeComplete()"></mat-checkbox>
+        <mat-card-title >{{ item.name }}</mat-card-title>
+        <mat-card-subtitle>{{ item.dueTime | date }}</mat-card-subtitle>
+        <!-- <mat-card-subtitle>
+            <mat-icon fontIcon="stars" [matBadge]="item.priority" matBadgeColor="warn"></mat-icon>
+        </mat-card-subtitle> -->
+        <mat-card-subtitle>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon>
+            {{ item.user?.name || 'Not assigned' }}
+        </mat-card-subtitle>
+
+    </mat-card-header>
+    <mat-card-actions align="end">
+        <button mat-button (click)="onEdit()">EDIT</button>
+        <button mat-button>DELETE</button>
+    </mat-card-actions>
+</mat-card>

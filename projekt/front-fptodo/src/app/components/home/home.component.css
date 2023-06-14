@@ -1,0 +1,15 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+mat-nav-list {
+    height: 100%;
+    display: flex;
+    flex-grow: 1;
+    overflow: auto;
+}
+
+mat-list-item {
+}

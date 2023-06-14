@@ -29,7 +29,7 @@ namespace RSIapi.Controllers
           {
               return NotFound();
           }
-            return await _context.Boards.Include(b => b.ToDoItems).ToListAsync();
+            return await _context.Boards.Include(b => b.ToDoItems).ThenInclude(item => item.User).ToListAsync();
         }
 
         // GET: api/Boards/5
@@ -40,7 +40,7 @@ namespace RSIapi.Controllers
           {
               return NotFound();
           }
-            var board = await _context.Boards.Include(b => b.ToDoItems).FirstOrDefaultAsync(b => b.Id == id);
+            var board = await _context.Boards.Include(b => b.ToDoItems).ThenInclude(item => item.User).FirstOrDefaultAsync(b => b.Id == id);
 
             if (board == null)
             {
