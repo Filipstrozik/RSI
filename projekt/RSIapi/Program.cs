@@ -68,6 +68,10 @@ myData.Info();
     app.UseSwaggerUI();
 }*/
 
+app.UseCors(options => {
+    options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+});
+
 app.UseSwagger();
 app.UseSwaggerUI();
 

@@ -1,4 +1,4 @@
-export interface ToDoItem {
+export interface ToDoItemDTO {
   id?: number;
   name?: string;
   isComplete: boolean;
@@ -8,4 +8,4 @@ export interface ToDoItem {
   userId?: number;
 }
 
-export default ToDoItem;
+export default ToDoItemDTO;
