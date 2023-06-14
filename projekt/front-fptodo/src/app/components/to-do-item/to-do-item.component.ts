@@ -1,4 +1,4 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, Output, EventEmitter } from '@angular/core';
 import ToDoItemDTO from 'src/app/models/todoItemDTO';
 import ToDoItem from 'src/app/models/todoitem';
 import { TodoapiService } from 'src/app/services/todoapi.service';
@@ -14,6 +14,8 @@ export class ToDoItemComponent {
   @Input() item!: ToDoItem;
   @Input() boardId: number = 0;
   checked: boolean = false;
+
+  @Output() updatedToDoItem: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private todoApiService: TodoapiService,
@@ -45,7 +47,26 @@ export class ToDoItemComponent {
     dialogConfig.autoFocus = true;
     this.todoApiService.getToDoItemById(this.item.id).subscribe((item) => {
       dialogConfig.data = item;
-      this.dialog.open(ToDoItemEditDialogComponent, dialogConfig);
+      this.dialog
+        .open(ToDoItemEditDialogComponent, dialogConfig)
+        .afterClosed()
+        .subscribe((item: ToDoItemDTO) => {
+          if (item) {
+            // if user id changed, get user
+            // if board id changed, emit event to update board
+            if (this.item.user?.id !== item.userId) {
+              // ser can bu unasigned
+              this.todoApiService
+                .getUserById(item.userId!)
+                .subscribe((user) => {
+                  this.item.user = user;
+                });
+            }
+            if (this.boardId !== item.boardId) {
+              this.updatedToDoItem.emit();
+            }
+          }
+        });
     });
   }
 }

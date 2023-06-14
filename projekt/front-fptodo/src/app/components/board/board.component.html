@@ -5,7 +5,7 @@
     </mat-card-header>
     <mat-card-content>
     <div *ngFor="let item of board.toDoItems">
-        <app-to-do-item [item]="item" [boardId]="board.id"></app-to-do-item>
+        <app-to-do-item [item]="item" [boardId]="board.id" (updatedToDoItem)="updateBoard()"></app-to-do-item>
     </div>
     </mat-card-content>
 </mat-card >

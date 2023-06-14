@@ -31,17 +31,16 @@ export class ToDoItemEditDialogComponent implements OnInit {
     this.item = data;
 
     const datetime = new Date(this.item.dueTime);
-    console.log(datetime);
     this.date = datetime.toLocaleDateString(); // 9/17/2016
     this.time = datetime.toLocaleTimeString(); // 11:18:48 AM
     // cut seconds
     this.time = this.time.slice(0, -3);
-    console.log(this.time);
     this.editForm = this.formBuilder.group({
       id: [this.item.id],
       name: [this.item.name, Validators.required],
       isComplete: [this.item.isComplete],
-      dueDate: [this.date],
+      dueDate: [datetime],
+      dueTime: [this.time],
       priority: [this.item.priority, Validators.required],
       boardId: [this.item.board.id, Validators.required],
       userId: [this.item.user?.id],
@@ -60,20 +59,19 @@ export class ToDoItemEditDialogComponent implements OnInit {
 
   save() {
     if (this.editForm.valid) {
-      const editedItem: ToDoItemDTO = this.editForm.value;
+      const hours = this.editForm.value.dueTime.split(':')[0];
+      const minutes = this.editForm.value.dueTime.split(':')[1];
+      const editedItem: ToDoItemDTO = {
+        id: this.editForm.value.id,
+        name: this.editForm.value.name,
+        isComplete: this.editForm.value.isComplete,
+        dueTime: new Date(this.editForm.value.dueDate.setHours(hours, minutes)),
+        priority: this.editForm.value.priority,
+        boardId: this.editForm.value.boardId,
+        userId: this.editForm.value.userId,
+      };
 
-      console.log(this.date);
-      console.log(this.time);
-
-      editedItem.dueTime = new Date(
-        `${this.editForm.value.dueDate} ${this.editForm.value.dueTime}`
-      );
-
-      console.log(editedItem);
-      // Call your save method or emit the edited item to the parent component
-      // Example: this.todoService.updateItem(editedItem);
-
-      // this.todoApiService.updateToDoItem(editedItem).subscribe();
+      this.todoApiService.updateToDoItem(editedItem).subscribe();
       this.dialogRef.close(editedItem);
     }
   }
