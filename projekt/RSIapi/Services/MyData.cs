@@ -1,33 +1,45 @@
+using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 
-
 public class MyData
 {
-    public static void Info()
+    private readonly ILogger<MyData> _logger;
+
+    public MyData(ILogger<MyData> logger)
     {
-        Console.WriteLine("Filip Strózik, 260377");
-        Console.WriteLine("Piotr Grygoruk, 260299");
+        _logger = logger;
+    }
 
-        Console.WriteLine((DateTime.UtcNow).ToString("dd MMM, HH:mm:ss"));
+    // use Logger to log at info level
+    public void Info()
+    {
+        string log = "";
+        log += "Filip Strózik, 260377 \n";
+        log += "Piotr Grygoruk, 260299 \n";
 
-        Console.WriteLine(Environment.Version.ToString());
-        Console.WriteLine(Environment.UserName);
-        Console.WriteLine(Environment.OSVersion);
+        log += DateTime.UtcNow.ToString("dd MMM, HH:mm:ss") + "\n";
+        log += Environment.Version.ToString() + "\n";
+        log += "OS: " + Environment.OSVersion.ToString() + "\n";
+
+        log += Environment.UserName + "\n";
 
         try
         {
-            Console.WriteLine(GetLocalIPAddress());
+            log += GetLocalIPAddress() + "\n";
         }
         catch (Exception e)
         {
-            throw new Exception(e.Message);
+            _logger.LogError(e, "Error retrieving local IP address");
+            throw;
         }
+
+        _logger.LogInformation(log);
     }
 
-    public static string GetLocalIPAddress()
+    private string GetLocalIPAddress()
     {
         var host = Dns.GetHostEntry(Dns.GetHostName());
         foreach (var ip in host.AddressList)

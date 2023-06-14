@@ -1,0 +1,22 @@
+<mat-sidenav-container>
+  <mat-sidenav opened mode="side">
+    <mat-nav-list>
+      <a mat-list-item>
+        <button mat-raised-button color="primary">
+          <mat-icon class="mat-icon-large">home</mat-icon>
+          <span class="nav-item-text">Home</span>
+        </button>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>FP ToDo</span>
+    </mat-toolbar>
+    
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

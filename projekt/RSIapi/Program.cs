@@ -5,9 +5,14 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 
-MyData.Info();
+builder.Services.AddSingleton<MyData>();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -53,6 +58,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+var myData = app.Services.GetRequiredService<MyData>();
+
+myData.Info();
 // Configure the HTTP request pipeline.
 /*if (app.Environment.IsDevelopment())
 {

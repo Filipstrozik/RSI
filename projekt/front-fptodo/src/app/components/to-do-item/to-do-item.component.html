@@ -1,0 +1,7 @@
+<div class="to-do-item">
+    <h3>{{ item.name }}</h3>
+    <p>Due Time: {{ item.dueTime | date }}</p>
+    <p>Created: {{ item.isComplete }}</p>
+    <p>Priority: {{ item.priority }}</p>
+    <p>User: {{ item.user?.name || 'Not assigned' }}</p>
+</div>
