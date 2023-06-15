@@ -1,4 +1,5 @@
-<h1 mat-dialog-title>Dodaj tablicę</h1>
+<h1 mat-dialog-title *ngIf="input">Edytuj tablicę</h1>
+<h1 mat-dialog-title *ngIf="!input">Dodaj tablicę</h1>
 
 <form [formGroup]="editForm" (ngSubmit)="save()">
     <div mat-dialog-content style="display: flex; flex-wrap: wrap; flex-direction: column; width: 50vw">

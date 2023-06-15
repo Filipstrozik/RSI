@@ -1,12 +1,16 @@
-<mat-card class="board" color="primary">
+<mat-card class="board" color="primary" [class.mat-elevation-z2]="true">
+                <button mat-icon-button color="warn" (click)="onDeleteBoard()" class="delete-button">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button (click)="onEditBoard()" class="edit-button">
+                    <mat-icon>border_color</mat-icon>
+                </button>
     <mat-card-header>
         <mat-card-title>
             {{ board.name }} 
-            <button mat-icon-button color="warn" (click)="onDeleteBoard()">
-                <mat-icon>delete</mat-icon>
-            </button>
         </mat-card-title>
-        <mat-card-subtitle>{{ board.dueTime | date }}</mat-card-subtitle>
+    <mat-card-subtitle>{{board.description}}</mat-card-subtitle>
+    <mat-card-subtitle>{{ board.dueTime | date }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
     <div class="center">

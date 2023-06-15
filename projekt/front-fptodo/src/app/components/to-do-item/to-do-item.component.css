@@ -1,5 +1,32 @@
 .to-do-item {
     background-color: rgb(226, 226, 226);
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 1px;
+}
+
+mat-card-subtitle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 2px;
+}   
+
+mat-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    min-height: 96px;
+}
+
+mat-card-header {
+    padding: 16px 16px 16px;
+}
+
+.delete-button {
+    position: absolute;
+    top: 0;
+    right: 0px;
+}
+
+.edit-button {
+    position: absolute;
+    top: 48px;
+    right: 0px;
 }

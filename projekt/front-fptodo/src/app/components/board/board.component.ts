@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import Board from 'src/app/models/board';
 import { TodoapiService } from 'src/app/services/todoapi.service';
 import { ToDoItemAddComponent } from '../to-do-item/to-do-item-add/to-do-item-add.component';
+import { BoardAddComponent } from './board-add/board-add.component';
 
 @Component({
   selector: 'app-board',
@@ -45,5 +46,17 @@ export class BoardComponent {
       console.log('deleted');
       this.updatedBoard.emit();
     });
+  }
+
+  onEditBoard() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = this.board;
+    this.dialog
+      .open(BoardAddComponent, dialogConfig)
+      .afterClosed()
+      .subscribe((item: any) => {
+        this.updateBoard();
+      });
   }
 }
