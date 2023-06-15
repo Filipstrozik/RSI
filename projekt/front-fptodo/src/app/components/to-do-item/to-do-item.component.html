@@ -2,7 +2,7 @@
     <mat-card-header>
         <mat-checkbox [(ngModel)]="item.isComplete" (change)="changeComplete()"></mat-checkbox>
         <mat-card-title >{{ item.name }}</mat-card-title>
-        <mat-card-subtitle>{{ item.dueTime | date }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ item.dueTime | date:'dd-MM-YYYY hh:mm' }}</mat-card-subtitle>
         <!-- <mat-card-subtitle>
             <mat-icon fontIcon="stars" [matBadge]="item.priority" matBadgeColor="warn"></mat-icon>
         </mat-card-subtitle> -->
@@ -14,6 +14,6 @@
     </mat-card-header>
     <mat-card-actions align="end">
         <button mat-button (click)="onEdit()">EDIT</button>
-        <button mat-button>DELETE</button>
+        <button mat-button (click)="onDelete()" >DELETE</button>
     </mat-card-actions>
 </mat-card>

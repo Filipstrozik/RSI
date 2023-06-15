@@ -62,6 +62,12 @@ namespace RSIapi.Controllers
             }
             // find user by id of the DTO
 
+            var foundToDoItem = await _context.ToDoItems.FindAsync(id);
+            if (foundToDoItem == null)
+            {
+                return NotFound();
+            }
+
             var user = await _context.Users.FindAsync(toDoItemDTO.UserId);
 
             var board = await _context.Boards.FindAsync(toDoItemDTO.BoardId);
@@ -77,23 +83,20 @@ namespace RSIapi.Controllers
             //map the DTO to the model
 
 
-            var toDoItem = new ToDoItem
-            {
-                Id = toDoItemDTO.Id,
-                Name = toDoItemDTO.Name,
-                IsComplete = toDoItemDTO.IsComplete,
-                DueTime = toDoItemDTO.DueTime,
-                Priority = toDoItemDTO.Priority,
-                Board = board,
-                User = user
-            };
+            foundToDoItem.Name = toDoItemDTO.Name;
+            foundToDoItem.IsComplete = toDoItemDTO.IsComplete;
+            foundToDoItem.DueTime = toDoItemDTO.DueTime;
+            foundToDoItem.Priority = toDoItemDTO.Priority;
+            foundToDoItem.Board = board;
+            foundToDoItem.User = user;
+
 
 
             // update the model
 
             //update the model that is in the database
+            _context.Entry(foundToDoItem).State = EntityState.Modified;
 
-            _context.ToDoItems.Update(toDoItem);
 
             try
             {
@@ -111,7 +114,7 @@ namespace RSIapi.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction("GetToDoItem", new { id = foundToDoItem.Id }, foundToDoItem);
         }
 
         // POST: api/ToDoItems

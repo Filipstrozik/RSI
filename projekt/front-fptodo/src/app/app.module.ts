@@ -31,6 +31,8 @@ import { BoardComponent } from './components/board/board.component';
 import { UserComponent } from './components/user/user.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ToDoItemEditDialogComponent } from './components/to-do-item/to-do-item-edit-dialog/to-do-item-edit-dialog.component';
+import { ToDoItemAddComponent } from './components/to-do-item/to-do-item-add/to-do-item-add.component';
+import { BoardAddComponent } from './components/board/board-add/board-add.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { ToDoItemEditDialogComponent } from './components/to-do-item/to-do-item-
     BoardComponent,
     UserComponent,
     ToDoItemEditDialogComponent,
+    ToDoItemAddComponent,
+    BoardAddComponent,
   ],
   imports: [
     BrowserModule,
