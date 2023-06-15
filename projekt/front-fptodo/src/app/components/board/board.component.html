@@ -1,11 +1,21 @@
-<mat-card  class="board">
+<mat-card class="board" color="primary">
     <mat-card-header>
-        <mat-card-title>{{ board.name }}</mat-card-title>
+        <mat-card-title>
+            {{ board.name }} 
+            <button mat-icon-button color="warn" (click)="onDeleteBoard()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-card-title>
         <mat-card-subtitle>{{ board.dueTime | date }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
+    <div class="center">
+        <button mat-fab color="accent" (click)="onAddToDoItem()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
     <div *ngFor="let item of board.toDoItems">
-        <app-to-do-item [item]="item" [boardId]="board.id" (updatedToDoItem)="updateBoard()"></app-to-do-item>
+        <app-to-do-item [item]="item" [boardId]="board.id!" (updatedToDoItem)="updateBoard()"></app-to-do-item>
     </div>
     </mat-card-content>
 </mat-card >

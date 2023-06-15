@@ -1,4 +1,10 @@
 .board {
-    background-color: rgb(218, 230, 173);
+    background-color: rgb(252, 247, 219);
     width: 400px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
 }

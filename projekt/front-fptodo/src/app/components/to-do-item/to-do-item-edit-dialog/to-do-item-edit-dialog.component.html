@@ -52,6 +52,9 @@
     <mat-form-field>
       <mat-label>User</mat-label>
       <mat-select formControlName="userId">
+        <mat-option [value]="null">
+          Not assigned 
+        </mat-option>
         <mat-option *ngFor="let user of users" [value]="user.id">
           {{ user.name }}
         </mat-option>

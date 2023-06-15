@@ -1,11 +1,11 @@
-import ToDoItem from "./todoitem";
+import ToDoItem from './todoitem';
 
 export interface Board {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   dueTime: Date;
-  toDoItems: ToDoItem[];
+  toDoItems?: ToDoItem[];
 }
 
 export default Board;

@@ -7,18 +7,17 @@ import User from '../models/user';
 import ToDoItemDTO from '../models/todoItemDTO';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoapiService {
-
   private apiUrl = 'https://fptodo.azurewebsites.net/api/';
 
   private toDoItemsUrl = 'todoitems';
   private boardsUrl = 'boards';
   private userUrl = 'users';
 
-  constructor(private http: HttpClient) { }
-  
+  constructor(private http: HttpClient) {}
+
   // ToDoItem CRUD methods
   getAllToDoItems(): Observable<ToDoItem[]> {
     return this.http.get<ToDoItem[]>(`${this.apiUrl}${this.toDoItemsUrl}`);

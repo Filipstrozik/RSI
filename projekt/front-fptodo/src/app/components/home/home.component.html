@@ -1,5 +1,9 @@
 <mat-nav-list>
   <div container *ngFor="let board of boards">
-    <app-board [board]="board"></app-board>
+    <app-board [board]="board" (updatedBoard)="updateBoards()"></app-board>
   </div>
+  <button mat-fab extended color="primary" (click)="onAddBoard()">
+    <mat-icon>add</mat-icon>
+    Dodaj tablicę
+  </button>
 </mat-nav-list>

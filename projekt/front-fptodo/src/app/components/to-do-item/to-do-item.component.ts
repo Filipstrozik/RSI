@@ -50,23 +50,21 @@ export class ToDoItemComponent {
       this.dialog
         .open(ToDoItemEditDialogComponent, dialogConfig)
         .afterClosed()
-        .subscribe((item: ToDoItemDTO) => {
+        .subscribe((item: ToDoItem) => {
+          console.log('item', item);
           if (item) {
-            // if user id changed, get user
-            // if board id changed, emit event to update board
-            if (this.item.user?.id !== item.userId) {
-              // ser can bu unasigned
-              this.todoApiService
-                .getUserById(item.userId!)
-                .subscribe((user) => {
-                  this.item.user = user;
-                });
-            }
-            if (this.boardId !== item.boardId) {
+            if (this.boardId !== item.board.id) {
               this.updatedToDoItem.emit();
             }
+            this.item = item;
           }
         });
+    });
+  }
+
+  onDelete() {
+    this.todoApiService.deleteToDoItem(this.item.id).subscribe(() => {
+      this.updatedToDoItem.emit();
     });
   }
 }

@@ -8,13 +8,12 @@ import User from 'src/app/models/user';
 import { TodoapiService } from 'src/app/services/todoapi.service';
 
 @Component({
-  selector: 'app-to-do-item-edit-dialog',
-  templateUrl: './to-do-item-edit-dialog.component.html',
-  styleUrls: ['./to-do-item-edit-dialog.component.css'],
+  selector: 'app-to-do-item-add',
+  templateUrl: 'to-do-item-add.component.html',
+  styleUrls: ['to-do-item-add.component.css'],
 })
-export class ToDoItemEditDialogComponent implements OnInit {
+export class ToDoItemAddComponent implements OnInit {
   editForm: FormGroup;
-  item: ToDoItem;
   public time = '';
   public date = '';
 
@@ -24,26 +23,24 @@ export class ToDoItemEditDialogComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<ToDoItemEditDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) data: ToDoItem,
+    private dialogRef: MatDialogRef<ToDoItemAddComponent>,
+    @Inject(MAT_DIALOG_DATA) data: Board,
     private todoApiService: TodoapiService
   ) {
-    this.item = data;
-
-    const datetime = new Date(this.item.dueTime);
+    const datetime = new Date();
     this.date = datetime.toLocaleDateString(); // 9/17/2016
     this.time = datetime.toLocaleTimeString(); // 11:18:48 AM
     // cut seconds
     this.time = this.time.slice(0, -3);
     this.editForm = this.formBuilder.group({
-      id: [this.item.id],
-      name: [this.item.name, Validators.required],
-      isComplete: [this.item.isComplete],
+      id: [],
+      name: [, Validators.required],
+      isComplete: [false],
       dueDate: [datetime],
       dueTime: [this.time],
-      priority: [this.item.priority, Validators.required],
-      boardId: [this.item.board.id, Validators.required],
-      userId: [this.item.user?.id],
+      priority: [, Validators.required],
+      boardId: [data.id, Validators.required],
+      userId: [],
     });
   }
 
@@ -61,22 +58,16 @@ export class ToDoItemEditDialogComponent implements OnInit {
     if (this.editForm.valid) {
       const hours = this.editForm.value.dueTime.split(':')[0];
       const minutes = this.editForm.value.dueTime.split(':')[1];
-
-      const userId = this.editForm.value.userId
-        ? this.editForm.value.userId
-        : -1;
       const editedItem: ToDoItemDTO = {
-        id: this.editForm.value.id,
         name: this.editForm.value.name,
         isComplete: this.editForm.value.isComplete,
         dueTime: new Date(this.editForm.value.dueDate.setHours(hours, minutes)),
         priority: this.editForm.value.priority,
         boardId: this.editForm.value.boardId,
-        userId: userId,
+        userId: this.editForm.value.userId,
       };
-
       this.todoApiService
-        .updateToDoItem(editedItem)
+        .createToDoItem(editedItem)
         .subscribe((item: ToDoItem) => {
           this.dialogRef.close(item);
         });

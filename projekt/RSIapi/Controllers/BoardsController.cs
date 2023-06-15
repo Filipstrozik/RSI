@@ -78,7 +78,7 @@ namespace RSIapi.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction("GetBoard", new { id = board.Id }, board);
         }
 
         // POST: api/Boards

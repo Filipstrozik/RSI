@@ -78,7 +78,7 @@ namespace RSIapi.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
         // POST: api/Users

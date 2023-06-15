@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Dodaj tablicę</h1>
+
+<form [formGroup]="editForm" (ngSubmit)="save()">
+    <div mat-dialog-content style="display: flex; flex-wrap: wrap; flex-direction: column; width: 50vw">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Name" />
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="dd" formControlName="description"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Due date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dueDate" value="{{date}}">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Due time</mat-label>
+            <input matInput [ngxMatTimepicker]="pickerB" name="selected_time_B" [format]="24" [value]="time"
+                formControlName="dueTime" readonly />
+            <mat-icon matSuffix (click)="pickerB.open()">
+                watch_later
+            </mat-icon>
+        </mat-form-field>
+        <ngx-mat-timepicker color="accent" #pickerB defaultTime="time" [format]="24"></ngx-mat-timepicker>
+    </div>
+
+    <mat-dialog-actions>
+        <button mat-raised-button (click)="close()">Close</button>
+        <button mat-raised-button mat-primary type="submit" [disabled]="editForm.invalid">
+            Save
+        </button>
+    </mat-dialog-actions>
+</form>
