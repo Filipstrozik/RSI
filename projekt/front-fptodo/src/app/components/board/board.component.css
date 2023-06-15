@@ -1,10 +1,29 @@
 .board {
     background-color: rgb(252, 247, 219);
     width: 400px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .center {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
+}
+
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.delete-button {
+    position: absolute;
+    top: 0;
+    right: 0px;
+}
+
+.edit-button {
+    position: absolute;
+    top: 0;
+    right: 48px;
 }

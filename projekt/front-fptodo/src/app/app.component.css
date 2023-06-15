@@ -4,4 +4,12 @@ mat-sidenav-container {
 
 mat-sidenav {
     width: auto;
+    background-color: #fff5d7;
+}
+
+mat-toolbar {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
 }

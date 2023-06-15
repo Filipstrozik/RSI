@@ -1,19 +1,16 @@
 <mat-card [matBadge]="item.priority"  matBadgeSize="large" class="to-do-item">
+            <button mat-icon-button (click)="onEdit()" class="edit-button"><mat-icon>border_color</mat-icon></button>
+            <button mat-icon-button (click)="onDelete()" class="delete-button"><mat-icon>delete</mat-icon></button>
     <mat-card-header>
-        <mat-checkbox [(ngModel)]="item.isComplete" (change)="changeComplete()"></mat-checkbox>
-        <mat-card-title >{{ item.name }}</mat-card-title>
-        <mat-card-subtitle>{{ item.dueTime | date:'dd-MM-YYYY hh:mm' }}</mat-card-subtitle>
-        <!-- <mat-card-subtitle>
-            <mat-icon fontIcon="stars" [matBadge]="item.priority" matBadgeColor="warn"></mat-icon>
-        </mat-card-subtitle> -->
-        <mat-card-subtitle>
+        
+        <mat-card-title >
+            <mat-checkbox [(ngModel)]="item.isComplete" (change)="changeComplete()"></mat-checkbox>
+            {{ item.name }}
+        </mat-card-title>
+        <mat-card-subtitle>{{ item.dueTime | date:'dd-MM-YYYY hh:mm' }}
             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon>
             {{ item.user?.name || 'Not assigned' }}
         </mat-card-subtitle>
 
     </mat-card-header>
-    <mat-card-actions align="end">
-        <button mat-button (click)="onEdit()">EDIT</button>
-        <button mat-button (click)="onDelete()" >DELETE</button>
-    </mat-card-actions>
 </mat-card>

@@ -16,6 +16,7 @@ export class BoardAddComponent {
   editForm: FormGroup;
   public time = '';
   public date = '';
+  input: Board | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,18 +24,34 @@ export class BoardAddComponent {
     @Inject(MAT_DIALOG_DATA) data: Board,
     private todoApiService: TodoapiService
   ) {
-    const datetime = new Date();
-    this.date = datetime.toLocaleDateString(); // 9/17/2016
-    this.time = datetime.toLocaleTimeString(); // 11:18:48 AM
-    // cut seconds
-    this.time = this.time.slice(0, -3);
-    this.editForm = this.formBuilder.group({
-      id: [],
-      name: [, Validators.required],
-      description: [],
-      dueDate: [datetime],
-      dueTime: [this.time],
-    });
+    if (data) {
+      this.input = data;
+      const datetime = new Date(data.dueTime);
+      this.date = datetime.toLocaleDateString(); // 9/17/2016
+      this.time = datetime.toLocaleTimeString(); // 11:18:48 AM
+      // cut seconds
+      this.time = this.time.slice(0, -3);
+      this.editForm = this.formBuilder.group({
+        id: [data.id],
+        name: [data.name, Validators.required],
+        description: [data.description],
+        dueDate: [datetime],
+        dueTime: [this.time],
+      });
+    } else {
+      const datetime = new Date();
+      this.date = datetime.toLocaleDateString(); // 9/17/2016
+      this.time = datetime.toLocaleTimeString(); // 11:18:48 AM
+      // cut seconds
+      this.time = this.time.slice(0, -3);
+      this.editForm = this.formBuilder.group({
+        id: [],
+        name: [, Validators.required],
+        description: [],
+        dueDate: [datetime],
+        dueTime: [this.time],
+      });
+    }
   }
 
   ngOnInit() {}
@@ -43,14 +60,32 @@ export class BoardAddComponent {
     if (this.editForm.valid) {
       const hours = this.editForm.value.dueTime.split(':')[0];
       const minutes = this.editForm.value.dueTime.split(':')[1];
-      const newBoard: Board = {
-        name: this.editForm.value.name,
-        description: this.editForm.value.description,
-        dueTime: new Date(this.editForm.value.dueDate.setHours(hours, minutes)),
-      };
-      this.todoApiService.createBoard(newBoard).subscribe((item: Board) => {
-        this.dialogRef.close(item);
-      });
+      if (this.input) {
+        const editedBoard: Board = {
+          id: this.editForm.value.id,
+          name: this.editForm.value.name,
+          description: this.editForm.value.description,
+          dueTime: new Date(
+            this.editForm.value.dueDate.setHours(hours, minutes)
+          ),
+        };
+        this.todoApiService
+          .updateBoard(editedBoard)
+          .subscribe((item: Board) => {
+            this.dialogRef.close(item);
+          });
+      } else {
+        const newBoard: Board = {
+          name: this.editForm.value.name,
+          description: this.editForm.value.description,
+          dueTime: new Date(
+            this.editForm.value.dueDate.setHours(hours, minutes)
+          ),
+        };
+        this.todoApiService.createBoard(newBoard).subscribe((item: Board) => {
+          this.dialogRef.close(item);
+        });
+      }
     }
   }
 

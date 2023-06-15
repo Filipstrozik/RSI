@@ -62,7 +62,7 @@ namespace RSIapi.Controllers
             }
             // find user by id of the DTO
 
-            var foundToDoItem = await _context.ToDoItems.FindAsync(id);
+            var foundToDoItem = await _context.ToDoItems.Include(t => t.Board).Include(t => t.User).FirstOrDefaultAsync(t => t.Id == id);
             if (foundToDoItem == null)
             {
                 return NotFound();
@@ -96,7 +96,7 @@ namespace RSIapi.Controllers
 
             //update the model that is in the database
             _context.Entry(foundToDoItem).State = EntityState.Modified;
-
+            _context.ToDoItems.Update(foundToDoItem);
 
             try
             {
