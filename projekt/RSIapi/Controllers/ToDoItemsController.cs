@@ -32,7 +32,6 @@ namespace RSIapi.Controllers
           }
                 
             var todoitems = await _context.ToDoItems.Include(t => t.Board).Include(t => t.User).ToListAsync();
-            todoitems.ForEach(t => t.DueTime = t.DueTime.ToUniversalTime());
             return todoitems;
 
         }
@@ -50,7 +49,6 @@ namespace RSIapi.Controllers
             {
                 return NotFound();
             }
-            toDoItem.DueTime = toDoItem.DueTime.ToUniversalTime();
 
             return toDoItem;
         }
@@ -96,7 +94,6 @@ namespace RSIapi.Controllers
 
 
 
-            // update the model
 
             //update the model that is in the database
             _context.Entry(foundToDoItem).State = EntityState.Modified;

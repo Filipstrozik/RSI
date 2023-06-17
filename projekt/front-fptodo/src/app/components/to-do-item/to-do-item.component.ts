@@ -24,9 +24,6 @@ export class ToDoItemComponent {
 
   ngOnInit(): void {
     if (this.item) {
-      console.log(new Date());
-      console.log(this.item.dueTime);
-      console.log(new Date(this.item.dueTime));
       this.item.dueTime = new Date(this.item.dueTime);
     }
   }

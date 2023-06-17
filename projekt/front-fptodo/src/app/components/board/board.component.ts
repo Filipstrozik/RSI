@@ -64,7 +64,6 @@ export class BoardComponent implements OnInit {
       .open(ToDoItemAddComponent, dialogConfig)
       .afterClosed()
       .subscribe((item: any) => {
-        console.log('item', item);
         this.updateBoard(false);
       });
   }

@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { HomeComponent } from './components/home/home.component';
 import { ToDoItemComponent } from './components/to-do-item/to-do-item.component';
@@ -72,6 +73,7 @@ import { AddUserDialogComponent } from './components/users-management/add-user-d
     MatDatepickerModule,
     MatNativeDateModule,
     NgxMatTimepickerModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

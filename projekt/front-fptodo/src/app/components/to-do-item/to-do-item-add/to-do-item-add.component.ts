@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import Board from 'src/app/models/board';
 import ToDoItemDTO from 'src/app/models/todoItemDTO';
 import ToDoItem from 'src/app/models/todoitem';
@@ -25,7 +26,8 @@ export class ToDoItemAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<ToDoItemAddComponent>,
     @Inject(MAT_DIALOG_DATA) data: Board,
-    private todoApiService: TodoapiService
+    private todoApiService: TodoapiService,
+    private snackBar: MatSnackBar
   ) {
     const datetime = new Date();
     this.date = datetime.toLocaleDateString(); // 9/17/2016
@@ -36,9 +38,9 @@ export class ToDoItemAddComponent implements OnInit {
       id: [],
       name: [, Validators.required],
       isComplete: [false],
-      dueDate: [datetime],
-      dueTime: [this.time],
-      priority: [, Validators.required],
+      dueDate: [datetime, Validators.required],
+      dueTime: [this.time, Validators.required],
+      priority: [3, Validators.required],
       boardId: [data.id, Validators.required],
       userId: [],
     });
@@ -66,11 +68,16 @@ export class ToDoItemAddComponent implements OnInit {
         boardId: this.editForm.value.boardId,
         userId: this.editForm.value.userId,
       };
-      this.todoApiService
-        .createToDoItem(editedItem)
-        .subscribe((item: ToDoItem) => {
+      this.todoApiService.createToDoItem(editedItem).subscribe(
+        (item: ToDoItem) => {
           this.dialogRef.close(item);
-        });
+        },
+        (error) => {
+          this.snackBar.open(error.error.errors.Priority, 'Close', {
+            duration: 5000,
+          });
+        }
+      );
     }
   }
 

@@ -26,7 +26,7 @@ export class AddUserDialogComponent {
       this.editForm = this.formBuilder.group({
         id: [data.id],
         name: [data.name, Validators.required],
-        email: [data.email, Validators.required],
+        email: [data.email, Validators.required, Validators.email],
         age: [data.age, Validators.required],
       });
     } else {

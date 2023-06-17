@@ -6,6 +6,7 @@ import ToDoItemDTO from 'src/app/models/todoItemDTO';
 import ToDoItem from 'src/app/models/todoitem';
 import User from 'src/app/models/user';
 import { TodoapiService } from 'src/app/services/todoapi.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-to-do-item-edit-dialog',
@@ -26,7 +27,8 @@ export class ToDoItemEditDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<ToDoItemEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: ToDoItem,
-    private todoApiService: TodoapiService
+    private todoApiService: TodoapiService,
+    private snackBar: MatSnackBar
   ) {
     this.item = data;
 
@@ -39,8 +41,8 @@ export class ToDoItemEditDialogComponent implements OnInit {
       id: [this.item.id],
       name: [this.item.name, Validators.required],
       isComplete: [this.item.isComplete],
-      dueDate: [datetime],
-      dueTime: [this.time],
+      dueDate: [datetime, Validators.required],
+      dueTime: [this.time, Validators.required],
       priority: [this.item.priority, Validators.required],
       boardId: [this.item.board.id, Validators.required],
       userId: [this.item.user?.id],
@@ -75,11 +77,16 @@ export class ToDoItemEditDialogComponent implements OnInit {
         userId: userId,
       };
 
-      this.todoApiService
-        .updateToDoItem(editedItem)
-        .subscribe((item: ToDoItem) => {
+      this.todoApiService.updateToDoItem(editedItem).subscribe(
+        (item: ToDoItem) => {
           this.dialogRef.close(item);
-        });
+        },
+        (error) => {
+          this.snackBar.open(error.error.errors.Priority, 'Close', {
+            duration: 5000,
+          });
+        }
+      );
     }
   }
 
