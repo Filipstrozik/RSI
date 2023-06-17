@@ -63,7 +63,7 @@ export class BoardAddComponent {
       console.log(hours);
       console.log(minutes);
       console.log(this.input?.dueTime);
-      this.editForm.value.dueDate.setUTCHours(hours, minutes);
+      this.editForm.value.dueDate.setHours(hours, minutes);
 
       console.log(new Date(this.editForm.value.dueDate));
 

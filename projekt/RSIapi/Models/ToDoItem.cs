@@ -8,7 +8,14 @@ namespace RSIapi.Models
         [Required]
         public string? Name { get; set; }
         public bool IsComplete { get; set; } = false;
-        public DateTime DueTime { get; set; }
+
+        private DateTime _dueTime;
+
+        public DateTime DueTime
+        {
+            get { return _dueTime.ToUniversalTime(); }
+            set { _dueTime = value.ToLocalTime(); }
+        }
 
         [Range(1, 5)]
         public int Priority { get; set; } = 3;

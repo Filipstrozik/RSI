@@ -45,7 +45,7 @@ namespace RSIapi.Controllers
               return NotFound();
           }
             var board = await _context.Boards.Include(b => b.ToDoItems).ThenInclude(item => item.User).FirstOrDefaultAsync(b => b.Id == id);
-            board.DueTime = board.DueTime.ToUniversalTime();
+            //board.DueTime = board.DueTime.ToUniversalTime();
 
             if (board == null)
             {
@@ -135,7 +135,7 @@ namespace RSIapi.Controllers
             _context.Boards.Add(board);
             await _context.SaveChangesAsync();
 
-            board.DueTime = board.DueTime.ToUniversalTime();
+            //board.DueTime = board.DueTime.ToUniversalTime();
 
             return CreatedAtAction("GetBoard", new { id = board.Id }, board);
         }
