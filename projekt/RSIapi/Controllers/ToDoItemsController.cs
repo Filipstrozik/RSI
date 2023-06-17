@@ -177,6 +177,34 @@ namespace RSIapi.Controllers
             return NoContent();
         }
 
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<ToDoItem>>> Search(string? name, bool? isComplete, int? minPriority, int? maxPriority)
+        {
+            IQueryable<ToDoItem> query = _context.ToDoItems;
+            
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(e => e.Name.ToLower().Equals(name));
+            }
+
+            if (isComplete.HasValue)
+            {
+                query = query.Where(e => e.IsComplete == isComplete.Value);
+            }
+
+            if (minPriority.HasValue)
+            {
+                query = query.Where(e => e.Priority >= minPriority.Value);
+            }
+
+            if (maxPriority.HasValue)
+            {
+                query = query.Where(e => e.Priority <= maxPriority.Value);
+            }
+
+            return await query.ToListAsync();
+        }
+
         private bool ToDoItemExists(int id)
         {
             return (_context.ToDoItems?.Any(e => e.Id == id)).GetValueOrDefault();

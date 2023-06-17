@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
 namespace RSIapi.Models
 {
     public class ToDoItem
     {
         public int Id { get; set; }
         [Required]
-        public string? Name { get; set; }
+        [MaxLength(50)]
+        public string Name { get; set; }
         public bool IsComplete { get; set; } = false;
 
         private DateTime _dueTime;

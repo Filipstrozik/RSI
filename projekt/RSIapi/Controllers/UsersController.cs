@@ -116,6 +116,34 @@ namespace RSIapi.Controllers
             return NoContent();
         }
 
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<User>>> Search(string? name, string? email, int? minAge, int? maxAge)
+        {
+            IQueryable<User> query = _context.Users;
+            
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(e => e.Name.ToLower().Equals(name));
+            }
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                query = query.Where(e => e.Email.Equals(email));
+            }
+
+            if (minAge.HasValue)
+            {
+                query = query.Where(e => e.Age >= minAge.Value);
+            }
+
+            if (maxAge.HasValue)
+            {
+                query = query.Where(e => e.Age <= maxAge.Value);
+            }
+
+            return await query.ToListAsync();
+        }
+
         private bool UserExists(int id)
         {
             return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();

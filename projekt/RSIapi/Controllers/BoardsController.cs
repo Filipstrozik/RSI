@@ -159,6 +159,23 @@ namespace RSIapi.Controllers
 
             return NoContent();
         }
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Board>>> Search(string name, string? description)
+        {
+            IQueryable<Board> query = _context.Boards;
+            
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(e => e.Name.ToLower().Equals(name));
+            }
+
+            if (!string.IsNullOrEmpty(description))
+            {
+                query = query.Where(e => e.Description.ToLower().Equals(description));
+            }
+
+            return await query.ToListAsync();
+        }
 
         private bool BoardExists(int id)
         {
