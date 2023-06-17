@@ -60,14 +60,19 @@ export class BoardAddComponent {
     if (this.editForm.valid) {
       const hours = this.editForm.value.dueTime.split(':')[0];
       const minutes = this.editForm.value.dueTime.split(':')[1];
+      console.log(hours);
+      console.log(minutes);
+      console.log(this.input?.dueTime);
+      this.editForm.value.dueDate.setUTCHours(hours, minutes);
+
+      console.log(new Date(this.editForm.value.dueDate));
+
       if (this.input) {
         const editedBoard: Board = {
           id: this.editForm.value.id,
           name: this.editForm.value.name,
           description: this.editForm.value.description,
-          dueTime: new Date(
-            this.editForm.value.dueDate.setHours(hours, minutes)
-          ),
+          dueTime: new Date(this.editForm.value.dueDate.toString()),
         };
         this.todoApiService
           .updateBoard(editedBoard)
@@ -78,12 +83,11 @@ export class BoardAddComponent {
         const newBoard: Board = {
           name: this.editForm.value.name,
           description: this.editForm.value.description,
-          dueTime: new Date(
-            this.editForm.value.dueDate.setHours(hours, minutes)
-          ),
+          dueTime: new Date(this.editForm.value.dueDate.toString()),
         };
+        console.log(newBoard);
         this.todoApiService.createBoard(newBoard).subscribe((item: Board) => {
-          this.dialogRef.close(item);
+          this.dialogRef.close(newBoard);
         });
       }
     }

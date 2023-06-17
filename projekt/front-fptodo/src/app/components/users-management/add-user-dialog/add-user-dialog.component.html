@@ -1,0 +1,24 @@
+<h1 mat-dialog-title *ngIf="input !== null">Edytuj osobę</h1>
+<h1 mat-dialog-title *ngIf="input === null">Dodaj osobę</h1>
+<form [formGroup]="editForm" (ngSubmit)="save()">
+    <div mat-dialog-content style="display: flex; flex-wrap: wrap; flex-direction: column; width: 50vw">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Name" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Age</mat-label>
+            <input matInput type="number" formControlName="age" placeholder="Age" />
+        </mat-form-field>
+    </div>
+    <mat-dialog-actions>
+        <button mat-raised-button (click)="close()">Close</button>
+        <button mat-raised-button mat-primary type="submit" [disabled]="editForm.invalid">
+            Save
+        </button>
+    </mat-dialog-actions>
+</form>

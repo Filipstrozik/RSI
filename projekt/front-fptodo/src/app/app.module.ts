@@ -28,11 +28,13 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { HomeComponent } from './components/home/home.component';
 import { ToDoItemComponent } from './components/to-do-item/to-do-item.component';
 import { BoardComponent } from './components/board/board.component';
-import { UserComponent } from './components/user/user.component';
+import { UserComponent } from './components/users-management/user/user.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ToDoItemEditDialogComponent } from './components/to-do-item/to-do-item-edit-dialog/to-do-item-edit-dialog.component';
 import { ToDoItemAddComponent } from './components/to-do-item/to-do-item-add/to-do-item-add.component';
 import { BoardAddComponent } from './components/board/board-add/board-add.component';
+import { UsersManagementComponent } from './components/users-management/users-management.component';
+import { AddUserDialogComponent } from './components/users-management/add-user-dialog/add-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { BoardAddComponent } from './components/board/board-add/board-add.compon
     ToDoItemEditDialogComponent,
     ToDoItemAddComponent,
     BoardAddComponent,
+    UsersManagementComponent,
+    AddUserDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,9 @@ namespace RSIapi.Context
                 .HasMany(u => u.ToDoItems)
                 .WithOne(t => t.User)
                 .HasForeignKey("UserId")
-                .IsRequired(false);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
+
 
             modelBuilder.Entity<Board>()
                  .HasMany(b => b.ToDoItems)

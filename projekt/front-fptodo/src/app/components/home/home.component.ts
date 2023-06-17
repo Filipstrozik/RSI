@@ -24,7 +24,6 @@ export class HomeComponent {
   updateBoards() {
     this.todoApiService.getAllBoards().subscribe((boards: Board[]) => {
       this.boards = boards;
-      console.log(this.boards);
     });
   }
 
@@ -35,8 +34,10 @@ export class HomeComponent {
     this.dialog
       .open(BoardAddComponent, dialogConfig)
       .afterClosed()
-      .subscribe((item: any) => {
-        this.updateBoards();
+      .subscribe((item: Board) => {
+        if (item) {
+          this.boards.push(item);
+        }
       });
   }
 }

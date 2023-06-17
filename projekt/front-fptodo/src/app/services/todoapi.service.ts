@@ -10,7 +10,8 @@ import ToDoItemDTO from '../models/todoItemDTO';
   providedIn: 'root',
 })
 export class TodoapiService {
-  private apiUrl = 'https://fptodo.azurewebsites.net/api/';
+  // private apiUrl = 'https://fptodo.azurewebsites.net/api/';
+  private apiUrl = 'https://localhost:7192/api/';
 
   private toDoItemsUrl = 'todoitems';
   private boardsUrl = 'boards';
@@ -52,6 +53,16 @@ export class TodoapiService {
     return this.http.get<Board>(url);
   }
 
+  getBoardItemsCountById(id: number): Observable<number> {
+    const url = `${this.apiUrl}${this.boardsUrl}/${id}/countitems`;
+    return this.http.get<number>(url);
+  }
+
+  getBoardPriorityById(id: number): Observable<number> {
+    const url = `${this.apiUrl}${this.boardsUrl}/${id}/priority`;
+    return this.http.get<number>(url);
+  }
+
   createBoard(board: Board): Observable<Board> {
     return this.http.post<Board>(`${this.apiUrl}${this.boardsUrl}`, board);
   }
@@ -88,5 +99,9 @@ export class TodoapiService {
   deleteUser(id: number): Observable<void> {
     const url = `${this.apiUrl}${this.userUrl}/${id}`;
     return this.http.delete<void>(url);
+  }
+
+  getAuthors(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}authors`);
   }
 }

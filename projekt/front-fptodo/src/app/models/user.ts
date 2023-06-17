@@ -1,10 +1,10 @@
-import ToDoItem from "./todoitem";
+import ToDoItem from './todoitem';
 
 export interface User {
-  id: number;
+  id?: number;
   name: string;
   email: string;
   age: number;
-  toDoItems: ToDoItem[];
+  toDoItems?: ToDoItem[];
 }
 export default User;

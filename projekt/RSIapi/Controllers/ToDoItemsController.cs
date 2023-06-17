@@ -30,7 +30,11 @@ namespace RSIapi.Controllers
           {
               return NotFound();
           }
-            return await _context.ToDoItems.Include(t => t.Board).Include(t => t.User).ToListAsync();
+                
+            var todoitems = await _context.ToDoItems.Include(t => t.Board).Include(t => t.User).ToListAsync();
+            todoitems.ForEach(t => t.DueTime = t.DueTime.ToUniversalTime());
+            return todoitems;
+
         }
 
         // GET: api/ToDoItems/5
@@ -42,11 +46,11 @@ namespace RSIapi.Controllers
               return NotFound();
           }
             var toDoItem = await _context.ToDoItems.Include(t => t.Board).Include(t => t.User).FirstOrDefaultAsync(t => t.Id == id);
-
             if (toDoItem == null)
             {
                 return NotFound();
             }
+            toDoItem.DueTime = toDoItem.DueTime.ToUniversalTime();
 
             return toDoItem;
         }

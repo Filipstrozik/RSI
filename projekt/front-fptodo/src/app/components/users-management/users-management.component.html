@@ -1,0 +1,9 @@
+<mat-nav-list>
+    <div container *ngFor="let user of users">
+        <app-user [user]="user" (updateUser)="updateUsers()" ></app-user>
+    </div>
+    <button mat-fab extended color="primary" (click)="onAddUser()">
+        <mat-icon>add</mat-icon>
+        Dodaj osobę
+    </button>
+</mat-nav-list>

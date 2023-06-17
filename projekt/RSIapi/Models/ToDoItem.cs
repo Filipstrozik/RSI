@@ -8,7 +8,7 @@ namespace RSIapi.Models
         [Required]
         public string? Name { get; set; }
         public bool IsComplete { get; set; } = false;
-        public DateTime? DueTime { get; set; }
+        public DateTime DueTime { get; set; }
 
         [Range(1, 5)]
         public int Priority { get; set; } = 3;

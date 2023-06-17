@@ -22,6 +22,15 @@ export class ToDoItemComponent {
     private dialog: MatDialog
   ) {}
 
+  ngOnInit(): void {
+    if (this.item) {
+      console.log(new Date());
+      console.log(this.item.dueTime);
+      console.log(new Date(this.item.dueTime));
+      this.item.dueTime = new Date(this.item.dueTime);
+    }
+  }
+
   changeComplete() {
     // change to DTO
     const itemDTO: ToDoItemDTO = {
@@ -51,12 +60,14 @@ export class ToDoItemComponent {
         .open(ToDoItemEditDialogComponent, dialogConfig)
         .afterClosed()
         .subscribe((item: ToDoItem) => {
-          console.log('item', item);
           if (item) {
             if (this.boardId !== item.board.id) {
-              this.updatedToDoItem.emit();
+              this.updatedToDoItem.emit(true);
+            } else if (this.item.priority !== item.priority) {
+              this.updatedToDoItem.emit(false);
+            } else {
+              this.item = item;
             }
-            this.item = item;
           }
         });
     });

@@ -1,6 +1,6 @@
 .board {
     background-color: rgb(252, 247, 219);
-    width: 400px;
+    width: 300px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -27,4 +27,11 @@ mat-card-content {
     position: absolute;
     top: 0;
     right: 48px;
+}
+
+mat-list-item {
+    display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        gap: 2px;
 }

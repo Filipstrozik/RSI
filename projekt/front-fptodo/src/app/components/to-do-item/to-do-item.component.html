@@ -7,7 +7,7 @@
             <mat-checkbox [(ngModel)]="item.isComplete" (change)="changeComplete()"></mat-checkbox>
             {{ item.name }}
         </mat-card-title>
-        <mat-card-subtitle>{{ item.dueTime | date:'dd-MM-YYYY hh:mm' }}
+        <mat-card-subtitle>{{ item.dueTime | date:'dd-MM-YYYY HH:mm' }}
             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon>
             {{ item.user?.name || 'Not assigned' }}
         </mat-card-subtitle>

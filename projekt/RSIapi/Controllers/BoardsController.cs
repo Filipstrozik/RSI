@@ -29,7 +29,11 @@ namespace RSIapi.Controllers
           {
               return NotFound();
           }
-            return await _context.Boards.Include(b => b.ToDoItems).ThenInclude(item => item.User).ToListAsync();
+
+            var boards = await _context.Boards.Include(b => b.ToDoItems).ThenInclude(item => item.User).ToListAsync();
+            boards.ForEach(board => board.DueTime = board.DueTime.ToUniversalTime());
+
+            return boards;
         }
 
         // GET: api/Boards/5
@@ -41,6 +45,7 @@ namespace RSIapi.Controllers
               return NotFound();
           }
             var board = await _context.Boards.Include(b => b.ToDoItems).ThenInclude(item => item.User).FirstOrDefaultAsync(b => b.Id == id);
+            board.DueTime = board.DueTime.ToUniversalTime();
 
             if (board == null)
             {
@@ -48,6 +53,43 @@ namespace RSIapi.Controllers
             }
 
             return board;
+        }
+
+        // GET: api/Boards/5/countitems
+        [HttpGet("{id}/countitems")]
+        public async Task<ActionResult<int>> GetBoardNumberOfItems(int id)
+        {
+            if (_context.Boards == null)
+            {
+                return NotFound();
+            }
+            var board = await _context.Boards.Include(b => b.ToDoItems).ThenInclude(item => item.User).FirstOrDefaultAsync(b => b.Id == id);
+
+            if (board == null)
+            {
+                return NotFound();
+            }
+
+            return board.ToDoItems.Count;
+        }
+
+        [HttpGet("{id}/priority")]
+        public async Task<ActionResult<int>> GetBoardPriority(int id)
+        {
+            if (_context.Boards == null)
+            {
+                return NotFound();
+            }
+            var board = await _context.Boards.Include(b => b.ToDoItems).ThenInclude(item => item.User).FirstOrDefaultAsync(b => b.Id == id);
+
+            if (board == null)
+            {
+                return NotFound();
+            }
+
+            var priority = board.ToDoItems.Aggregate(0, (acc, item) => acc + item.Priority);
+
+            return priority;
         }
 
         // PUT: api/Boards/5
@@ -92,6 +134,8 @@ namespace RSIapi.Controllers
           }
             _context.Boards.Add(board);
             await _context.SaveChangesAsync();
+
+            board.DueTime = board.DueTime.ToUniversalTime();
 
             return CreatedAtAction("GetBoard", new { id = board.Id }, board);
         }
