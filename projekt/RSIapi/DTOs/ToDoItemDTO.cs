@@ -6,8 +6,16 @@ namespace RSIapi.DTOs
     public class ToDoItemDTO
     {
         public int Id { get; set; }
+
+        [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
+
+        [Required]
+        [MaxLength(50)]
         public bool IsComplete { get; set; } = false;
+
+        [Required]
         public DateTime DueTime { get; set; }
 
         [Range(1, 5)]
