@@ -1,11 +1,17 @@
-<div>
-  <label for="name">Name:</label>
-  <input type="text" id="name" [(ngModel)]="name" (input)="filterBoards()" />
+<div class="searchbar">
 
-  <label for="description">Description:</label>
-  <input type="text" id="description" [(ngModel)]="description" (input)="filterBoards()" />
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name" [(ngModel)]="name" />
+  </mat-form-field>
 
-  <button (click)="clearFilters()">Clear Filters</button>
+  <mat-form-field [style.width.px]=400>
+    <mat-label>Description</mat-label>
+    <input matInput  placeholder="Description" [(ngModel)]="description" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="filterBoards()">Filter</button>
+  <button mat-raised-button (click)="clearFilters()">Clear Filters</button>
 </div>
 <mat-nav-list>
   <div container *ngFor="let board of boards">

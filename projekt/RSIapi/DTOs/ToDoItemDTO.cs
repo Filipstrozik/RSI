@@ -12,12 +12,12 @@ namespace RSIapi.DTOs
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(50)]
         public bool IsComplete { get; set; } = false;
 
         [Required]
         public DateTime DueTime { get; set; }
 
+        [Required]
         [Range(1, 5)]
         public int Priority { get; set; } = 3;
 

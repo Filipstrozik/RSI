@@ -1,0 +1,30 @@
+<div class="searchbar">
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" [(ngModel)]="name" />
+    </mat-form-field>
+
+    <mat-checkbox matInput [(ngModel)]="isComplete">Completed</mat-checkbox>
+
+    <mat-form-field>
+        <mat-label>Min Priority</mat-label>
+        <input matInput type="number" placeholder="Min Priority" [(ngModel)]="minPriority" />
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Max Prtiority</mat-label>
+        <input matInput type="number" placeholder="Max Priority" [(ngModel)]="maxPriority" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="filterToDoItems()">Filter</button>
+    <button mat-raised-button (click)="clearFilters()">Clear Filters</button>
+</div>
+<mat-nav-list>
+    <div *ngFor="let item of toDoItems">
+        <app-to-do-item [item]="item"></app-to-do-item>
+    </div>
+    <!-- <button mat-fab extended color="primary" (click)="onAddUser()">
+        <mat-icon>add</mat-icon>
+        Dodaj osobę
+    </button> -->
+</mat-nav-list>

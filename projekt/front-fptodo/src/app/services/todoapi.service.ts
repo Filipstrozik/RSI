@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import ToDoItem from '../models/todoitem';
@@ -10,8 +10,8 @@ import ToDoItemDTO from '../models/todoItemDTO';
   providedIn: 'root',
 })
 export class TodoapiService {
-  private apiUrl = 'https://fptodo.azurewebsites.net/api/';
-  // private apiUrl = 'http://localhost:5019/api/';
+  // private apiUrl = 'https://fptodo.azurewebsites.net/api/';
+  private apiUrl = 'https://localhost:7192/api/';
 
   private toDoItemsUrl = 'todoitems';
   private boardsUrl = 'boards';
@@ -30,10 +30,26 @@ export class TodoapiService {
     minPrority: number,
     maxPriority: number
   ): Observable<ToDoItem[]> {
+    let params = new HttpParams();
+
+    if (name) {
+      params = params.set('name', name);
+    }
+
+    if (isComplete !== null) {
+      params = params.set('isComplete', isComplete.toString());
+    }
+
+    if (minPrority) {
+      params = params.set('minPriority', minPrority.toString());
+    }
+
+    if (maxPriority) {
+      params = params.set('maxPriority', maxPriority.toString());
+    }
+
     const url = `${this.apiUrl}${this.toDoItemsUrl}/search`;
-    return this.http.get<ToDoItem[]>(url, {
-      params: { name, isComplete, minPrority, maxPriority },
-    });
+    return this.http.get<ToDoItem[]>(url, { params: params });
   }
 
   getToDoItemById(id: number): Observable<ToDoItem> {
@@ -105,10 +121,23 @@ export class TodoapiService {
     minAge: number,
     maxAge: number
   ): Observable<User[]> {
-    const url = `${this.apiUrl}${this.userUrl}/search`;
-    return this.http.get<User[]>(url, {
-      params: { name, email, minAge, maxAge },
-    });
+    let params = new HttpParams();
+
+    if (name) {
+      params = params.set('name', name);
+    }
+    if (email) {
+      params = params.set('email', email);
+    }
+    if (minAge) {
+      params = params.set('minAge', minAge.toString());
+    }
+    if (maxAge) {
+      params = params.set('maxAge', maxAge.toString());
+    }
+
+    const url = `${this.apiUrl}/${this.userUrl}/search`;
+    return this.http.get<User[]>(url, { params });
   }
 
   getUserById(id: number): Observable<User> {

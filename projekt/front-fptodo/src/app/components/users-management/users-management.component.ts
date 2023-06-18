@@ -11,6 +11,10 @@ import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.compon
 })
 export class UsersManagementComponent {
   users: User[] = [];
+  name: string = '';
+  email: string = '';
+  minAge: number | null = null;
+  maxAge: number | null = null;
 
   constructor(
     private dialog: MatDialog,
@@ -39,5 +43,21 @@ export class UsersManagementComponent {
           this.users.push(result);
         }
       });
+  }
+
+  filterUsers() {
+    this.todoApiService
+      .filterUsers(this.name, this.email, this.minAge!, this.maxAge!)
+      .subscribe((users: User[]) => {
+        this.users = users;
+      });
+  }
+
+  clearFilters(): void {
+    this.name = '';
+    this.email = '';
+    this.minAge = null;
+    this.maxAge = null;
+    this.updateUsers();
   }
 }

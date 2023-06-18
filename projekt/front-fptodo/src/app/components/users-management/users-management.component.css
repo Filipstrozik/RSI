@@ -13,6 +13,15 @@ mat-nav-list {
     height: 100%;
     display: flex;
     flex-grow: 1;
+    flex-wrap: wrap;
     gap: 20px;
     padding: 10px;
+}
+
+.searchbar {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
 }

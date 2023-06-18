@@ -36,6 +36,7 @@ import { ToDoItemAddComponent } from './components/to-do-item/to-do-item-add/to-
 import { BoardAddComponent } from './components/board/board-add/board-add.component';
 import { UsersManagementComponent } from './components/users-management/users-management.component';
 import { AddUserDialogComponent } from './components/users-management/add-user-dialog/add-user-dialog.component';
+import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AddUserDialogComponent } from './components/users-management/add-user-d
     BoardAddComponent,
     UsersManagementComponent,
     AddUserDialogComponent,
+    ToDoListComponent,
   ],
   imports: [
     BrowserModule,

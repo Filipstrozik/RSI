@@ -177,7 +177,7 @@ namespace RSIapi.Controllers
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<ToDoItem>>> Search(string? name, bool? isComplete, int? minPriority, int? maxPriority)
         {
-            IQueryable<ToDoItem> query = _context.ToDoItems;
+            IQueryable<ToDoItem> query = _context.ToDoItems.Include(t => t.Board).Include(t => t.User);
             
             if (!string.IsNullOrEmpty(name))
             {

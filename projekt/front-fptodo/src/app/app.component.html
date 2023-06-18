@@ -13,6 +13,12 @@
         <span class="nav-item-text">Users</span>
       </button>
     </a>
+      <a mat-list-item routerLink="/todos" (click)="sidenav.toggle()">
+        <button mat-raised-button color="primary">
+          <mat-icon class="mat-icon-large">assignment_turned_in</mat-icon>
+          <span class="nav-item-text">ToDos</span>
+        </button>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
