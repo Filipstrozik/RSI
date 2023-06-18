@@ -157,7 +157,7 @@ namespace RSIapi.Controllers
             return NoContent();
         }
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Board>>> Search(string name, string? description)
+        public async Task<ActionResult<IEnumerable<Board>>> Search(string? name, string? description)
         {
             IQueryable<Board> query = _context.Boards;
             
