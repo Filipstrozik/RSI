@@ -10,8 +10,8 @@ import ToDoItemDTO from '../models/todoItemDTO';
   providedIn: 'root',
 })
 export class TodoapiService {
-  // private apiUrl = 'https://fptodo.azurewebsites.net/api/';
-  private apiUrl = 'https://localhost:7192/api/';
+  private apiUrl = 'https://fptodo.azurewebsites.net/api/';
+  // private apiUrl = 'https://localhost:7192/api/';
 
   private toDoItemsUrl = 'todoitems';
   private boardsUrl = 'boards';
