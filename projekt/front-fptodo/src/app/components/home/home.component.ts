@@ -11,6 +11,8 @@ import { BoardAddComponent } from '../board/board-add/board-add.component';
 })
 export class HomeComponent {
   boards: Board[] = [];
+  name: string = '';
+  description: string = '';
 
   constructor(
     private todoApiService: TodoapiService,
@@ -39,5 +41,19 @@ export class HomeComponent {
           this.boards.push(item);
         }
       });
+  }
+
+  filterBoards() {
+    this.todoApiService
+      .filterBoards(this.name, this.description)
+      .subscribe((boards: Board[]) => {
+        this.boards = boards;
+      });
+  }
+
+  clearFilters(): void {
+    this.name = '';
+    this.description = '';
+    this.updateBoards();
   }
 }

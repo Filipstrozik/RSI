@@ -1,3 +1,12 @@
+<div>
+  <label for="name">Name:</label>
+  <input type="text" id="name" [(ngModel)]="name" (input)="filterBoards()" />
+
+  <label for="description">Description:</label>
+  <input type="text" id="description" [(ngModel)]="description" (input)="filterBoards()" />
+
+  <button (click)="clearFilters()">Clear Filters</button>
+</div>
 <mat-nav-list>
   <div container *ngFor="let board of boards">
     <app-board [board]="board" (updatedBoard)="updateBoards()"></app-board>

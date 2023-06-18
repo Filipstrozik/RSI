@@ -24,6 +24,18 @@ export class TodoapiService {
     return this.http.get<ToDoItem[]>(`${this.apiUrl}${this.toDoItemsUrl}`);
   }
 
+  filterToDoItems(
+    name: string,
+    isComplete: boolean,
+    minPrority: number,
+    maxPriority: number
+  ): Observable<ToDoItem[]> {
+    const url = `${this.apiUrl}${this.toDoItemsUrl}/search`;
+    return this.http.get<ToDoItem[]>(url, {
+      params: { name, isComplete, minPrority, maxPriority },
+    });
+  }
+
   getToDoItemById(id: number): Observable<ToDoItem> {
     const url = `${this.apiUrl}${this.toDoItemsUrl}/${id}`;
     return this.http.get<ToDoItem>(url);
@@ -46,6 +58,11 @@ export class TodoapiService {
   // Board CRUD methods
   getAllBoards(): Observable<Board[]> {
     return this.http.get<Board[]>(`${this.apiUrl}${this.boardsUrl}`);
+  }
+
+  filterBoards(name: string, description: string): Observable<Board[]> {
+    const url = `${this.apiUrl}${this.boardsUrl}/search`;
+    return this.http.get<Board[]>(url, { params: { name, description } });
   }
 
   getBoardById(id: number): Observable<Board> {
@@ -80,6 +97,18 @@ export class TodoapiService {
   // User CRUD methods
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}${this.userUrl}`);
+  }
+
+  filterUsers(
+    name: string,
+    email: string,
+    minAge: number,
+    maxAge: number
+  ): Observable<User[]> {
+    const url = `${this.apiUrl}${this.userUrl}/search`;
+    return this.http.get<User[]>(url, {
+      params: { name, email, minAge, maxAge },
+    });
   }
 
   getUserById(id: number): Observable<User> {
