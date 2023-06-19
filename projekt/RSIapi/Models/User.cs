@@ -6,11 +6,13 @@ namespace RSIapi.Models
         public int Id { get; set; }
 
         [Required]
+        [MinLength(3)]
         [MaxLength(50)]
         public string Name { get; set; }
 
         [Required]
         [MaxLength(50)]
+        [MinLength(3)]
         public string Email { get; set; }
 
         [Required]

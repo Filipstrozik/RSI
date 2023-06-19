@@ -136,7 +136,7 @@ export class TodoapiService {
       params = params.set('maxAge', maxAge.toString());
     }
 
-    const url = `${this.apiUrl}/${this.userUrl}/search`;
+    const url = `${this.apiUrl}${this.userUrl}/search`;
     return this.http.get<User[]>(url, { params });
   }
 

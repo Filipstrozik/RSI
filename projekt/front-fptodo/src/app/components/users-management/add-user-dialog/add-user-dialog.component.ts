@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import User from 'src/app/models/user';
 import { TodoapiService } from 'src/app/services/todoapi.service';
 
@@ -19,22 +20,62 @@ export class AddUserDialogComponent {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: User,
-    private todoApiService: TodoapiService
+    private todoApiService: TodoapiService,
+    private snackBar: MatSnackBar
   ) {
     if (data) {
       this.input = data;
       this.editForm = this.formBuilder.group({
         id: [data.id],
-        name: [data.name, Validators.required],
-        email: [data.email, Validators.required, Validators.email],
-        age: [data.age, Validators.required],
+        name: [
+          data.name,
+          {
+            validators: [
+              Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(50),
+            ],
+          },
+        ],
+        email: [
+          data.email,
+          { validators: [Validators.required, Validators.email] },
+        ],
+        age: [
+          data.age,
+          {
+            validators: [
+              Validators.required,
+              Validators.min(1),
+              Validators.max(5),
+            ],
+          },
+        ],
       });
     } else {
       this.editForm = this.formBuilder.group({
         id: [],
-        name: [, Validators.required],
-        email: [, Validators.required],
-        age: [, Validators.required],
+        name: [
+          ,
+          {
+            validators: [
+              Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(50),
+            ],
+          },
+        ],
+        email: [, { validators: [Validators.required, Validators.email] }],
+        age: [
+          ,
+          {
+            validators: [
+              Validators.required,
+              Validators.min(1),
+              Validators.max(100),
+            ],
+          },
+        ],
       });
     }
   }
@@ -59,9 +100,17 @@ export class AddUserDialogComponent {
           email: this.editForm.value.email,
           age: this.editForm.value.age,
         };
-        this.todoApiService.createUser(newUser).subscribe((item: User) => {
-          this.dialogRef.close(item);
-        });
+        this.todoApiService.createUser(newUser).subscribe(
+          (item: User) => {
+            this.dialogRef.close(item);
+          },
+          (error) => {
+            this.dialogRef.close();
+            this.snackBar.open(error.error, 'Close', {
+              duration: 5000,
+            });
+          }
+        );
       }
     }
   }

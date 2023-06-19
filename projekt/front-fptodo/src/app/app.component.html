@@ -4,7 +4,7 @@
       <a mat-list-item routerLink="/home" (click)="sidenav.toggle()">
         <button mat-raised-button color="primary">
           <mat-icon class="mat-icon-large">home</mat-icon>
-          <span class="nav-item-text">Home</span>
+          <span class="nav-item-text">Boards</span>
         </button>
       </a>
     <a mat-list-item routerLink="/users" (click)="sidenav.toggle()">
@@ -26,8 +26,8 @@
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>FP ToDo</span>
-      <div style="position: absolute; right: 10px; display: flex; gap: 10px">
+      <span>ToDo App</span>
+      <div style="position: absolute; right: 10px; display: flex; gap: 10px; z-index: -1;">
         <span *ngFor="let author of authors">
           {{author}}
         </span> 

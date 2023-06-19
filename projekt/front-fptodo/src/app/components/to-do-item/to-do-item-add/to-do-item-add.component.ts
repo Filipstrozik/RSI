@@ -36,11 +36,29 @@ export class ToDoItemAddComponent implements OnInit {
     this.time = this.time.slice(0, -3);
     this.editForm = this.formBuilder.group({
       id: [],
-      name: [, Validators.required],
-      isComplete: [false],
+      name: [
+        ,
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(50),
+          ],
+        },
+      ],
+      isComplete: [false, Validators.required],
       dueDate: [datetime, Validators.required],
       dueTime: [this.time, Validators.required],
-      priority: [3, Validators.required],
+      priority: [
+        3,
+        {
+          validators: [
+            Validators.required,
+            Validators.min(1),
+            // Validators.maxLength(5),
+          ],
+        },
+      ],
       boardId: [data.id, Validators.required],
       userId: [],
     });
@@ -73,6 +91,7 @@ export class ToDoItemAddComponent implements OnInit {
           this.dialogRef.close(item);
         },
         (error) => {
+          this.dialogRef.close();
           this.snackBar.open(error.error.errors.Priority, 'Close', {
             duration: 5000,
           });

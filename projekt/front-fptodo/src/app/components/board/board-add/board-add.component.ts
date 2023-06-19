@@ -40,10 +40,28 @@ export class BoardAddComponent {
       this.time = this.time.slice(0, -3);
       this.editForm = this.formBuilder.group({
         id: [data.id],
-        name: [data.name, Validators.required, this.minLengthValidator(3)],
-        description: [data.description, Validators.required],
+        name: [
+          data.name,
+          {
+            validators: [
+              Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(50),
+            ],
+          },
+        ],
+        description: [
+          data.description,
+          {
+            validators: [
+              Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(200),
+            ],
+          },
+        ],
         dueDate: [datetime, Validators.required],
-        dueTime: [this.time],
+        dueTime: [this.time, Validators.required],
       });
     } else {
       const datetime = new Date();
@@ -53,10 +71,28 @@ export class BoardAddComponent {
       this.time = this.time.slice(0, -3);
       this.editForm = this.formBuilder.group({
         id: [],
-        name: [, Validators.required, this.minLengthValidator(3)],
-        description: [, Validators.required],
+        name: [
+          ,
+          {
+            validators: [
+              Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(50),
+            ],
+          },
+        ],
+        description: [
+          ,
+          {
+            validators: [
+              Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(200),
+            ],
+          },
+        ],
         dueDate: [datetime, Validators.required],
-        dueTime: [this.time],
+        dueTime: [this.time, Validators.required],
       });
     }
   }

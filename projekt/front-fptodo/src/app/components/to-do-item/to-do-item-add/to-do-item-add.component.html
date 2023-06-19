@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Dodaj zadanie</h1>
 
 <form [formGroup]="editForm" (ngSubmit)="save()">
-    <div mat-dialog-content style="display: flex; flex-wrap: wrap; flex-direction: column; width: 50vw">
+    <div mat-dialog-content style="display: flex; flex-wrap: wrap; flex-direction: column; width: 80vw">
         <mat-form-field>
             <mat-label>Name</mat-label>
             <input matInput formControlName="name" placeholder="Name" />

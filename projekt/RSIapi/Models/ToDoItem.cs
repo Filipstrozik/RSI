@@ -7,6 +7,7 @@ namespace RSIapi.Models
 
         [Required]
         [MaxLength(50)]
+        [MinLength(3)]
         public string Name { get; set; }
 
         [Required]
@@ -25,6 +26,7 @@ namespace RSIapi.Models
         [Range(1, 5)]
         public int Priority { get; set; } = 3;
 
+        [Required]
         public Board Board { get; set; }
 
         public User? User { get; set; }

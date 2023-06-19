@@ -9,6 +9,7 @@ namespace RSIapi.DTOs
 
         [Required]
         [MaxLength(50)]
+        [MinLength(3)]
         public string Name { get; set; }
 
         [Required]
@@ -21,6 +22,7 @@ namespace RSIapi.DTOs
         [Range(1, 5)]
         public int Priority { get; set; } = 3;
 
+        [Required]
         public int BoardId { get; set; }
 
         public int? UserId { get; set; }

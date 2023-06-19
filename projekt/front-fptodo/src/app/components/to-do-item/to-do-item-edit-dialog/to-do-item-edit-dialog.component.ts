@@ -39,11 +39,29 @@ export class ToDoItemEditDialogComponent implements OnInit {
     this.time = this.time.slice(0, -3);
     this.editForm = this.formBuilder.group({
       id: [this.item.id],
-      name: [this.item.name, Validators.required],
-      isComplete: [this.item.isComplete],
+      name: [
+        this.item.name,
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(50),
+          ],
+        },
+      ],
+      isComplete: [this.item.isComplete, Validators.required],
       dueDate: [datetime, Validators.required],
       dueTime: [this.time, Validators.required],
-      priority: [this.item.priority, Validators.required],
+      priority: [
+        this.item.priority,
+        {
+          validators: [
+            Validators.required,
+            Validators.min(1),
+            // Validators.max(5),
+          ],
+        },
+      ],
       boardId: [this.item.board.id, Validators.required],
       userId: [this.item.user?.id],
     });
