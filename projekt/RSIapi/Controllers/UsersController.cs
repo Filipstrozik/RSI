@@ -86,10 +86,18 @@ namespace RSIapi.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-          if (_context.Users == null)
-          {
-              return Problem("Entity set 'ToDoItemContext.Users'  is null.");
-          }
+            if (_context.Users == null)
+            {
+                return Problem("Entity set 'ToDoItemContext.Users' is null.");
+            }
+
+            // Sprawdź, czy istnieje użytkownik o takim samym adresie e-mail
+            bool isEmailExists = await _context.Users.AnyAsync(u => u.Email == user.Email);
+            if (isEmailExists)
+            {
+                return Conflict("Użytkownik o podanym adresie e-mail już istnieje.");
+            }
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
