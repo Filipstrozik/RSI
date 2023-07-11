@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSIapi", "RSIapi.csproj", "{176F7C3D-405C-4D9D-AAA1-D5B3AA42A978}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{176F7C3D-405C-4D9D-AAA1-D5B3AA42A978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{176F7C3D-405C-4D9D-AAA1-D5B3AA42A978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{176F7C3D-405C-4D9D-AAA1-D5B3AA42A978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{176F7C3D-405C-4D9D-AAA1-D5B3AA42A978}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31768E52-EB72-454D-9286-E36C7638DC4C}
+	EndGlobalSection
+EndGlobal
