@@ -5,7 +5,6 @@ namespace RSIapi.Models
     {
         public int Id { get; set; }
 
-        [Required]
         [MinLength(3)]
         [MaxLength(50)]
         public string Name { get; set; }
@@ -18,6 +17,12 @@ namespace RSIapi.Models
         [Required]
         [Range(1, 100)]
         public int Age { get; set; }
+
+        public string PasswordHash { get; set; }
+
+        public int RoleId { get; set; }
+
+        public virtual Role Role { get; set; }
 
         public ICollection<ToDoItem> ToDoItems { get; } = new List<ToDoItem>();
     }

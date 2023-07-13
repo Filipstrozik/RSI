@@ -15,6 +15,10 @@ namespace RSIapi.Context
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Role> Roles { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
@@ -23,6 +27,10 @@ namespace RSIapi.Context
                 .HasForeignKey("UserId")
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Role>()
+                .Property(r => r.Name)
+                .IsRequired();
 
 
             modelBuilder.Entity<Board>()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ namespace RSIapi.Controllers
 {
     [Route("api/boards")]
     [ApiController]
+    [Authorize]
+
     public class BoardsController : ControllerBase
     {
         private readonly ToDoItemContext _context;
@@ -23,6 +26,8 @@ namespace RSIapi.Controllers
 
         // GET: api/Boards
         [HttpGet]
+        //[Authorize(Policy = "HasAge")] // This is the policy name from Startup.cs used for authorization by claim.
+        [Authorize(Policy = "AtLeast20")] // This is the policy name from Startup.cs used for authorization by requirement.
         public async Task<ActionResult<IEnumerable<Board>>> GetBoards()
         {
           if (_context.Boards == null)
@@ -39,10 +44,10 @@ namespace RSIapi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Board>> GetBoard(int id)
         {
-          if (_context.Boards == null)
-          {
-              return NotFound();
-          }
+            if (_context.Boards == null)
+            {
+                return NotFound();
+            }
             var board = await _context.Boards.Include(b => b.ToDoItems).ThenInclude(item => item.User).FirstOrDefaultAsync(b => b.Id == id);
 
             if (board == null)
@@ -122,14 +127,15 @@ namespace RSIapi.Controllers
         }
 
         // POST: api/Boards
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<ActionResult<Board>> PostBoard(Board board)
         {
-          if (_context.Boards == null)
-          {
-              return Problem("Entity set 'ToDoItemContext.Boards'  is null.");
-          }
+
+            if (_context.Boards == null)
+            {
+                return Problem("Entity set 'ToDoItemContext.Boards'  is null.");
+            }
             _context.Boards.Add(board);
             await _context.SaveChangesAsync();
 
