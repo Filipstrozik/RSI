@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace RSIapi.Models
-{
-    public class Board
-    {
-        public int Id { get; set; }
+﻿using RSIapi.Models;
+using System.ComponentModel.DataAnnotations;
 
+namespace RSIapi.DTOs
+{
+    public class CreateBoardDto
+    {
         [Required]
         [MaxLength(50)]
         [MinLength(3)]
@@ -23,11 +23,5 @@ namespace RSIapi.Models
             get { return _dueTime.ToUniversalTime(); }
             set { _dueTime = value.ToLocalTime(); }
         }
-
-        public int? CreatedById { get; set; }
-
-        public virtual User CreatedBy { get; set; }
-
-        public ICollection<ToDoItem> ToDoItems { get; } = new List<ToDoItem>();
     }
 }

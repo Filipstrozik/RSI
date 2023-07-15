@@ -7,6 +7,7 @@ using RSIapi;
 using RSIapi.Authorization;
 using RSIapi.Context;
 using RSIapi.Models;
+using RSIapi.Services;
 using System.Dynamic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -88,8 +89,11 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddScoped<IAuthorizationHandler, MinimumAgeRequiremenHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<ContextSeeder>();
+builder.Services.AddScoped<IUserContextService, UserContextService>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options => 

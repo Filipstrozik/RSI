@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RSIapi.Authorization;
 using RSIapi.Context;
+using RSIapi.DTOs;
 using RSIapi.Models;
+using RSIapi.Services;
 
 namespace RSIapi.Controllers
 {
@@ -18,10 +22,14 @@ namespace RSIapi.Controllers
     public class BoardsController : ControllerBase
     {
         private readonly ToDoItemContext _context;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly IUserContextService userContextService;
 
-        public BoardsController(ToDoItemContext context)
+        public BoardsController(ToDoItemContext context, IAuthorizationService authorizationService, IUserContextService userContextService)
         {
             _context = context;
+            _authorizationService = authorizationService;
+            this.userContextService = userContextService;
         }
 
         // GET: api/Boards
@@ -100,9 +108,18 @@ namespace RSIapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBoard(int id, Board board)
         {
+
             if (id != board.Id)
             {
                 return BadRequest();
+            }
+
+            var authorizationResult = _authorizationService
+                .AuthorizeAsync(userContextService.User, board, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            if(!authorizationResult.Succeeded)
+            {
+                return Forbid();
             }
 
             _context.Entry(board).State = EntityState.Modified;
@@ -128,14 +145,22 @@ namespace RSIapi.Controllers
 
         // POST: api/Boards
         [HttpPost]
-        [Authorize(Roles = "Admin,Manager")]
-        public async Task<ActionResult<Board>> PostBoard(Board board)
+        //[Authorize(Roles = "Admin,Manager")]
+        public async Task<ActionResult<Board>> PostBoard(CreateBoardDto boardDto)
         {
 
             if (_context.Boards == null)
             {
                 return Problem("Entity set 'ToDoItemContext.Boards'  is null.");
             }
+
+            var board = new Board
+            {
+                Name = boardDto.Name,
+                Description = boardDto.Description,
+                DueTime = boardDto.DueTime,
+                CreatedById = userContextService.GetUserId
+            };
             _context.Boards.Add(board);
             await _context.SaveChangesAsync();
 
@@ -155,6 +180,14 @@ namespace RSIapi.Controllers
             if (board == null)
             {
                 return NotFound();
+            }
+
+            var authorizationResult = _authorizationService
+                .AuthorizeAsync(userContextService.User, board, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
             }
 
             _context.Boards.Remove(board);
